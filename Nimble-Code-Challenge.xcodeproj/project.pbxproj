@@ -26,6 +26,9 @@
 		F71F86652865846100767F6E /* NimbleSurveyAPITargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */; };
 		F71F8668286584C800767F6E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F8667286584C800767F6E /* AppConstants.swift */; };
 		F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86692865859800767F6E /* NimbleSurveyProvider.swift */; };
+		F71F866C28658DDE00767F6E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866B28658DDE00767F6E /* NetworkService.swift */; };
+		F71F866E28658EAB00767F6E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866D28658EAB00767F6E /* NetworkError.swift */; };
+		F71F867028658EF800767F6E /* NetworkServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +68,9 @@
 		F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyAPITargetType.swift; sourceTree = "<group>"; };
 		F71F8667286584C800767F6E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F71F86692865859800767F6E /* NimbleSurveyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyProvider.swift; sourceTree = "<group>"; };
+		F71F866B28658DDE00767F6E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F71F866D28658EAB00767F6E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceImpl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +254,9 @@
 		F71F86612865826700767F6E /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				F71F866B28658DDE00767F6E /* NetworkService.swift */,
+				F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */,
+				F71F866D28658EAB00767F6E /* NetworkError.swift */,
 				F71F8662286583F800767F6E /* NimbleSurveyAPI.swift */,
 				F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */,
 				F71F86692865859800767F6E /* NimbleSurveyProvider.swift */,
@@ -469,14 +478,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71F867028658EF800767F6E /* NetworkServiceImpl.swift in Sources */,
 				F71F865528656A4600767F6E /* LoginViewController.swift in Sources */,
 				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
 				F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */,
 				F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */,
 				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
+				F71F866C28658DDE00767F6E /* NetworkService.swift in Sources */,
 				F71F865D28656BA000767F6E /* CoordinatorType.swift in Sources */,
 				F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */,
+				F71F866E28658EAB00767F6E /* NetworkError.swift in Sources */,
 				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
