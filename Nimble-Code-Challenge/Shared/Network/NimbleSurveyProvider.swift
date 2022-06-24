@@ -24,11 +24,11 @@ class NimbleSurveyProvider<NimbleSurveyAPI>: MoyaProvider<NimbleSurveyAPI> where
     convenience init(apiSession: Session = apiSession,
                      pluginsProvider: [PluginType] = pluginsProvider) {
         self.init(endpointClosure: MoyaProvider.defaultEndpointMapping,
-                   requestClosure: MoyaProvider<NimbleSurveyAPI>.defaultRequestMapping,
-                   stubClosure: MoyaProvider.neverStub,
-                   callbackQueue: nil,
-                   session: apiSession,
-                   plugins: pluginsProvider,
-                   trackInflights: false)
+                  requestClosure: MoyaProvider<NimbleSurveyAPI>.defaultRequestMapping,
+                  stubClosure: MoyaProvider.neverStub,
+                  callbackQueue: nil,
+                  session: apiSession,
+                  plugins: pluginsProvider,
+                  trackInflights: false)
     }
 }
