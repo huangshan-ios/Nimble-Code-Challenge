@@ -10,11 +10,22 @@
 		3B65653500307560D75C6C13 /* Pods_Nimble_Code_Challenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA471B0BA741E73D5FC40DF0 /* Pods_Nimble_Code_Challenge.framework */; };
 		50128CA3B29DF9D80A95AE77 /* Pods_Nimble_Code_ChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69427D46C59A2DA4FFBE7C8B /* Pods_Nimble_Code_ChallengeTests.framework */; };
 		F71F86122865608800767F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86112865608800767F6E /* AppDelegate.swift */; };
-		F71F86162865608800767F6E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86152865608800767F6E /* ViewController.swift */; };
-		F71F86192865608800767F6E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F86172865608800767F6E /* Main.storyboard */; };
 		F71F861B2865608900767F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71F861A2865608900767F6E /* Assets.xcassets */; };
 		F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F861C2865608900767F6E /* LaunchScreen.storyboard */; };
 		F71F86432865619C00767F6E /* NimbleTestExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86422865619C00767F6E /* NimbleTestExample.swift */; };
+		F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F864B2865688B00767F6E /* ViewModelType.swift */; };
+		F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F864D2865691500767F6E /* ViewControllerType.swift */; };
+		F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86502865695C00767F6E /* NSObject+Extensions.swift */; };
+		F71F865528656A4600767F6E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F865328656A4600767F6E /* LoginViewController.swift */; };
+		F71F865628656A4600767F6E /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F71F865428656A4600767F6E /* LoginViewController.xib */; };
+		F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F865828656A6400767F6E /* LoginViewModel.swift */; };
+		F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F865A28656B0B00767F6E /* AppCoordinator.swift */; };
+		F71F865D28656BA000767F6E /* CoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F865C28656BA000767F6E /* CoordinatorType.swift */; };
+		F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F865F28656D4D00767F6E /* LoginCoordinator.swift */; };
+		F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F8662286583F800767F6E /* NimbleSurveyAPI.swift */; };
+		F71F86652865846100767F6E /* NimbleSurveyAPITargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */; };
+		F71F8668286584C800767F6E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F8667286584C800767F6E /* AppConstants.swift */; };
+		F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86692865859800767F6E /* NimbleSurveyProvider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,13 +47,24 @@
 		AA471B0BA741E73D5FC40DF0 /* Pods_Nimble_Code_Challenge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Nimble_Code_Challenge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F860E2865608800767F6E /* Nimble-Code-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nimble-Code-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F86112865608800767F6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F71F86152865608800767F6E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F71F86182865608800767F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F71F861A2865608900767F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F71F861D2865608900767F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F71F861F2865608900767F6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F71F86242865608A00767F6E /* Nimble-Code-ChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nimble-Code-ChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F86422865619C00767F6E /* NimbleTestExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleTestExample.swift; sourceTree = "<group>"; };
+		F71F864B2865688B00767F6E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
+		F71F864D2865691500767F6E /* ViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerType.swift; sourceTree = "<group>"; };
+		F71F86502865695C00767F6E /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
+		F71F865328656A4600767F6E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		F71F865428656A4600767F6E /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		F71F865828656A6400767F6E /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		F71F865A28656B0B00767F6E /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		F71F865C28656BA000767F6E /* CoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorType.swift; sourceTree = "<group>"; };
+		F71F865F28656D4D00767F6E /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
+		F71F8662286583F800767F6E /* NimbleSurveyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyAPI.swift; sourceTree = "<group>"; };
+		F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyAPITargetType.swift; sourceTree = "<group>"; };
+		F71F8667286584C800767F6E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		F71F86692865859800767F6E /* NimbleSurveyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +135,6 @@
 				F71F86482865630600767F6E /* Domains */,
 				F71F86472865630200767F6E /* Datas */,
 				F71F8646286562FD00767F6E /* Shared */,
-				F71F86152865608800767F6E /* ViewController.swift */,
-				F71F86172865608800767F6E /* Main.storyboard */,
 				F71F8645286561DA00767F6E /* Resources */,
 			);
 			path = "Nimble-Code-Challenge";
@@ -132,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				F71F86112865608800767F6E /* AppDelegate.swift */,
+				F71F865A28656B0B00767F6E /* AppCoordinator.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -149,6 +170,10 @@
 		F71F8646286562FD00767F6E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F71F8666286584A200767F6E /* Common */,
+				F71F86612865826700767F6E /* Network */,
+				F71F864A2865687D00767F6E /* Base */,
+				F71F864F2865694E00767F6E /* Extensions */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -170,8 +195,72 @@
 		F71F86492865631000767F6E /* Presentations */ = {
 			isa = PBXGroup;
 			children = (
+				F71F865228656A2700767F6E /* Login */,
 			);
 			path = Presentations;
+			sourceTree = "<group>";
+		};
+		F71F864A2865687D00767F6E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				F71F864B2865688B00767F6E /* ViewModelType.swift */,
+				F71F865C28656BA000767F6E /* CoordinatorType.swift */,
+				F71F864D2865691500767F6E /* ViewControllerType.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		F71F864F2865694E00767F6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F71F86502865695C00767F6E /* NSObject+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F71F865228656A2700767F6E /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F71F865728656A5700767F6E /* ViewModel */,
+				F71F865E28656D3900767F6E /* Views */,
+				F71F865F28656D4D00767F6E /* LoginCoordinator.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		F71F865728656A5700767F6E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F71F865828656A6400767F6E /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F71F865E28656D3900767F6E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F71F865328656A4600767F6E /* LoginViewController.swift */,
+				F71F865428656A4600767F6E /* LoginViewController.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F71F86612865826700767F6E /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F71F8662286583F800767F6E /* NimbleSurveyAPI.swift */,
+				F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */,
+				F71F86692865859800767F6E /* NimbleSurveyProvider.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F71F8666286584A200767F6E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F71F8667286584C800767F6E /* AppConstants.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,9 +350,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F71F865628656A4600767F6E /* LoginViewController.xib in Resources */,
 				F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */,
 				F71F861B2865608900767F6E /* Assets.xcassets in Resources */,
-				F71F86192865608800767F6E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,8 +469,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F71F86162865608800767F6E /* ViewController.swift in Sources */,
+				F71F865528656A4600767F6E /* LoginViewController.swift in Sources */,
+				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
+				F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */,
+				F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */,
+				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
+				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
+				F71F865D28656BA000767F6E /* CoordinatorType.swift in Sources */,
+				F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */,
+				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
+				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
+				F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */,
+				F71F86652865846100767F6E /* NimbleSurveyAPITargetType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,14 +504,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F71F86172865608800767F6E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F71F86182865608800767F6E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F71F861C2865608900767F6E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -551,7 +643,6 @@
 				INFOPLIST_FILE = "Nimble-Code-Challenge/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -581,7 +672,6 @@
 				INFOPLIST_FILE = "Nimble-Code-Challenge/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
