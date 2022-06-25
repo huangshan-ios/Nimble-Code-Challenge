@@ -28,8 +28,8 @@ extension NimbleSurveyAPI: TargetType {
     
     var paramaters: [String: String] {
         switch self {
-        case .login(let userName, let password):
-            return ["userName": userName, "password": password]
+        case .login(let email, let password):
+            return ["email": email, "password": password]
         }
     }
     
