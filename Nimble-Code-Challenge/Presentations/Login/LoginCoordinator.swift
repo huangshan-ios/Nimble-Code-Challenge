@@ -10,8 +10,10 @@ import Foundation
 final class LoginCoordinator: Coordinator {
     
     override func start() {
-        let loginViewController = LoginViewController(viewModel: LoginViewModel(),
-                                                      coordinator: self,
+        let repository = CredentialRepositoryImpl()
+        let useCase = LoginViewUseCaseImpl(credentialRepository: repository)
+        let viewModel = LoginViewModel(useCase: useCase)
+        let loginViewController = LoginViewController(viewModel: viewModel, coordinator: self,
                                                       controller: LoginViewController.self)
         
         navigationController.viewControllers = [loginViewController]
