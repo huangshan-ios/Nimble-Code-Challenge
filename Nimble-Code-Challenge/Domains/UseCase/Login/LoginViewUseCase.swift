@@ -24,7 +24,8 @@ final class LoginViewUseCaseImpl: LoginViewUseCase {
         return credentialRepository.login(with: email, and: password)
             .map { result in
                 switch result {
-                case .success:
+                case .success(let loginDTO):
+                    UserSession.shared.setCredential(loginDTO.toCredentials())
                     return .success(())
                 case .failure(let error):
                     return .failure(error.mapToAppError())

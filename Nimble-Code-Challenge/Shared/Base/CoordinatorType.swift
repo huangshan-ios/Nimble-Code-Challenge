@@ -28,7 +28,7 @@ class Coordinator: CoordinatorType {
     
     func start(_ coordinator: CoordinatorType) {
         childCoordinators?.append(coordinator)
-        coordinator.parentCoordinator = coordinator
+        coordinator.parentCoordinator = self
         coordinator.start()
     }
     

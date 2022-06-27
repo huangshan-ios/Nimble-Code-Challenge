@@ -24,7 +24,7 @@ class LoginViewModel: ViewModelType {
         let loginSuccess: Signal<Void>
         let navigateToForgotPassword: Signal<Void>
     }
-        
+    
     let useCase: LoginViewUseCase
     
     init(useCase: LoginViewUseCase) {
@@ -52,6 +52,7 @@ class LoginViewModel: ViewModelType {
                     .flatMap({ result -> Observable<Void> in
                         if case let .failure(error) = result {
                             errorTrigger.accept(error)
+                            return .empty()
                         }
                         return .just(())
                     })

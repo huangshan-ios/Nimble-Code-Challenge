@@ -27,10 +27,15 @@ extension NimbleSurveyAPI: TargetType {
     }
     
     var paramaters: [String: String] {
+        var paramaters: [String: String] = ["client_id": "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE",
+                                            "client_secret": "lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU"]
         switch self {
         case .login(let email, let password):
-            return ["grant_type": "password", "email": email, "password": password]
+            paramaters["grant_type"] = "password"
+            paramaters["email"] = email
+            paramaters["password"] = password
         }
+        return paramaters
     }
     
     var parameterEncoding: ParameterEncoding {

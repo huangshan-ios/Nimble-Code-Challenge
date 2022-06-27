@@ -30,7 +30,6 @@ class LoginViewController: ViewControllerType<LoginViewModel, LoginCoordinator> 
                                                               attributes: [.foregroundColor: UIColor.whiteGray])
                 textfield?.attributedPlaceholder = attributePlaceholder
             }
-        
     }
     
     override func configureBindings() {
@@ -44,13 +43,36 @@ class LoginViewController: ViewControllerType<LoginViewModel, LoginCoordinator> 
         let enableLoginButtonDispo = output.enableLoginButton
             .drive(loginButton.rx.isEnabled)
         
+        let loadingDispo = output.isLoading
+            .emit(onNext: { [weak self] isLoading in
+                guard let self = self else { return }
+                self.showIndicator(isLoading)
+            })
+        
         let loginSuccessDispo = output.loginSuccess
+            .emit(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.coordinator.navigateToHomeViewController()
+            })
+        
+        let errorDispo = output.error
+            .emit(onNext: { [weak self] error in
+                guard let self = self, let error = error else {
+                    return
+                }
+                self.handleError(error: error)
+            })
+        
+        let forgotPasswordDispo = output.navigateToForgotPassword
             .emit(onNext: { _ in
-                // TODO: Navigate to home screen
+                // TODO: Navigate to forgot password screen
             })
         
         disposeBag.insert([enableLoginButtonDispo,
-                           loginSuccessDispo])
+                           loadingDispo,
+                           loginSuccessDispo,
+                           errorDispo,
+                           forgotPasswordDispo])
     }
-
+    
 }

@@ -20,4 +20,14 @@ final class LoginCoordinator: Coordinator {
         navigationController.viewControllers = [loginViewController]
     }
     
+    func navigateToHomeViewController() {
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else {
+            return
+        }
+        let homeCoordinator = HomeCoordinator()
+        homeCoordinator.navigationController = appCoordinator.navigationController
+        appCoordinator.start(homeCoordinator)
+        appCoordinator.finish(self)
+    }
+    
 }
