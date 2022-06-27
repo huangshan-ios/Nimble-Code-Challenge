@@ -7,13 +7,14 @@
 
 import UIKit
 import RxSwift
+import RxRelay
 
 class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController {
     
     var viewModel: V!
     weak var coordinator: C!
     
-    var disposeBag = DisposeBag()
+    let disposeBag = DisposeBag()
     
     init(viewModel: V, coordinator: C, controller: ViewControllerType.Type) {
         self.viewModel = viewModel
@@ -34,4 +35,49 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
     func configureUIs() {}
     
     func configureBindings() {}
+    
+    func handleError(error: AppError) {
+        showError(error: error)
+    }
+    
+    func showIndicator(_ isLoading: Bool) {
+        if isLoading {
+            IndicatorLoader.shared.show()
+        } else {
+            IndicatorLoader.shared.hide()
+        }
+    }
+}
+
+// MARK: Private functions
+extension ViewControllerType {
+    private func showError(error: AppError) {
+        let alertController = UIAlertController(title: "Oops there was an error!",
+                                                message: error.message,
+                                                preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            switch error {
+            case .unauthorizedClient:
+                self.onConfirmUnauthorizedClient()
+            default:
+                self.onConfirmErrorDialog()
+            }
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.onCancelErrorDialog()
+        }))
+        
+        present(alertController, animated: false)
+    }
+}
+
+// MARK: - Utilities functions
+extension ViewControllerType {
+    func onConfirmErrorDialog() {}
+    func onCancelErrorDialog() {}
+    func onConfirmUnauthorizedClient() {}
 }

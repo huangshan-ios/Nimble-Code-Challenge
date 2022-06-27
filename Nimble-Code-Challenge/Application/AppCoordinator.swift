@@ -22,4 +22,10 @@ final class AppCoordinator: Coordinator {
         loginCoordinator.navigationController = navigationController
         start(loginCoordinator)
     }
+    
+    func changeRootToHomeView() {
+        let homeViewCoordinator = HomeCoordinator()
+        homeViewCoordinator.navigationController = navigationController
+        start(homeViewCoordinator)
+    }
 }

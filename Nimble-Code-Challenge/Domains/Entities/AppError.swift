@@ -14,4 +14,17 @@ enum AppError: Error {
     case unauthorizedClient(String)
     case incorrectPassword(String)
     case invalid(String)
+    
+    var message: String {
+        switch self {
+        case .somethingWentWrong:
+            return "Something went wrong"
+        case .invalidGrant(let message),
+                .invalidClient(let message),
+                .unauthorizedClient(let message),
+                .incorrectPassword(let message),
+                .invalid(let message):
+            return message
+        }
+    }
 }

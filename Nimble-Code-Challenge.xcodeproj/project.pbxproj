@@ -39,6 +39,12 @@
 		F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FE2869640A0046DF5F /* LoginDTO.swift */; };
 		F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3002869657B0046DF5F /* DataResponseDTO.swift */; };
 		F779C303286968010046DF5F /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C302286968010046DF5F /* Error+Extensions.swift */; };
+		F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30528697CEE0046DF5F /* HomeCoordinator.swift */; };
+		F779C30C286980570046DF5F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30A286980570046DF5F /* HomeViewController.swift */; };
+		F779C30D286980570046DF5F /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F779C30B286980570046DF5F /* HomeViewController.xib */; };
+		F779C30F2869AA1E0046DF5F /* IndicatorLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */; };
+		F779C3112869AC190046DF5F /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3102869AC190046DF5F /* UserSession.swift */; };
+		F779C3132869AC2C0046DF5F /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3122869AC2C0046DF5F /* Credential.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +97,12 @@
 		F779C2FE2869640A0046DF5F /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
 		F779C3002869657B0046DF5F /* DataResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponseDTO.swift; sourceTree = "<group>"; };
 		F779C302286968010046DF5F /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
+		F779C30528697CEE0046DF5F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
+		F779C30A286980570046DF5F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		F779C30B286980570046DF5F /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLoader.swift; sourceTree = "<group>"; };
+		F779C3102869AC190046DF5F /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		F779C3122869AC2C0046DF5F /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				F71F865228656A2700767F6E /* Login */,
+				F779C304286975480046DF5F /* Home */,
 			);
 			path = Presentations;
 			sourceTree = "<group>";
@@ -329,6 +342,8 @@
 			isa = PBXGroup;
 			children = (
 				F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */,
+				F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */,
+				F779C3102869AC190046DF5F /* UserSession.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -354,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				F779C2FC28695E660046DF5F /* AppError.swift */,
+				F779C3122869AC2C0046DF5F /* Credential.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -364,6 +380,24 @@
 				F779C2E5286646330046DF5F /* Login */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		F779C304286975480046DF5F /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F779C3072869803C0046DF5F /* Views */,
+				F779C30528697CEE0046DF5F /* HomeCoordinator.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		F779C3072869803C0046DF5F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F779C30A286980570046DF5F /* HomeViewController.swift */,
+				F779C30B286980570046DF5F /* HomeViewController.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,6 +490,7 @@
 				F71F865628656A4600767F6E /* LoginViewController.xib in Resources */,
 				F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */,
 				F71F861B2865608900767F6E /* Assets.xcassets in Resources */,
+				F779C30D286980570046DF5F /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,6 +612,7 @@
 				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
 				F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */,
 				F779C2EF28675B4E0046DF5F /* ActivityIndicator.swift in Sources */,
+				F779C3132869AC2C0046DF5F /* Credential.swift in Sources */,
 				F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */,
 				F779C2E3286645660046DF5F /* LoginViewUseCase.swift in Sources */,
 				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
@@ -591,7 +627,11 @@
 				F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */,
 				F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */,
 				F779C2E7286646C40046DF5F /* CredentialRepository.swift in Sources */,
+				F779C30C286980570046DF5F /* HomeViewController.swift in Sources */,
 				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,
+				F779C3112869AC190046DF5F /* UserSession.swift in Sources */,
+				F779C30F2869AA1E0046DF5F /* IndicatorLoader.swift in Sources */,
+				F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */,
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
 				F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */,
