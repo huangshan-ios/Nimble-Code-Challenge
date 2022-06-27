@@ -16,6 +16,10 @@ class LoginViewController: ViewControllerType<LoginViewModel, LoginCoordinator> 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var forgotPasswordButton: UIButton!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     override func configureUIs() {
         let placeholdes = ["Email", "Password"]
         let textFields = [emailTextField, passwordTextField]
@@ -34,7 +38,19 @@ class LoginViewController: ViewControllerType<LoginViewModel, LoginCoordinator> 
                                          password: passwordTextField.rx.text.orEmpty.asObservable(),
                                          login: loginButton.rx.tap.asObservable(),
                                          forgotPassword: forgotPasswordButton.rx.tap.asObservable())
-        _ = viewModel.transform(input)
+        
+        let output = viewModel.transform(input)
+        
+        let enableLoginButtonDispo = output.enableLoginButton
+            .drive(loginButton.rx.isEnabled)
+        
+        let loginSuccessDispo = output.loginSuccess
+            .emit(onNext: { _ in
+                // TODO: Navigate to home screen
+            })
+        
+        disposeBag.insert([enableLoginButtonDispo,
+                           loginSuccessDispo])
     }
-    
+
 }

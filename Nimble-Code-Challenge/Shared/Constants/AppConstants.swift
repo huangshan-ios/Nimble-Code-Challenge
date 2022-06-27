@@ -6,5 +6,5 @@
 //
 
 struct AppConstants {
-    static let baseURL = ""
+    static let baseURL = "https://survey-api.nimblehq.co/api/v1/"
 }

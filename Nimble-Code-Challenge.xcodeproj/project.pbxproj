@@ -26,13 +26,19 @@
 		F71F86652865846100767F6E /* NimbleSurveyAPITargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */; };
 		F71F8668286584C800767F6E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F8667286584C800767F6E /* AppConstants.swift */; };
 		F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86692865859800767F6E /* NimbleSurveyProvider.swift */; };
-		F71F866C28658DDE00767F6E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866B28658DDE00767F6E /* NetworkService.swift */; };
 		F71F866E28658EAB00767F6E /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866D28658EAB00767F6E /* NetworkError.swift */; };
 		F71F867028658EF800767F6E /* NetworkServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */; };
 		F779C2E3286645660046DF5F /* LoginViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2E2286645660046DF5F /* LoginViewUseCase.swift */; };
 		F779C2E7286646C40046DF5F /* CredentialRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2E6286646C40046DF5F /* CredentialRepository.swift */; };
 		F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2E9286751F20046DF5F /* UIView+Extensions.swift */; };
 		F779C2EC286754F40046DF5F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */; };
+		F779C2EF28675B4E0046DF5F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */; };
+		F779C2F1286763280046DF5F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F0286763280046DF5F /* NetworkService.swift */; };
+		F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F528695A230046DF5F /* APIErrorDTO.swift */; };
+		F779C2FD28695E660046DF5F /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FC28695E660046DF5F /* AppError.swift */; };
+		F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FE2869640A0046DF5F /* LoginDTO.swift */; };
+		F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3002869657B0046DF5F /* DataResponseDTO.swift */; };
+		F779C303286968010046DF5F /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C302286968010046DF5F /* Error+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,13 +78,19 @@
 		F71F86642865846100767F6E /* NimbleSurveyAPITargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyAPITargetType.swift; sourceTree = "<group>"; };
 		F71F8667286584C800767F6E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		F71F86692865859800767F6E /* NimbleSurveyProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleSurveyProvider.swift; sourceTree = "<group>"; };
-		F71F866B28658DDE00767F6E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F71F866D28658EAB00767F6E /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceImpl.swift; sourceTree = "<group>"; };
 		F779C2E2286645660046DF5F /* LoginViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCase.swift; sourceTree = "<group>"; };
 		F779C2E6286646C40046DF5F /* CredentialRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepository.swift; sourceTree = "<group>"; };
 		F779C2E9286751F20046DF5F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		F779C2F0286763280046DF5F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		F779C2F528695A230046DF5F /* APIErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorDTO.swift; sourceTree = "<group>"; };
+		F779C2FC28695E660046DF5F /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		F779C2FE2869640A0046DF5F /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		F779C3002869657B0046DF5F /* DataResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponseDTO.swift; sourceTree = "<group>"; };
+		F779C302286968010046DF5F /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,8 +196,9 @@
 		F71F8646286562FD00767F6E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				F779C2ED28675B390046DF5F /* Helper */,
 				F779C2E8286745010046DF5F /* CustomView */,
-				F71F8666286584A200767F6E /* Common */,
+				F71F8666286584A200767F6E /* Constants */,
 				F71F86612865826700767F6E /* Network */,
 				F71F864A2865687D00767F6E /* Base */,
 				F71F864F2865694E00767F6E /* Extensions */,
@@ -196,6 +209,7 @@
 		F71F86472865630200767F6E /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				F779C2F728695BAD0046DF5F /* DTOs */,
 				F779C2E42866462E0046DF5F /* Repositories */,
 			);
 			path = Datas;
@@ -204,7 +218,8 @@
 		F71F86482865630600767F6E /* Domains */ = {
 			isa = PBXGroup;
 			children = (
-				F779C2E5286646330046DF5F /* Login */,
+				F779C2FA28695E2F0046DF5F /* UseCase */,
+				F779C2F928695E290046DF5F /* Entities */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -233,6 +248,7 @@
 				F71F86502865695C00767F6E /* NSObject+Extensions.swift */,
 				F779C2E9286751F20046DF5F /* UIView+Extensions.swift */,
 				F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */,
+				F779C302286968010046DF5F /* Error+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -267,7 +283,8 @@
 		F71F86612865826700767F6E /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				F71F866B28658DDE00767F6E /* NetworkService.swift */,
+				F779C2F428695A130046DF5F /* ResponseDTO */,
+				F779C2F0286763280046DF5F /* NetworkService.swift */,
 				F71F866F28658EF800767F6E /* NetworkServiceImpl.swift */,
 				F71F866D28658EAB00767F6E /* NetworkError.swift */,
 				F71F8662286583F800767F6E /* NimbleSurveyAPI.swift */,
@@ -277,12 +294,12 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
-		F71F8666286584A200767F6E /* Common */ = {
+		F71F8666286584A200767F6E /* Constants */ = {
 			isa = PBXGroup;
 			children = (
 				F71F8667286584C800767F6E /* AppConstants.swift */,
 			);
-			path = Common;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		F779C2E42866462E0046DF5F /* Repositories */ = {
@@ -306,6 +323,47 @@
 			children = (
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		F779C2ED28675B390046DF5F /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		F779C2F428695A130046DF5F /* ResponseDTO */ = {
+			isa = PBXGroup;
+			children = (
+				F779C2F528695A230046DF5F /* APIErrorDTO.swift */,
+			);
+			path = ResponseDTO;
+			sourceTree = "<group>";
+		};
+		F779C2F728695BAD0046DF5F /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+				F779C3002869657B0046DF5F /* DataResponseDTO.swift */,
+				F779C2FE2869640A0046DF5F /* LoginDTO.swift */,
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		F779C2F928695E290046DF5F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				F779C2FC28695E660046DF5F /* AppError.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		F779C2FA28695E2F0046DF5F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				F779C2E5286646330046DF5F /* Login */,
+			);
+			path = UseCase;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,22 +576,28 @@
 				F71F865528656A4600767F6E /* LoginViewController.swift in Sources */,
 				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
 				F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */,
+				F779C2EF28675B4E0046DF5F /* ActivityIndicator.swift in Sources */,
 				F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */,
 				F779C2E3286645660046DF5F /* LoginViewUseCase.swift in Sources */,
 				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
-				F71F866C28658DDE00767F6E /* NetworkService.swift in Sources */,
 				F71F865D28656BA000767F6E /* CoordinatorType.swift in Sources */,
 				F71F866A2865859800767F6E /* NimbleSurveyProvider.swift in Sources */,
 				F779C2EC286754F40046DF5F /* UIColor+Extensions.swift in Sources */,
 				F71F866E28658EAB00767F6E /* NetworkError.swift in Sources */,
+				F779C2F1286763280046DF5F /* NetworkService.swift in Sources */,
+				F779C303286968010046DF5F /* Error+Extensions.swift in Sources */,
+				F779C2FD28695E660046DF5F /* AppError.swift in Sources */,
+				F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */,
 				F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */,
 				F779C2E7286646C40046DF5F /* CredentialRepository.swift in Sources */,
 				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
+				F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */,
 				F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */,
 				F71F86652865846100767F6E /* NimbleSurveyAPITargetType.swift in Sources */,
+				F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

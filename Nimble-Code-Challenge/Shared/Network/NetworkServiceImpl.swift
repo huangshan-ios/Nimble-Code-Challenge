@@ -9,16 +9,21 @@ import RxSwift
 import Moya
 
 class NetworkServiceImpl: NetworkService {
-    func request<T>(_ token: NimbleSurveyAPI) -> Single<T> where T: Decodable {
+    func request<T>(_ token: NimbleSurveyAPI) -> Single<Result<T, Error>> where T: Decodable {
         return nimbleSurveyProvider.rx.request(token)
-            .flatMap({ response in
+            .map({ response in
                 switch response.statusCode {
                 case 200...299:
-                    return .just(response)
+                    do {
+                        let dtoResponse = try JSONDecoder().decode(DataResponseDTO<T>.self, from: response.data)
+                        return .success(dtoResponse.data)
+                    } catch {
+                        return .failure(NetworkAPIError.unknown)
+                    }
                 default:
-                    throw NetworkAPIError.getError(from: response.statusCode, data: response.data)
+                    return .failure(NetworkAPIError.getError(from: response.statusCode, data: response.data))
                 }
             })
-            .map(T.self)
+        
     }
 }
