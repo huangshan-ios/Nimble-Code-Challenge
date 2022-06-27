@@ -11,7 +11,7 @@ import RxSwift
 class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController {
     
     var viewModel: V!
-    var coordinator: C!
+    weak var coordinator: C!
     
     var disposeBag = DisposeBag()
     

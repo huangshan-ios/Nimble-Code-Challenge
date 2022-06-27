@@ -10,14 +10,12 @@ import Foundation
 enum NetworkAPIError: Error {
     case noStatusCode
     case invalidData(data: Any?)
-    case unknown(statusCode: Int?, data: Any?)
-    case notModified // 304
-    case invalidRequest(data: Any? = nil) // 400
-    case unauthorized // 401
-    case accessDenied // 403
+    case unknown
+    case invalidRequest(error: APIErrorDTO? = nil) // 400
+    case unauthorized(error: APIErrorDTO? = nil) // 401
+    case accessDenied(error: APIErrorDTO? = nil) // 403
     case notFound  // 404
-    case methodNotAllowed  // 405
-    case validate   // 422
+    case validate(error: APIErrorDTO? = nil) // 422
     case serverError // 500
     case badGateway // 502
     case serviceUnavailable // 503
@@ -27,20 +25,28 @@ enum NetworkAPIError: Error {
     case noNetworkCollection
     
     // swiftlint:disable cyclomatic_complexity
-    static func getError(from code: Int, data: Any? = nil) -> NetworkAPIError {
+    static func getError(from code: Int, data: Data? = nil) -> NetworkAPIError {
+        
+        var response: APIErrorDTO?
+        do {
+            if let data = data {
+                response = try JSONDecoder().decode(APIErrorDTO.self, from: data)
+            }
+        } catch {
+            response = nil
+        }
+        
         switch code {
-        case 304:
-            return .notModified
+        case 400:
+            return .invalidRequest(error: response)
         case 401:
-            return .unauthorized
+            return .unauthorized(error: response)
         case 403:
-            return .accessDenied
+            return .accessDenied(error: response)
         case 404:
             return .notFound
-        case 405:
-            return .methodNotAllowed
         case 422:
-            return .validate
+            return .validate(error: response)
         case 500:
             return .serverError
         case 502:
@@ -50,7 +56,7 @@ enum NetworkAPIError: Error {
         case 504:
             return .gatewayTimeout
         default:
-            return .unknown(statusCode: code, data: data)
+            return .unknown
         }
     }
     // swiftlint:enable cyclomatic_complexity

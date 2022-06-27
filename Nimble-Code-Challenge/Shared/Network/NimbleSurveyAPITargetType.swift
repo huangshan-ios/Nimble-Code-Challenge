@@ -15,7 +15,7 @@ extension NimbleSurveyAPI: TargetType {
     var path: String {
         switch self {
         case .login:
-            return ""
+            return "oauth/token"
         }
     }
     
@@ -29,7 +29,7 @@ extension NimbleSurveyAPI: TargetType {
     var paramaters: [String: String] {
         switch self {
         case .login(let email, let password):
-            return ["email": email, "password": password]
+            return ["grant_type": "password", "email": email, "password": password]
         }
     }
     
