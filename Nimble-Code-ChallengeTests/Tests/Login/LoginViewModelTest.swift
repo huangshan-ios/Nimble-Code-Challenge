@@ -85,7 +85,7 @@ class LoginViewModelTest: XCTestCase {
     func testLoginSuccess() throws {
         let isLoginSuccess = scheduler.createObserver(Bool.self)
         
-        useCase.listMock = [.login(.success(()))]
+        useCase.listMock = [.login(.success(true))]
         
         output.loginSuccess
             .emit(to: isLoginSuccess)
@@ -147,7 +147,7 @@ class LoginViewModelTest: XCTestCase {
     func testLoadingStates() throws {
         let loadingStates = scheduler.createObserver(Bool.self)
         
-        useCase.listMock = [.login(.success((())))]
+        useCase.listMock = [.login(.success(true))]
         
         output.loginSuccess
             .emit()

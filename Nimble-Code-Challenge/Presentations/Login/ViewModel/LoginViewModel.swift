@@ -49,12 +49,9 @@ class LoginViewModel: ViewModelType {
                 return self.useCase
                     .login(with: email, and: password)
                     .trackActivity(activityIndicator)
-                    .flatMap({ result -> Observable<Bool> in
-                        if case let .failure(error) = result {
-                            errorTrigger.accept(error)
-                            return .just(false)
-                        }
-                        return .just(true)
+                    .catch({ error in
+                        errorTrigger.accept(error.mapToAppError())
+                        return .just(false)
                     })
             }
         

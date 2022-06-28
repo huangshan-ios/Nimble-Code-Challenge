@@ -18,10 +18,10 @@ class LoginViewUseCaseTest: XCTestCase {
     private var repository: CredentialRepositoryMock!
     private var useCase: LoginViewUseCaseImpl!
     
-    private lazy var mockDTO: LoginDTO = {
-        return LoginDTO(id: "1",
+    private lazy var mockDTO: CredentialDTO = {
+        return CredentialDTO(id: "1",
                         type: "Bearer",
-                        attributes: LoginAttributesDTO(access_token: "lbxD2K2BjbYtNzz8xjvh2FvSKx838KBCf79q773kq2c",
+                        attributes: CredentialAttributesDTO(access_token: "lbxD2K2BjbYtNzz8xjvh2FvSKx838KBCf79q773kq2c",
                                                        token_type: "Bearer", expires_in: 7200,
                                                        refresh_token: "3zJz2oW0njxlj_I3ghyUBF7ZfdQKYXd2n0ODlMkAjHc", created_at: 1597169495))
     }()
@@ -36,12 +36,6 @@ class LoginViewUseCaseTest: XCTestCase {
         repository.listMock = [.login(.success(mockDTO))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard case .success = result else {
-                    return false
-                }
-                return true
-            })
             .toBlocking()
             .first()
         
@@ -52,14 +46,11 @@ class LoginViewUseCaseTest: XCTestCase {
         repository.listMock = [.login(.failure(NetworkAPIError.notFound))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard
-                    case let .failure(error) = result,
-                    case .somethingWentWrong = error
-                else {
-                    return false
+            .catch({ error in
+                guard case .notFound = (error as? NetworkAPIError) else {
+                    return .just(false)
                 }
-                return true
+                return .just(true)
             })
             .toBlocking()
             .first()

@@ -28,30 +28,22 @@ class CredentialRepositoryTest: XCTestCase {
         networkService.listMock = [.login(.success(.json("login_success")))]
         
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard case .success = result else {
-                    return false
-                }
-                return true
-            })
             .toBlocking()
             .first()
         
-        XCTAssertTrue(result!)
+        XCTAssertEqual(result!.id, "10")
     }
     
     func testLoginFailed() throws {
         networkService.listMock = [.login(.failure(NetworkAPIError.notFound))]
         
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard
-                    case let .failure(error) = result,
-                    case .notFound = (error as? NetworkAPIError)
-                else {
-                    return false
+            .map({ _ in return true })
+            .catch({ error in
+                guard case .notFound = (error as? NetworkAPIError) else {
+                    return .just(false)
                 }
-                return true
+                return .just(true)
             })
             .toBlocking()
             .first()

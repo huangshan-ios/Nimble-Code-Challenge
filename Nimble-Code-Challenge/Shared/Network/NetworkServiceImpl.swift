@@ -8,22 +8,49 @@
 import RxSwift
 import Moya
 
+enum TokenError: Error {
+    case tokenExpired
+}
+
 class NetworkServiceImpl: NetworkService {
-    func request<T>(_ token: NimbleSurveyAPI) -> Single<Result<T, Error>> where T: Decodable {
-        return nimbleSurveyProvider.rx.request(token)
+    func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
+        return nimbleSurveyProvider.rx.request(request)
             .map({ response in
                 switch response.statusCode {
                 case 200...299:
                     do {
                         let dtoResponse = try JSONDecoder().decode(T.self, from: response.data)
-                        return .success(dtoResponse)
+                        return dtoResponse
                     } catch {
-                        return .failure(NetworkAPIError.unknown)
+                        throw NetworkAPIError.unknown
+                    }
+                case 401:
+                    let isCredentialRequest = (response.request?.url?.path ?? "").contains("token")
+                    if isCredentialRequest {
+                        throw NetworkAPIError.getError(from: response.statusCode, data: response.data)
+                    } else {
+                        throw TokenError.tokenExpired
                     }
                 default:
-                    return .failure(NetworkAPIError.getError(from: response.statusCode, data: response.data))
+                    throw NetworkAPIError.getError(from: response.statusCode, data: response.data)
                 }
             })
-        
+            .retry(when: { (error: Observable<TokenError>) in
+                error.flatMap { error -> Single<()> in
+                    switch error {
+                    case .tokenExpired:
+                        let token = UserSession.shared.getCredential().attributes.refreshToken
+                        return nimbleSurveyProvider.rx.request(.refreshToken(token))
+                            .flatMap { response in
+                                switch response.statusCode {
+                                case 200:
+                                    return .just(())
+                                default:
+                                    return .just(())
+                                }
+                            }
+                    }
+                }
+            }).retry(2)
     }
 }
