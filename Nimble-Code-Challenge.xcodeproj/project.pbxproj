@@ -47,7 +47,7 @@
 		F779C3162869ED7F0046DF5F /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3152869ED7F0046DF5F /* Mockable.swift */; };
 		F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */; };
 		F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3212869EED00046DF5F /* DataTypeMock.swift */; };
-		F779C3242869EFA30046DF5F /* LoginUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3232869EFA30046DF5F /* LoginUseCaseMock.swift */; };
+		F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,7 +108,7 @@
 		F779C3152869ED7F0046DF5F /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
 		F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
 		F779C3212869EED00046DF5F /* DataTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeMock.swift; sourceTree = "<group>"; };
-		F779C3232869EFA30046DF5F /* LoginUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCaseMock.swift; sourceTree = "<group>"; };
+		F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,7 +429,7 @@
 		F779C3182869EE340046DF5F /* Domains */ = {
 			isa = PBXGroup;
 			children = (
-				F779C3232869EFA30046DF5F /* LoginUseCaseMock.swift */,
+				F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */,
 			);
 			path = Domains;
 			sourceTree = "<group>";
@@ -703,7 +703,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */,
-				F779C3242869EFA30046DF5F /* LoginUseCaseMock.swift in Sources */,
+				F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */,
 				F779C3162869ED7F0046DF5F /* Mockable.swift in Sources */,
 				F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */,
 			);
