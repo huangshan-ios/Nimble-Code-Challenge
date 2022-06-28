@@ -36,12 +36,6 @@ class LoginViewUseCaseTest: XCTestCase {
         repository.listMock = [.login(.success(mockDTO))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard case .success = result else {
-                    return false
-                }
-                return true
-            })
             .toBlocking()
             .first()
         
@@ -52,14 +46,11 @@ class LoginViewUseCaseTest: XCTestCase {
         repository.listMock = [.login(.failure(NetworkAPIError.notFound))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
-            .map({ result -> Bool in
-                guard
-                    case let .failure(error) = result,
-                    case .somethingWentWrong = error
-                else {
-                    return false
+            .catch({ error in
+                guard case .notFound = (error as? NetworkAPIError) else {
+                    return .just(false)
                 }
-                return true
+                return .just(true)
             })
             .toBlocking()
             .first()

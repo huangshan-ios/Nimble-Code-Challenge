@@ -10,7 +10,7 @@ import RxSwift
 @testable import Nimble_Code_Challenge
 
 final class NetworkServiceMock: NetworkService, Mockable {
-    
+
     var listMock: [MockType] = []
     
     enum MockType {
@@ -27,7 +27,7 @@ final class NetworkServiceMock: NetworkService, Mockable {
         }
     }
     
-    func request<T>(_ request: NimbleSurveyAPI) -> Single<T> where T: Decodable {
+    func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
             return .error(NetworkAPIError.unknown)
         }

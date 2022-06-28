@@ -10,6 +10,7 @@ import RxSwift
 @testable import Nimble_Code_Challenge
 
 final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
+    
     let credentialRepository: CredentialRepository
     
     init(credentialRepository: CredentialRepository) {
@@ -19,7 +20,7 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case login(Result<Void, AppError>)
+        case login(Result<Bool, AppError>)
         
         enum Case {
             case login
@@ -32,14 +33,19 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
         }
     }
     
-    func login(with email: String, and password: String) -> Single<Result<Void, AppError>> {
+    func login(with email: String, and password: String) -> Single<Bool> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .just(.failure(AppError.somethingWentWrong))
+            return .error(AppError.somethingWentWrong)
         }
         
         switch mock {
         case .login(let result):
-            return .just(result)
+            switch result {
+            case .success(let success):
+                return .just(success)
+            case .failure(let error):
+                return .error(error)
+            }
         }
     }
     

@@ -10,6 +10,7 @@ import RxSwift
 @testable import Nimble_Code_Challenge
 
 final class CredentialRepositoryMock: CredentialRepository, Mockable {
+
     let networkService: NetworkService
     
     init(networkService: NetworkService) {
@@ -32,14 +33,19 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
         }
     }
     
-    func login(with email: String, and password: String) -> Single<Result<CredentialDTO, Error>> {
+    func login(with email: String, and password: String) -> Single<CredentialDTO> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .just(.failure(AppError.somethingWentWrong))
+            return .error(AppError.somethingWentWrong)
         }
         
         switch mock {
         case .login(let result):
-            return .just(result)
+            switch result {
+            case .success(let success):
+                return .just(success)
+            case .failure(let error):
+                return .error(error)
+            }
         }
     }
     
