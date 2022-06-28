@@ -32,6 +32,7 @@ class LoginViewModelTest: XCTestCase {
         disposeBag = DisposeBag()
         useCase = LoginViewUseCaseMock(credentialRepository: CredentialRepositoryImpl(networkService: NetworkServiceImpl()))
         viewModel = LoginViewModel(useCase: useCase)
+        scheduler = TestScheduler(initialClock: 0)
         
         let input = LoginViewModel.Input(email: emailTriggerSubject.asObservable(),
                                          password: passwordTriggerSubject.asObservable(),
@@ -82,14 +83,11 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoginSuccess() throws {
-        scheduler = TestScheduler(initialClock: 0)
-
         let isLoginSuccess = scheduler.createObserver(Bool.self)
         
         useCase.listMock = [.login(.success(()))]
         
         output.loginSuccess
-            .map({ _ in return true })
             .emit(to: isLoginSuccess)
             .disposed(by: disposeBag)
         
@@ -106,8 +104,76 @@ class LoginViewModelTest: XCTestCase {
             .disposed(by: disposeBag)
         
         scheduler.start()
-  
+        
         XCTAssertEqual(isLoginSuccess.events, [.next(10, true)])
+    }
+    
+    func testLoginError() throws {
+        let isLoginError = scheduler.createObserver(Bool.self)
+        
+        useCase.listMock = [.login(.failure(.somethingWentWrong))]
+        
+        output.loginSuccess
+            .emit()
+            .disposed(by: disposeBag)
+        
+        output.error
+            .map({ error in
+                guard let error = error, case .somethingWentWrong = error else {
+                    return false
+                }
+                return true
+            })
+            .emit(to: isLoginError)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(0, "dev@nimblehq.co")])
+            .bind(to: emailTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(0, "12345678")])
+            .bind(to: passwordTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(10, ())])
+            .bind(to: loginButtonTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.start()
+        
+        XCTAssertEqual(isLoginError.events, [.next(10, true)])
+    }
+    
+    func testLoadingStates() throws {
+        let loadingStates = scheduler.createObserver(Bool.self)
+        
+        useCase.listMock = [.login(.success((())))]
+        
+        output.loginSuccess
+            .emit()
+            .disposed(by: disposeBag)
+        
+        output.isLoading
+            .emit(to: loadingStates)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(0, "dev@nimblehq.co")])
+            .bind(to: emailTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(0, "12345678")])
+            .bind(to: passwordTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(10, ())])
+            .bind(to: loginButtonTriggerSubject)
+            .disposed(by: disposeBag)
+        
+        scheduler.start()
+        
+        XCTAssertEqual(loadingStates.events, [.next(0, false),
+                                              .next(10, true),
+                                              .next(10, false)])
     }
     
     override func tearDown() {

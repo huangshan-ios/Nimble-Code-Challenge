@@ -50,8 +50,8 @@ class LoginViewController: ViewControllerType<LoginViewModel, LoginCoordinator> 
             })
         
         let loginSuccessDispo = output.loginSuccess
-            .emit(onNext: { [weak self] _ in
-                guard let self = self else { return }
+            .emit(onNext: { [weak self] isSuccess in
+                guard let self = self, isSuccess else { return }
                 self.coordinator.navigateToHomeViewController()
             })
         

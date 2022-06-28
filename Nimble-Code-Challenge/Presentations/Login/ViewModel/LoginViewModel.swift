@@ -21,7 +21,7 @@ class LoginViewModel: ViewModelType {
         let enableLoginButton: Driver<Bool>
         let isLoading: Signal<Bool>
         let error: Signal<AppError?>
-        let loginSuccess: Signal<Void>
+        let loginSuccess: Signal<Bool>
         let navigateToForgotPassword: Signal<Void>
     }
     
@@ -44,24 +44,24 @@ class LoginViewModel: ViewModelType {
         
         let loginStatus = input.login
             .withLatestFrom(credentials)
-            .flatMap { [weak self] email, password -> Observable<Void> in
+            .flatMap { [weak self] email, password -> Observable<Bool> in
                 guard let self = self else { return .empty() }
                 return self.useCase
                     .login(with: email, and: password)
                     .trackActivity(activityIndicator)
-                    .flatMap({ result -> Observable<Void> in
+                    .flatMap({ result -> Observable<Bool> in
                         if case let .failure(error) = result {
                             errorTrigger.accept(error)
-                            return .empty()
+                            return .just(false)
                         }
-                        return .just(())
+                        return .just(true)
                     })
             }
         
         return Output(enableLoginButton: enableLoginButton.asDriver(onErrorJustReturn: false),
                       isLoading: activityIndicator.asSignal(onErrorJustReturn: false),
                       error: errorTrigger.asSignal(onErrorJustReturn: nil),
-                      loginSuccess: loginStatus.asSignal(onErrorJustReturn: ()),
+                      loginSuccess: loginStatus.asSignal(onErrorJustReturn: false),
                       navigateToForgotPassword: input.forgotPassword.asSignal(onErrorJustReturn: ()))
     }
 }
