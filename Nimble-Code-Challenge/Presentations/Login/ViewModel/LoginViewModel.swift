@@ -45,7 +45,7 @@ class LoginViewModel: ViewModelType {
         let loginStatus = input.login
             .withLatestFrom(credentials)
             .flatMap { [weak self] email, password -> Observable<Bool> in
-                guard let self = self else { return .empty() }
+                guard let self = self else { return .just(false) }
                 return self.useCase
                     .login(with: email, and: password)
                     .trackActivity(activityIndicator)

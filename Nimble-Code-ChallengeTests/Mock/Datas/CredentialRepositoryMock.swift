@@ -1,25 +1,25 @@
 //
-//  LoginViewUseCaseMock.swift
+//  CredentialRepositoryMock.swift
 //  Nimble-Code-ChallengeTests
 //
-//  Created by Son Hoang on 27/06/2022.
+//  Created by Son Hoang on 28/06/2022.
 //
 
 import RxSwift
 
 @testable import Nimble_Code_Challenge
 
-final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
-    let credentialRepository: CredentialRepository
+final class CredentialRepositoryMock: CredentialRepository, Mockable {
+    let networkService: NetworkService
     
-    init(credentialRepository: CredentialRepository) {
-        self.credentialRepository = credentialRepository
+    init(networkService: NetworkService) {
+        self.networkService = networkService
     }
     
     var listMock: [MockType] = []
     
     enum MockType {
-        case login(Result<Void, AppError>)
+        case login(Result<LoginDTO, Error>)
         
         enum Case {
             case login
@@ -32,7 +32,7 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
         }
     }
     
-    func login(with email: String, and password: String) -> Single<Result<Void, AppError>> {
+    func login(with email: String, and password: String) -> Single<Result<LoginDTO, Error>> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
             return .just(.failure(AppError.somethingWentWrong))
         }

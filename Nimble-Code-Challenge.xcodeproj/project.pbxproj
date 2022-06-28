@@ -48,6 +48,12 @@
 		F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */; };
 		F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3212869EED00046DF5F /* DataTypeMock.swift */; };
 		F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */; };
+		F7EFC0AB286B6A2400177139 /* CredentialRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */; };
+		F7EFC0AF286B6AAD00177139 /* LoginViewUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */; };
+		F7EFC0B1286B6ECB00177139 /* CredentialRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */; };
+		F7EFC0B4286B6EF900177139 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0B3286B6EF900177139 /* NetworkServiceMock.swift */; };
+		F7EFC0B7286B714B00177139 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B6286B714B00177139 /* login_success.json */; };
+		F7EFC0B9286B737700177139 /* invalid_grant_400.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B8286B737700177139 /* invalid_grant_400.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,6 +115,12 @@
 		F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
 		F779C3212869EED00046DF5F /* DataTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeMock.swift; sourceTree = "<group>"; };
 		F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseMock.swift; sourceTree = "<group>"; };
+		F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryMock.swift; sourceTree = "<group>"; };
+		F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseTest.swift; sourceTree = "<group>"; };
+		F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryTest.swift; sourceTree = "<group>"; };
+		F7EFC0B3286B6EF900177139 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
+		F7EFC0B6286B714B00177139 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
+		F7EFC0B8286B737700177139 /* invalid_grant_400.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalid_grant_400.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,8 +432,10 @@
 		F779C3172869EDB50046DF5F /* Mock */ = {
 			isa = PBXGroup;
 			children = (
+				F7EFC0B5286B711A00177139 /* Jsons */,
 				F779C3182869EE340046DF5F /* Domains */,
 				F779C3192869EE3E0046DF5F /* Datas */,
+				F7EFC0B2286B6EEA00177139 /* Network */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -437,6 +451,7 @@
 		F779C3192869EE3E0046DF5F /* Datas */ = {
 			isa = PBXGroup;
 			children = (
+				F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */,
 			);
 			path = Datas;
 			sourceTree = "<group>";
@@ -453,8 +468,27 @@
 			isa = PBXGroup;
 			children = (
 				F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */,
+				F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */,
+				F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F7EFC0B2286B6EEA00177139 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F7EFC0B3286B6EF900177139 /* NetworkServiceMock.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F7EFC0B5286B711A00177139 /* Jsons */ = {
+			isa = PBXGroup;
+			children = (
+				F7EFC0B8286B737700177139 /* invalid_grant_400.json */,
+				F7EFC0B6286B714B00177139 /* login_success.json */,
+			);
+			path = Jsons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -555,6 +589,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7EFC0B7286B714B00177139 /* login_success.json in Resources */,
+				F7EFC0B9286B737700177139 /* invalid_grant_400.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,7 +738,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F7EFC0B4286B6EF900177139 /* NetworkServiceMock.swift in Sources */,
 				F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */,
+				F7EFC0AB286B6A2400177139 /* CredentialRepositoryMock.swift in Sources */,
+				F7EFC0B1286B6ECB00177139 /* CredentialRepositoryTest.swift in Sources */,
+				F7EFC0AF286B6AAD00177139 /* LoginViewUseCaseTest.swift in Sources */,
 				F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */,
 				F779C3162869ED7F0046DF5F /* Mockable.swift in Sources */,
 				F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */,

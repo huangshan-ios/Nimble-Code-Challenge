@@ -15,8 +15,8 @@ class NetworkServiceImpl: NetworkService {
                 switch response.statusCode {
                 case 200...299:
                     do {
-                        let dtoResponse = try JSONDecoder().decode(DataResponseDTO<T>.self, from: response.data)
-                        return .success(dtoResponse.data)
+                        let dtoResponse = try JSONDecoder().decode(T.self, from: response.data)
+                        return .success(dtoResponse)
                     } catch {
                         return .failure(NetworkAPIError.unknown)
                     }
