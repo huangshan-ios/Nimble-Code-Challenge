@@ -21,6 +21,15 @@ final class CredentialRepositoryImpl: CredentialRepository {
     }
     
     func login(with email: String, and password: String) -> Single<Result<LoginDTO, Error>> {
-        return networkService.request(.login(email, password))
+        let dataResponse: Single<Result<DataResponseDTO<LoginDTO>, Error>> = networkService.request(.login(email, password))
+        return dataResponse
+            .map { result in
+                switch result {
+                case .success(let dataResponse):
+                    return .success(dataResponse.data)
+                case .failure(let error):
+                    return .failure(error)
+                }
+            }
     }
 }

@@ -6,6 +6,7 @@ disabled_rules:
   - notification_center_detachment
   - unused_optional_binding
   - identifier_name
+  - nesting
 excluded:
   - Carthage
   - Pods

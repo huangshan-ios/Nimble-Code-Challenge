@@ -11,3 +11,8 @@ enum DataTypeMock {
     case json(String)
     case object(Decodable)
 }
+
+enum ErrorTypeMock {
+    case json(String)
+    case error(Error)
+}
