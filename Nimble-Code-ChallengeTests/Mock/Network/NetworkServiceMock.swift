@@ -27,9 +27,9 @@ final class NetworkServiceMock: NetworkService, Mockable {
         }
     }
     
-    func request<T>(_ request: NimbleSurveyAPI) -> Single<Result<T, Error>> where T: Decodable {
+    func request<T>(_ request: NimbleSurveyAPI) -> Single<T> where T: Decodable {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .just(.failure(NetworkAPIError.unknown))
+            return .error(NetworkAPIError.unknown)
         }
         
         switch mock {
@@ -39,15 +39,15 @@ final class NetworkServiceMock: NetworkService, Mockable {
                 switch dataType {
                 case .json(let fileName):
                     let object = loadJSON(filename: fileName, type: T.self)
-                    return .just(.success(object))
+                    return .just(object)
                 case .object(let object):
                     guard let object = object as? T else {
-                        return .just(.failure(NetworkAPIError.unknown))
+                        return .error(NetworkAPIError.unknown)
                     }
-                    return .just(.success(object))
+                    return .just(object)
                 }
             case .failure(let error):
-                return .just(.failure(error))
+                return .error(error)
             }
         }
     }
