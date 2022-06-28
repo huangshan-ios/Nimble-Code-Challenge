@@ -19,7 +19,7 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case login(Result<LoginDTO, Error>)
+        case login(Result<CredentialDTO, Error>)
         
         enum Case {
             case login
@@ -32,7 +32,7 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
         }
     }
     
-    func login(with email: String, and password: String) -> Single<Result<LoginDTO, Error>> {
+    func login(with email: String, and password: String) -> Single<Result<CredentialDTO, Error>> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
             return .just(.failure(AppError.somethingWentWrong))
         }

@@ -10,7 +10,7 @@ import RxSwift
 protocol CredentialRepository {
     var networkService: NetworkService { get }
     
-    func login(with email: String, and password: String) -> Single<Result<LoginDTO, Error>>
+    func login(with email: String, and password: String) -> Single<Result<CredentialDTO, Error>>
 }
 
 final class CredentialRepositoryImpl: CredentialRepository {
@@ -20,16 +20,13 @@ final class CredentialRepositoryImpl: CredentialRepository {
         self.networkService = networkService
     }
     
-    func login(with email: String, and password: String) -> Single<Result<LoginDTO, Error>> {
-        let dataResponse: Single<Result<DataResponseDTO<LoginDTO>, Error>> = networkService.request(.login(email, password))
-        return dataResponse
-            .map { result in
-                switch result {
-                case .success(let dataResponse):
-                    return .success(dataResponse.data)
-                case .failure(let error):
-                    return .failure(error)
-                }
-            }
+    func login(with email: String, and password: String) -> Single<Result<CredentialDTO, Error>> {
+        let request: Single<DataResponseDTO<CredentialDTO>> = networkService.request(.login(email, password))
+        return request
+            .map { dataResponse in
+                return .success(dataResponse.data)
+            }.catch({ error in
+                return .just(.failure(error))
+            })
     }
 }

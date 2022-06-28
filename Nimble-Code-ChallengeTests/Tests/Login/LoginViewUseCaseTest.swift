@@ -18,10 +18,10 @@ class LoginViewUseCaseTest: XCTestCase {
     private var repository: CredentialRepositoryMock!
     private var useCase: LoginViewUseCaseImpl!
     
-    private lazy var mockDTO: LoginDTO = {
-        return LoginDTO(id: "1",
+    private lazy var mockDTO: CredentialDTO = {
+        return CredentialDTO(id: "1",
                         type: "Bearer",
-                        attributes: LoginAttributesDTO(access_token: "lbxD2K2BjbYtNzz8xjvh2FvSKx838KBCf79q773kq2c",
+                        attributes: CredentialAttributesDTO(access_token: "lbxD2K2BjbYtNzz8xjvh2FvSKx838KBCf79q773kq2c",
                                                        token_type: "Bearer", expires_in: 7200,
                                                        refresh_token: "3zJz2oW0njxlj_I3ghyUBF7ZfdQKYXd2n0ODlMkAjHc", created_at: 1597169495))
     }()

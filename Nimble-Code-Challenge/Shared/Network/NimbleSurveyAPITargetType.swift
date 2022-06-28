@@ -14,14 +14,14 @@ extension NimbleSurveyAPI: TargetType {
     
     var path: String {
         switch self {
-        case .login:
+        case .login, .refreshToken:
             return "oauth/token"
         }
     }
     
     var method: Method {
         switch self {
-        case .login:
+        case .login, .refreshToken:
             return .post
         }
     }
@@ -34,6 +34,9 @@ extension NimbleSurveyAPI: TargetType {
             paramaters["grant_type"] = "password"
             paramaters["email"] = email
             paramaters["password"] = password
+        case .refreshToken(let refreshToken):
+            paramaters["grant_type"] = "refresh_token"
+            paramaters["refresh_token"] = refreshToken
         }
         return paramaters
     }
@@ -49,12 +52,12 @@ extension NimbleSurveyAPI: TargetType {
     var headers: [String: String]? {
         var headers: [String: String] = [:]
         switch self {
-        case .login:
+        case .login, .refreshToken:
             return headers
         default:
             let credential = UserSession.shared.getCredential()
             if !credential.attributes.accessToken.isEmpty {
-                headers["Authentication"] = "\(credential.type) \(credential.attributes.accessToken)"
+                headers["Authentication"] = "\(credential.attributes.tokenType) \(credential.attributes.accessToken)"
             }
         }
         return headers

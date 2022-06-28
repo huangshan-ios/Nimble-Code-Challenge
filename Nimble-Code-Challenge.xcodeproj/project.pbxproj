@@ -35,7 +35,7 @@
 		F779C2F1286763280046DF5F /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F0286763280046DF5F /* NetworkService.swift */; };
 		F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F528695A230046DF5F /* APIErrorDTO.swift */; };
 		F779C2FD28695E660046DF5F /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FC28695E660046DF5F /* AppError.swift */; };
-		F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FE2869640A0046DF5F /* LoginDTO.swift */; };
+		F779C2FF2869640A0046DF5F /* CredentialDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FE2869640A0046DF5F /* CredentialDTO.swift */; };
 		F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3002869657B0046DF5F /* DataResponseDTO.swift */; };
 		F779C303286968010046DF5F /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C302286968010046DF5F /* Error+Extensions.swift */; };
 		F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30528697CEE0046DF5F /* HomeCoordinator.swift */; };
@@ -102,7 +102,7 @@
 		F779C2F0286763280046DF5F /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F779C2F528695A230046DF5F /* APIErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorDTO.swift; sourceTree = "<group>"; };
 		F779C2FC28695E660046DF5F /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
-		F779C2FE2869640A0046DF5F /* LoginDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		F779C2FE2869640A0046DF5F /* CredentialDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialDTO.swift; sourceTree = "<group>"; };
 		F779C3002869657B0046DF5F /* DataResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponseDTO.swift; sourceTree = "<group>"; };
 		F779C302286968010046DF5F /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
 		F779C30528697CEE0046DF5F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
@@ -380,7 +380,7 @@
 			isa = PBXGroup;
 			children = (
 				F779C3002869657B0046DF5F /* DataResponseDTO.swift */,
-				F779C2FE2869640A0046DF5F /* LoginDTO.swift */,
+				F779C2FE2869640A0046DF5F /* CredentialDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -717,7 +717,7 @@
 				F779C2F1286763280046DF5F /* NetworkService.swift in Sources */,
 				F779C303286968010046DF5F /* Error+Extensions.swift in Sources */,
 				F779C2FD28695E660046DF5F /* AppError.swift in Sources */,
-				F779C2FF2869640A0046DF5F /* LoginDTO.swift in Sources */,
+				F779C2FF2869640A0046DF5F /* CredentialDTO.swift in Sources */,
 				F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */,
 				F779C2E7286646C40046DF5F /* CredentialRepository.swift in Sources */,
 				F779C30C286980570046DF5F /* HomeViewController.swift in Sources */,
