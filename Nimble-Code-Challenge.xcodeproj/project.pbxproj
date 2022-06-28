@@ -12,7 +12,6 @@
 		F71F86122865608800767F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86112865608800767F6E /* AppDelegate.swift */; };
 		F71F861B2865608900767F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71F861A2865608900767F6E /* Assets.xcassets */; };
 		F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F861C2865608900767F6E /* LaunchScreen.storyboard */; };
-		F71F86432865619C00767F6E /* NimbleTestExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86422865619C00767F6E /* NimbleTestExample.swift */; };
 		F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F864B2865688B00767F6E /* ViewModelType.swift */; };
 		F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F864D2865691500767F6E /* ViewControllerType.swift */; };
 		F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86502865695C00767F6E /* NSObject+Extensions.swift */; };
@@ -45,6 +44,10 @@
 		F779C30F2869AA1E0046DF5F /* IndicatorLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */; };
 		F779C3112869AC190046DF5F /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3102869AC190046DF5F /* UserSession.swift */; };
 		F779C3132869AC2C0046DF5F /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3122869AC2C0046DF5F /* Credential.swift */; };
+		F779C3162869ED7F0046DF5F /* Mockable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3152869ED7F0046DF5F /* Mockable.swift */; };
+		F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */; };
+		F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3212869EED00046DF5F /* DataTypeMock.swift */; };
+		F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +73,6 @@
 		F71F861D2865608900767F6E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F71F861F2865608900767F6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F71F86242865608A00767F6E /* Nimble-Code-ChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Nimble-Code-ChallengeTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F71F86422865619C00767F6E /* NimbleTestExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleTestExample.swift; sourceTree = "<group>"; };
 		F71F864B2865688B00767F6E /* ViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelType.swift; sourceTree = "<group>"; };
 		F71F864D2865691500767F6E /* ViewControllerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerType.swift; sourceTree = "<group>"; };
 		F71F86502865695C00767F6E /* NSObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Extensions.swift"; sourceTree = "<group>"; };
@@ -103,6 +105,10 @@
 		F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndicatorLoader.swift; sourceTree = "<group>"; };
 		F779C3102869AC190046DF5F /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		F779C3122869AC2C0046DF5F /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
+		F779C3152869ED7F0046DF5F /* Mockable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mockable.swift; sourceTree = "<group>"; };
+		F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
+		F779C3212869EED00046DF5F /* DataTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeMock.swift; sourceTree = "<group>"; };
+		F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +187,9 @@
 		F71F86272865608A00767F6E /* Nimble-Code-ChallengeTests */ = {
 			isa = PBXGroup;
 			children = (
-				F71F86422865619C00767F6E /* NimbleTestExample.swift */,
+				F779C31A2869EE460046DF5F /* Tests */,
+				F779C3172869EDB50046DF5F /* Mock */,
+				F779C3142869ED730046DF5F /* Shared */,
 			);
 			path = "Nimble-Code-ChallengeTests";
 			sourceTree = "<group>";
@@ -398,6 +406,55 @@
 				F779C30B286980570046DF5F /* HomeViewController.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F779C3142869ED730046DF5F /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				F779C3152869ED7F0046DF5F /* Mockable.swift */,
+				F779C3212869EED00046DF5F /* DataTypeMock.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		F779C3172869EDB50046DF5F /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				F779C3182869EE340046DF5F /* Domains */,
+				F779C3192869EE3E0046DF5F /* Datas */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		F779C3182869EE340046DF5F /* Domains */ = {
+			isa = PBXGroup;
+			children = (
+				F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */,
+			);
+			path = Domains;
+			sourceTree = "<group>";
+		};
+		F779C3192869EE3E0046DF5F /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Datas;
+			sourceTree = "<group>";
+		};
+		F779C31A2869EE460046DF5F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F779C31C2869EE550046DF5F /* Login */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		F779C31C2869EE550046DF5F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -645,7 +702,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F71F86432865619C00767F6E /* NimbleTestExample.swift in Sources */,
+				F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */,
+				F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */,
+				F779C3162869ED7F0046DF5F /* Mockable.swift in Sources */,
+				F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

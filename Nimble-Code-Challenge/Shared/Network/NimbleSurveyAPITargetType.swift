@@ -47,7 +47,17 @@ extension NimbleSurveyAPI: TargetType {
     }
     
     var headers: [String: String]? {
-        return [:]
+        var headers: [String: String] = [:]
+        switch self {
+        case .login:
+            return headers
+        default:
+            let credential = UserSession.shared.getCredential()
+            if !credential.attributes.accessToken.isEmpty {
+                headers["Authentication"] = "\(credential.type) \(credential.attributes.accessToken)"
+            }
+        }
+        return headers
     }
     
 }
