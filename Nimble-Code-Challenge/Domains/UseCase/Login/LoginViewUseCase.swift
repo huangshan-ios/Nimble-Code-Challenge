@@ -10,7 +10,7 @@ import RxSwift
 protocol LoginViewUseCase {
     var credentialRepository: CredentialRepository { get }
     
-    func login(with email: String, and password: String) -> Single<Result<Void, AppError>>
+    func login(with email: String, and password: String) -> Single<Bool>
 }
 
 final class LoginViewUseCaseImpl: LoginViewUseCase {
@@ -20,16 +20,11 @@ final class LoginViewUseCaseImpl: LoginViewUseCase {
         self.credentialRepository = credentialRepository
     }
     
-    func login(with email: String, and password: String) -> Single<Result<Void, AppError>> {
+    func login(with email: String, and password: String) -> Single<Bool> {
         return credentialRepository.login(with: email, and: password)
-            .map { result in
-                switch result {
-                case .success(let loginDTO):
-                    UserSession.shared.setCredential(loginDTO.toCredentials())
-                    return .success(())
-                case .failure(let error):
-                    return .failure(error.mapToAppError())
-                }
+            .map { credentialDTO in
+                UserSession.shared.setCredential(credentialDTO.toCredentials())
+                return true
             }
     }
 }

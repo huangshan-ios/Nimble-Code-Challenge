@@ -8,5 +8,5 @@
 import RxSwift
 
 protocol NetworkService {
-    func request<T: Decodable>(_ request: NimbleSurveyAPI) -> Single<T>
+    func request<T: Decodable>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T>
 }

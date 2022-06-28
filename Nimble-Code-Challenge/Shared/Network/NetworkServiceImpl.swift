@@ -13,8 +13,8 @@ enum TokenError: Error {
 }
 
 class NetworkServiceImpl: NetworkService {
-    func request<T>(_ token: NimbleSurveyAPI) -> Single<T> where T: Decodable {
-        return nimbleSurveyProvider.rx.request(token)
+    func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
+        return nimbleSurveyProvider.rx.request(request)
             .map({ response in
                 switch response.statusCode {
                 case 200...299:
