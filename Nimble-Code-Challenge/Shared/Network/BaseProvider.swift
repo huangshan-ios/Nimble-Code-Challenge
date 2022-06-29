@@ -19,7 +19,7 @@ private var apiSession: Session = {
 
 class BaseProvider<API: TargetType>: MoyaProvider<API> {
     convenience init(apiSession: Session = apiSession,
-                     pluginsProvider: [PluginType] = [NetworkLoggerPlugin()]) {
+                     pluginsProvider: [PluginType] = []) {
         self.init(endpointClosure: MoyaProvider.defaultEndpointMapping,
                   requestClosure: MoyaProvider<API>.defaultRequestMapping,
                   stubClosure: MoyaProvider.neverStub,

@@ -13,25 +13,14 @@ struct SurveyDTO: Decodable {
     let relationships: Relationships
     
     struct Attributes: Codable {
-        let title, description, thank_email_above_threshold, thank_email_below_threshold: String
+        let title, description: String
+        let thank_email_above_threshold: String?
+        let thank_email_below_threshold: String?
         let is_active: Bool
         let cover_image_url: String
         let created_at, active_at: String
         let inactive_at: String?
         let survey_type: String
-        
-        enum CodingKeys: String, CodingKey {
-            case title
-            case description
-            case thank_email_above_threshold
-            case thank_email_below_threshold
-            case is_active
-            case cover_image_url
-            case created_at
-            case active_at
-            case inactive_at
-            case survey_type
-        }
     }
     
     struct Relationships: Decodable {

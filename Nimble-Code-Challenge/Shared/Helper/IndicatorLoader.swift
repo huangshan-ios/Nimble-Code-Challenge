@@ -11,7 +11,11 @@ class IndicatorLoader: NSObject {
     
     static let shared = IndicatorLoader()
 
-    let indicator: UIActivityIndicatorView? = UIActivityIndicatorView(style: .white)
+    private lazy var indicator: UIActivityIndicatorView? = {
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.backgroundColor = .gray
+        return indicator
+    }()
 
     let screen = UIScreen.main.bounds
 

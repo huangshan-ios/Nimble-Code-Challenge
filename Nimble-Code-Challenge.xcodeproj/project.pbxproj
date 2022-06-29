@@ -66,6 +66,8 @@
 		F7EFC0D3286CC1F400177139 /* SurveyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */; };
 		F7EFC0D5286CC38800177139 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D4286CC38800177139 /* Survey.swift */; };
 		F7EFC0D7286CC39D00177139 /* ResponseMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */; };
+		F7EFC0D9286CC93600177139 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D8286CC93600177139 /* Array+Extensions.swift */; };
+		F7EFC0DB286CCA1C00177139 /* BulletsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0DA286CCA1C00177139 /* BulletsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +147,8 @@
 		F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyRepository.swift; sourceTree = "<group>"; };
 		F7EFC0D4286CC38800177139 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
 		F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMeta.swift; sourceTree = "<group>"; };
+		F7EFC0D8286CC93600177139 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		F7EFC0DA286CCA1C00177139 /* BulletsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -340,6 +344,7 @@
 				F779C2E9286751F20046DF5F /* UIView+Extensions.swift */,
 				F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */,
 				F7026F79286C50BE00523A2A /* Error+Extensions.swift */,
+				F7EFC0D8286CC93600177139 /* Array+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -399,6 +404,7 @@
 		F779C2E8286745010046DF5F /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				F7EFC0DA286CCA1C00177139 /* BulletsView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -799,6 +805,7 @@
 				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,
 				F779C3112869AC190046DF5F /* UserSession.swift in Sources */,
 				F779C30F2869AA1E0046DF5F /* IndicatorLoader.swift in Sources */,
+				F7EFC0DB286CCA1C00177139 /* BulletsView.swift in Sources */,
 				F7026F6B286C3B4300523A2A /* BaseService.swift in Sources */,
 				F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */,
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
@@ -810,6 +817,7 @@
 				F71F86652865846100767F6E /* NimbleSurveyAPI+TargetType.swift in Sources */,
 				F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */,
 				F7EFC0D5286CC38800177139 /* Survey.swift in Sources */,
+				F7EFC0D9286CC93600177139 /* Array+Extensions.swift in Sources */,
 				F7EFC0D3286CC1F400177139 /* SurveyRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

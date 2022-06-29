@@ -7,12 +7,10 @@
 
 import RxSwift
 
-typealias SurveysResponse = (surveys: [Survey], meta: ResponseMeta?)
-
 protocol HomeViewUseCase {
     var surveyRepository: SurveyRepository { get }
     
-    func fetchSurveys(page: Int, size: Int) -> Single<SurveysResponse>
+    func fetchSurveys() -> Single<[Survey]>
 }
 
 final class HomeViewUseCaseImpl: HomeViewUseCase {
@@ -22,12 +20,10 @@ final class HomeViewUseCaseImpl: HomeViewUseCase {
         self.surveyRepository = surveyRepository
     }
     
-    func fetchSurveys(page: Int, size: Int) -> Single<SurveysResponse> {
-        return surveyRepository.fetchSurveys(page: page, size: size)
+    func fetchSurveys() -> Single<[Survey]> {
+        return surveyRepository.fetchSurveys()
             .map { response in
-                let surveys = response.data.map { $0.toSurvey() }
-                let meta = response.meta?.toResponseMeta()
-                return (surveys: surveys, meta: meta)
+                return response.data.map { $0.toSurvey() }
             }
     }
 }
