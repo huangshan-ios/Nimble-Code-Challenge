@@ -58,6 +58,14 @@
 		F7EFC0B7286B714B00177139 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B6286B714B00177139 /* login_success.json */; };
 		F7EFC0B9286B737700177139 /* invalid_grant_400.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B8286B737700177139 /* invalid_grant_400.json */; };
 		F7EFC0BD286CB2B200177139 /* HandleResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0BC286CB2B200177139 /* HandleResponse+Extensions.swift */; };
+		F7EFC0C6286CBD8100177139 /* SurveyImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0C4286CBD8100177139 /* SurveyImageCell.swift */; };
+		F7EFC0C7286CBD8100177139 /* SurveyImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0C5286CBD8100177139 /* SurveyImageCell.xib */; };
+		F7EFC0CA286CBDF500177139 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0C9286CBDF500177139 /* HomeViewModel.swift */; };
+		F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */; };
+		F7EFC0D1286CC0FA00177139 /* HomeViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D0286CC0FA00177139 /* HomeViewUseCase.swift */; };
+		F7EFC0D3286CC1F400177139 /* SurveyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */; };
+		F7EFC0D5286CC38800177139 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D4286CC38800177139 /* Survey.swift */; };
+		F7EFC0D7286CC39D00177139 /* ResponseMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +137,14 @@
 		F7EFC0B6286B714B00177139 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
 		F7EFC0B8286B737700177139 /* invalid_grant_400.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalid_grant_400.json; sourceTree = "<group>"; };
 		F7EFC0BC286CB2B200177139 /* HandleResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HandleResponse+Extensions.swift"; sourceTree = "<group>"; };
+		F7EFC0C4286CBD8100177139 /* SurveyImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyImageCell.swift; sourceTree = "<group>"; };
+		F7EFC0C5286CBD8100177139 /* SurveyImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SurveyImageCell.xib; sourceTree = "<group>"; };
+		F7EFC0C9286CBDF500177139 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDTO.swift; sourceTree = "<group>"; };
+		F7EFC0D0286CC0FA00177139 /* HomeViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewUseCase.swift; sourceTree = "<group>"; };
+		F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyRepository.swift; sourceTree = "<group>"; };
+		F7EFC0D4286CC38800177139 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
+		F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMeta.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				F779C2E6286646C40046DF5F /* CredentialRepository.swift */,
+				F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -410,6 +427,7 @@
 			children = (
 				F779C3002869657B0046DF5F /* DataResponseDTO.swift */,
 				F779C2FE2869640A0046DF5F /* CredentialDTO.swift */,
+				F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -418,6 +436,8 @@
 			isa = PBXGroup;
 			children = (
 				F779C3122869AC2C0046DF5F /* Credential.swift */,
+				F7EFC0D4286CC38800177139 /* Survey.swift */,
+				F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -426,6 +446,7 @@
 			isa = PBXGroup;
 			children = (
 				F779C2E5286646330046DF5F /* Login */,
+				F7EFC0CF286CC0EA00177139 /* Home */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -433,6 +454,7 @@
 		F779C304286975480046DF5F /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F7EFC0C8286CBDEA00177139 /* ViewModel */,
 				F779C3072869803C0046DF5F /* Views */,
 				F779C30528697CEE0046DF5F /* HomeCoordinator.swift */,
 			);
@@ -444,6 +466,8 @@
 			children = (
 				F779C30A286980570046DF5F /* HomeViewController.swift */,
 				F779C30B286980570046DF5F /* HomeViewController.xib */,
+				F7EFC0C4286CBD8100177139 /* SurveyImageCell.swift */,
+				F7EFC0C5286CBD8100177139 /* SurveyImageCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -517,6 +541,22 @@
 				F7EFC0B6286B714B00177139 /* login_success.json */,
 			);
 			path = Jsons;
+			sourceTree = "<group>";
+		};
+		F7EFC0C8286CBDEA00177139 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F7EFC0C9286CBDF500177139 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F7EFC0CF286CC0EA00177139 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				F7EFC0D0286CC0FA00177139 /* HomeViewUseCase.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,6 +650,7 @@
 				F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */,
 				F71F861B2865608900767F6E /* Assets.xcassets in Resources */,
 				F779C30D286980570046DF5F /* HomeViewController.xib in Resources */,
+				F7EFC0C7286CBD8100177139 /* SurveyImageCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -729,6 +770,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				F71F867028658EF800767F6E /* NimbleNetworkServiceImpl.swift in Sources */,
+				F7EFC0D1286CC0FA00177139 /* HomeViewUseCase.swift in Sources */,
+				F7EFC0C6286CBD8100177139 /* SurveyImageCell.swift in Sources */,
 				F71F865528656A4600767F6E /* LoginViewController.swift in Sources */,
 				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
 				F71F866028656D4D00767F6E /* LoginCoordinator.swift in Sources */,
@@ -737,7 +780,9 @@
 				F71F864E2865691500767F6E /* ViewControllerType.swift in Sources */,
 				F779C2E3286645660046DF5F /* LoginViewUseCase.swift in Sources */,
 				F7026F71286C3E3B00523A2A /* AuthAPI+TargetType.swift in Sources */,
+				F7EFC0CA286CBDF500177139 /* HomeViewModel.swift in Sources */,
 				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
+				F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */,
 				F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */,
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
 				F7026F74286C3EA100523A2A /* NimbleNetworkService.swift in Sources */,
@@ -759,10 +804,13 @@
 				F71F86122865608800767F6E /* AppDelegate.swift in Sources */,
 				F7026F6D286C3E1200523A2A /* AuthService.swift in Sources */,
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
+				F7EFC0D7286CC39D00177139 /* ResponseMeta.swift in Sources */,
 				F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */,
 				F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */,
 				F71F86652865846100767F6E /* NimbleSurveyAPI+TargetType.swift in Sources */,
 				F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */,
+				F7EFC0D5286CC38800177139 /* Survey.swift in Sources */,
+				F7EFC0D3286CC1F400177139 /* SurveyRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

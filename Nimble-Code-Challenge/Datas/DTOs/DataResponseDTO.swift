@@ -9,4 +9,29 @@ import Foundation
 
 struct DataResponseDTO<D: Decodable>: Decodable {
     let data: D
+    let meta: MetaDTO?
+    
+    enum CodingKeys: String, CodingKey {
+        case data
+        case meta
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        data = try container.decode(D.self, forKey: .data)
+        meta = try container.decodeIfPresent(MetaDTO.self, forKey: .meta)
+    }
+    
+    struct MetaDTO: Decodable {
+        let page, pages, page_size, records: Int
+    }
+}
+
+extension DataResponseDTO.MetaDTO {
+    func toResponseMeta() -> ResponseMeta {
+        return ResponseMeta(page: page,
+                            pages: pages,
+                            page_size: page_size,
+                            records: records)
+    }
 }

@@ -8,37 +8,37 @@
 import Foundation
 
 struct APIErrorDTO: Error, Decodable {
-    static let somethingWentWrong = APIErrorDTO(errors: [APIErrorDetailDTO.somethingWentWrong])
+    static let somethingWentWrong = APIErrorDTO(errors: [APIErrorDetail.somethingWentWrong])
     
     var httpStatusCode: Int?
-    let errors: [APIErrorDetailDTO]
-}
-
-struct APIErrorDetailDTO: Decodable {
-    static let somethingWentWrong = APIErrorDetailDTO(source: "local",
-                                                      detail: "Something went wrong",
-                                                      code: "something_went_wrong")
+    let errors: [APIErrorDetail]
     
-    let source: String?
-    let detail: String
-    let code: String
-    
-    enum CodingKeys: String, CodingKey {
-        case source
-        case detail
-        case code
-    }
-    
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        source = try container.decodeIfPresent(String.self, forKey: .source)
-        detail = try container.decode(String.self, forKey: .detail)
-        code = try container.decode(String.self, forKey: .code)
-    }
-    
-    init(source: String, detail: String, code: String) {
-        self.source = source
-        self.detail = detail
-        self.code = code
+    struct APIErrorDetail: Decodable {
+        static let somethingWentWrong = APIErrorDetail(source: "local",
+                                                       detail: "Something went wrong",
+                                                       code: "something_went_wrong")
+        
+        let source: String?
+        let detail: String
+        let code: String
+        
+        enum CodingKeys: String, CodingKey {
+            case source
+            case detail
+            case code
+        }
+        
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            source = try container.decodeIfPresent(String.self, forKey: .source)
+            detail = try container.decode(String.self, forKey: .detail)
+            code = try container.decode(String.self, forKey: .code)
+        }
+        
+        init(source: String, detail: String, code: String) {
+            self.source = source
+            self.detail = detail
+            self.code = code
+        }
     }
 }

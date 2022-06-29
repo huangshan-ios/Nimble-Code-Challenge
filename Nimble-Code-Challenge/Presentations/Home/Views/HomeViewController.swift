@@ -7,11 +7,15 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
-
+class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
+    
+    @IBOutlet weak var surveyCollectionView: UICollectionView!
+    @IBOutlet weak var bulletsView: UIView!
+    @IBOutlet weak var surveyTitleLabel: UILabel!
+    @IBOutlet weak var surveyDescriptionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
+
 }

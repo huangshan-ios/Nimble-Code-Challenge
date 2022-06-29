@@ -9,7 +9,10 @@ import UIKit
 
 final class HomeCoordinator: Coordinator {
     override func start() {
-        let homeViewController = HomeViewController()
+        let viewModel = HomeViewModel()
+        let homeViewController = HomeViewController(viewModel: viewModel,
+                                                    coordinator: self,
+                                                    controller: HomeViewController.self)
         navigationController.viewControllers = [homeViewController]
     }
 }
