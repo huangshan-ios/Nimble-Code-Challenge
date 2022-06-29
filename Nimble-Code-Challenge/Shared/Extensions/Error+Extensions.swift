@@ -8,11 +8,11 @@
 import Foundation
 
 extension Error {
-    func toAPIError() -> APIError {
+    func toAPIError() -> APIErrorDTO {
         guard let apiErrorDTO = self as? APIErrorDTO else {
-            return  APIErrorDTO.somethingWentWrong.toAPIError()
+            return  APIErrorDTO.somethingWentWrong
         }
         
-        return apiErrorDTO.toAPIError()
+        return apiErrorDTO
     }
 }

@@ -15,9 +15,7 @@
 		F7026F71286C3E3B00523A2A /* AuthAPI+TargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F70286C3E3B00523A2A /* AuthAPI+TargetType.swift */; };
 		F7026F74286C3EA100523A2A /* NimbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F73286C3EA100523A2A /* NimbleNetworkService.swift */; };
 		F7026F76286C401800523A2A /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F75286C401800523A2A /* TokenError.swift */; };
-		F7026F78286C415200523A2A /* HandleResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F77286C415200523A2A /* HandleResponse+Extensions.swift */; };
 		F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F79286C50BE00523A2A /* Error+Extensions.swift */; };
-		F7026F7C286C50D900523A2A /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F7B286C50D900523A2A /* APIError.swift */; };
 		F71F86122865608800767F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86112865608800767F6E /* AppDelegate.swift */; };
 		F71F861B2865608900767F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71F861A2865608900767F6E /* Assets.xcassets */; };
 		F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F861C2865608900767F6E /* LaunchScreen.storyboard */; };
@@ -59,6 +57,7 @@
 		F7EFC0B4286B6EF900177139 /* NetworkServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0B3286B6EF900177139 /* NetworkServiceMock.swift */; };
 		F7EFC0B7286B714B00177139 /* login_success.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B6286B714B00177139 /* login_success.json */; };
 		F7EFC0B9286B737700177139 /* invalid_grant_400.json in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0B8286B737700177139 /* invalid_grant_400.json */; };
+		F7EFC0BD286CB2B200177139 /* HandleResponse+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0BC286CB2B200177139 /* HandleResponse+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,9 +83,7 @@
 		F7026F70286C3E3B00523A2A /* AuthAPI+TargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthAPI+TargetType.swift"; sourceTree = "<group>"; };
 		F7026F73286C3EA100523A2A /* NimbleNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleNetworkService.swift; sourceTree = "<group>"; };
 		F7026F75286C401800523A2A /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
-		F7026F77286C415200523A2A /* HandleResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "HandleResponse+Extensions.swift"; path = "../../../../../../Documents/HandleResponse+Extensions.swift"; sourceTree = "<group>"; };
 		F7026F79286C50BE00523A2A /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
-		F7026F7B286C50D900523A2A /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		F71F860E2865608800767F6E /* Nimble-Code-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nimble-Code-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F86112865608800767F6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F71F861A2865608900767F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,6 +128,7 @@
 		F7EFC0B3286B6EF900177139 /* NetworkServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceMock.swift; sourceTree = "<group>"; };
 		F7EFC0B6286B714B00177139 /* login_success.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login_success.json; sourceTree = "<group>"; };
 		F7EFC0B8286B737700177139 /* invalid_grant_400.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = invalid_grant_400.json; sourceTree = "<group>"; };
+		F7EFC0BC286CB2B200177139 /* HandleResponse+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HandleResponse+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +178,7 @@
 				F7026F69286C3AC900523A2A /* Auth */,
 				F7026F6A286C3B4300523A2A /* BaseService.swift */,
 				F71F86692865859800767F6E /* BaseProvider.swift */,
+				F7EFC0BC286CB2B200177139 /* HandleResponse+Extensions.swift */,
 				F779C2F428695A130046DF5F /* ResponseDTO */,
 			);
 			path = Network;
@@ -188,11 +187,9 @@
 		F7026F69286C3AC900523A2A /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				F7026F6C286C3E1200523A2A /* AuthService.swift */,
 				F7026F6E286C3E2600523A2A /* AuthAPI.swift */,
+				F7026F6C286C3E1200523A2A /* AuthService.swift */,
 				F7026F70286C3E3B00523A2A /* AuthAPI+TargetType.swift */,
-				F7026F75286C401800523A2A /* TokenError.swift */,
-				F7026F77286C415200523A2A /* HandleResponse+Extensions.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -402,6 +399,7 @@
 		F779C2F428695A130046DF5F /* ResponseDTO */ = {
 			isa = PBXGroup;
 			children = (
+				F7026F75286C401800523A2A /* TokenError.swift */,
 				F779C2F528695A230046DF5F /* APIErrorDTO.swift */,
 			);
 			path = ResponseDTO;
@@ -420,7 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				F779C3122869AC2C0046DF5F /* Credential.swift */,
-				F7026F7B286C50D900523A2A /* APIError.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -748,11 +745,10 @@
 				F71F866A2865859800767F6E /* BaseProvider.swift in Sources */,
 				F7026F76286C401800523A2A /* TokenError.swift in Sources */,
 				F779C2EC286754F40046DF5F /* UIColor+Extensions.swift in Sources */,
-				F7026F7C286C50D900523A2A /* APIError.swift in Sources */,
 				F779C2FF2869640A0046DF5F /* CredentialDTO.swift in Sources */,
 				F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */,
 				F779C2E7286646C40046DF5F /* CredentialRepository.swift in Sources */,
-				F7026F78286C415200523A2A /* HandleResponse+Extensions.swift in Sources */,
+				F7EFC0BD286CB2B200177139 /* HandleResponse+Extensions.swift in Sources */,
 				F7026F6F286C3E2600523A2A /* AuthAPI.swift in Sources */,
 				F779C30C286980570046DF5F /* HomeViewController.swift in Sources */,
 				F71F8668286584C800767F6E /* AppConstants.swift in Sources */,

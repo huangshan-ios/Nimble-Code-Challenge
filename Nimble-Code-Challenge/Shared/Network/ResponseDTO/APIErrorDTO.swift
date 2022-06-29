@@ -8,12 +8,17 @@
 import Foundation
 
 struct APIErrorDTO: Error, Decodable {
-    static let somethingWentWrong = APIErrorDTO(errors: [APIErrorDetailDTO(source: "local", detail: "Something went wrong", code: "something_went_wrong")])
+    static let somethingWentWrong = APIErrorDTO(errors: [APIErrorDetailDTO.somethingWentWrong])
     
+    var httpStatusCode: Int?
     let errors: [APIErrorDetailDTO]
 }
 
 struct APIErrorDetailDTO: Decodable {
+    static let somethingWentWrong = APIErrorDetailDTO(source: "local",
+                                                      detail: "Something went wrong",
+                                                      code: "something_went_wrong")
+    
     let source: String?
     let detail: String
     let code: String
@@ -35,17 +40,5 @@ struct APIErrorDetailDTO: Decodable {
         self.source = source
         self.detail = detail
         self.code = code
-    }
-}
-
-extension APIErrorDTO {
-    func toAPIError() -> APIError {
-        return APIError(errors: errors.map { $0.toAPIErrorDetail() })
-    }
-}
-
-extension APIErrorDetailDTO {
-    func toAPIErrorDetail() -> APIErrorDetail {
-        return APIErrorDetail(source: source, detail: detail, code: code)
     }
 }
