@@ -10,7 +10,7 @@ import Foundation
 final class LoginCoordinator: Coordinator {
     
     override func start() {
-        let networkService = NetworkServiceImpl()
+        let networkService = NimbleNetworkServiceImpl()
         let repository = CredentialRepositoryImpl(networkService: networkService)
         let useCase = LoginViewUseCaseImpl(credentialRepository: repository)
         let viewModel = LoginViewModel(useCase: useCase)

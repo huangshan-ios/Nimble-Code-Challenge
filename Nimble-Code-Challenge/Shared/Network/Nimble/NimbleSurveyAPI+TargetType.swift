@@ -1,5 +1,5 @@
 //
-//  NimbleSurveyAPITargetType.swift
+//  NimbleSurveyAPI+TargetType.swift
 //  Nimble-Code-Challenge
 //
 //  Created by Son Hoang on 24/06/2022.

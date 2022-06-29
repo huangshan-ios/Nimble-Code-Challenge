@@ -36,7 +36,7 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
     
     func configureBindings() {}
     
-    func handleError(error: AppError) {
+    func handleError(error: APIError) {
         showError(error: error)
     }
     
@@ -51,15 +51,16 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
 
 // MARK: Private functions
 extension ViewControllerType {
-    private func showError(error: AppError) {
+    private func showError(error: APIError) {
+        let apiError = error.errors.first ?? APIErrorDTO.somethingWentWrong.toAPIError().errors.first!
         let alertController = UIAlertController(title: "Oops there was an error!",
-                                                message: error.message,
+                                                message: apiError.detail,
                                                 preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
-            switch error {
-            case .unauthorizedClient:
+            switch apiError.code {
+            case "unauthorized":
                 self.onConfirmUnauthorizedClient()
             default:
                 self.onConfirmErrorDialog()

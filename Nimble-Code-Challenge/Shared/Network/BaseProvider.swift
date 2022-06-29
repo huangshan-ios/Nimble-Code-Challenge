@@ -1,5 +1,5 @@
 //
-//  NimbleSurveyProvider.swift
+//  BaseProvider.swift
 //  Nimble-Code-Challenge
 //
 //  Created by Son Hoang on 24/06/2022.
@@ -9,7 +9,6 @@ import Moya
 import Alamofire
 import RxSwift
 
-private let pluginsProvider = [NetworkLoggerPlugin()]
 private var apiSession: Session = {
     let configuration = URLSessionConfiguration.default
     configuration.timeoutIntervalForResource = 30
@@ -18,13 +17,11 @@ private var apiSession: Session = {
     return session
 }()
 
-let nimbleSurveyProvider = NimbleSurveyProvider<NimbleSurveyAPI>()
-
-class NimbleSurveyProvider<NimbleSurveyAPI>: MoyaProvider<NimbleSurveyAPI> where NimbleSurveyAPI: TargetType {
+class BaseProvider<API: TargetType>: MoyaProvider<API> {
     convenience init(apiSession: Session = apiSession,
-                     pluginsProvider: [PluginType] = pluginsProvider) {
+                     pluginsProvider: [PluginType] = [NetworkLoggerPlugin()]) {
         self.init(endpointClosure: MoyaProvider.defaultEndpointMapping,
-                  requestClosure: MoyaProvider<NimbleSurveyAPI>.defaultRequestMapping,
+                  requestClosure: MoyaProvider<API>.defaultRequestMapping,
                   stubClosure: MoyaProvider.neverStub,
                   callbackQueue: nil,
                   session: apiSession,

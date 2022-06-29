@@ -8,15 +8,15 @@
 import RxSwift
 
 protocol CredentialRepository {
-    var networkService: NetworkService { get }
+    var networkService: NimbleNetworkService { get }
     
     func login(with email: String, and password: String) -> Single<CredentialDTO>
 }
 
 final class CredentialRepositoryImpl: CredentialRepository {
-    let networkService: NetworkService
+    let networkService: NimbleNetworkService
     
-    init(networkService: NetworkService) {
+    init(networkService: NimbleNetworkService) {
         self.networkService = networkService
     }
     

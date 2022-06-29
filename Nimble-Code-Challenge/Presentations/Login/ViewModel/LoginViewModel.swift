@@ -20,7 +20,7 @@ class LoginViewModel: ViewModelType {
     struct Output {
         let enableLoginButton: Driver<Bool>
         let isLoading: Signal<Bool>
-        let error: Signal<AppError?>
+        let error: Signal<APIError?>
         let loginSuccess: Signal<Bool>
         let navigateToForgotPassword: Signal<Void>
     }
@@ -34,7 +34,7 @@ class LoginViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         
         let activityIndicator = ActivityIndicator()
-        let errorTrigger = PublishRelay<AppError?>()
+        let errorTrigger = PublishRelay<APIError?>()
         
         let credentials = Observable.combineLatest(input.email, input.password) {
             return (email: $0, password: $1)
@@ -50,7 +50,7 @@ class LoginViewModel: ViewModelType {
                     .login(with: email, and: password)
                     .trackActivity(activityIndicator)
                     .catch({ error in
-                        errorTrigger.accept(error.mapToAppError())
+                        errorTrigger.accept(error.toAPIError())
                         return .just(false)
                     })
             }
