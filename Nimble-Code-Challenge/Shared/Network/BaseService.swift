@@ -14,6 +14,7 @@ class BaseService<API: TargetType> {
     func _request(_ api: API) -> Single<Response> {
         return provider.rx.request(api)
             .flatMap { response in
+                print("Network services request status code \(response.statusCode)")
                 if response.statusCode == 401 {
                     throw TokenError.tokenExpired
                 } else {
@@ -22,10 +23,12 @@ class BaseService<API: TargetType> {
             }
             .retry { (error: Observable<TokenError>) in
                 error.flatMap { error -> Single<Response> in
-                    AuthService.shared.renewalToken()
+                    print("Renewal token \(error)")
+                    return AuthService.shared.renewalToken()
                 }
             }
             .handleResponse()
+            .filterSuccessfulStatusCodes()
             .retry(2)
     }
 }

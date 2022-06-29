@@ -8,7 +8,7 @@
 import RxSwift
 
 protocol SurveyRepository {
-    func fetchSurveys(page: Int, size: Int) -> Single<DataResponseDTO<[SurveyDTO]>>
+    func fetchSurveys() -> Single<DataResponseDTO<[SurveyDTO]>>
 }
 
 final class SurveyRepositoryImpl: SurveyRepository {
@@ -18,7 +18,7 @@ final class SurveyRepositoryImpl: SurveyRepository {
         self.networkService = networkService
     }
     
-    func fetchSurveys(page: Int, size: Int) -> Single<DataResponseDTO<[SurveyDTO]>> {
-        return networkService.request(.surveys(page, size), type: DataResponseDTO.self)
+    func fetchSurveys() -> Single<DataResponseDTO<[SurveyDTO]>> {
+        return networkService.request(.surveys, type: DataResponseDTO.self)
     }
 }

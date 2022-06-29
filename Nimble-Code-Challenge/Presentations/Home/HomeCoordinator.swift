@@ -9,7 +9,10 @@ import UIKit
 
 final class HomeCoordinator: Coordinator {
     override func start() {
-        let viewModel = HomeViewModel()
+        let networkService = NimbleNetworkServiceImpl()
+        let repository = SurveyRepositoryImpl(networkService: networkService)
+        let useCase = HomeViewUseCaseImpl(surveyRepository: repository)
+        let viewModel = HomeViewModel(useCase: useCase)
         let homeViewController = HomeViewController(viewModel: viewModel,
                                                     coordinator: self,
                                                     controller: HomeViewController.self)

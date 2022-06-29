@@ -9,5 +9,5 @@ import Foundation
 
 enum NimbleSurveyAPI {
     case login(String, String)
-    case surveys(Int, Int)
+    case surveys
 }

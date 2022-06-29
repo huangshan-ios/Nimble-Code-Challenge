@@ -31,16 +31,16 @@ extension NimbleSurveyAPI: TargetType {
     }
     
     var paramaters: [String: String] {
-        var paramaters: [String: String] = ["client_id": "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE",
-                                            "client_secret": "lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU"]
+        var paramaters: [String: String] = [:]
         switch self {
         case .login(let email, let password):
+            paramaters["client_secret"] = "lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU"
+            paramaters["client_id"] = "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE"
             paramaters["grant_type"] = "password"
             paramaters["email"] = email
             paramaters["password"] = password
-        case .surveys(let page, let size):
-            paramaters["page[number]"] = "\(page)"
-            paramaters["page[size]"] = "\(size)"
+        case .surveys:
+            return paramaters
         }
         return paramaters
     }
@@ -61,7 +61,7 @@ extension NimbleSurveyAPI: TargetType {
         default:
             let credential = UserSession.shared.getCredential()
             if !credential.attributes.accessToken.isEmpty {
-                headers["Authentication"] = "\(credential.attributes.tokenType) \(credential.attributes.accessToken)"
+                headers["Authorization"] = "\(credential.attributes.tokenType) \(credential.attributes.accessToken)"
             }
         }
         return headers
