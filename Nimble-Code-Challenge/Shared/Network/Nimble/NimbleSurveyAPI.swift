@@ -9,5 +9,4 @@ import Foundation
 
 enum NimbleSurveyAPI {
     case login(String, String)
-    case refreshToken(String)
 }
