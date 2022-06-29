@@ -36,8 +36,8 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
     
     func configureBindings() {}
     
-    func handleError(error: AppError) {
-        showError(error: error)
+    func handleError(error: Error) {
+        showError(error: error.toAPIError())
     }
     
     func showIndicator(_ isLoading: Bool) {
@@ -51,17 +51,20 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
 
 // MARK: Private functions
 extension ViewControllerType {
-    private func showError(error: AppError) {
+    private func showError(error: APIErrorDTO) {
+        let apiError = error.errors.first ?? APIErrorDetailDTO.somethingWentWrong
+        let httpStatusCode = error.httpStatusCode ?? -1
+        
         let alertController = UIAlertController(title: "Oops there was an error!",
-                                                message: error.message,
+                                                message: apiError.detail,
                                                 preferredStyle: .alert)
         
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak self] _ in
             guard let self = self else { return }
-            switch error {
-            case .unauthorizedClient:
+            
+            if apiError.code == "invalid_client" && httpStatusCode == 401 {
                 self.onConfirmUnauthorizedClient()
-            default:
+            } else {
                 self.onConfirmErrorDialog()
             }
         }))

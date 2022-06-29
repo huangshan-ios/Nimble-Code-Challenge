@@ -35,15 +35,16 @@ class CredentialRepositoryTest: XCTestCase {
     }
     
     func testLoginFailed() throws {
-        networkService.listMock = [.login(.failure(NetworkAPIError.notFound))]
+        networkService.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
         
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
             .map({ _ in return true })
             .catch({ error in
-                guard case .notFound = (error as? NetworkAPIError) else {
-                    return .just(false)
+                let error = error.toAPIError()
+                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("something_went_wrong") {
+                    return .just(true)
                 }
-                return .just(true)
+                return .just(false)
             })
             .toBlocking()
             .first()

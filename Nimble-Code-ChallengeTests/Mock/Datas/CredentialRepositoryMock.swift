@@ -11,9 +11,9 @@ import RxSwift
 
 final class CredentialRepositoryMock: CredentialRepository, Mockable {
 
-    let networkService: NetworkService
+    let networkService: NimbleNetworkService
     
-    init(networkService: NetworkService) {
+    init(networkService: NimbleNetworkService) {
         self.networkService = networkService
     }
     
@@ -35,7 +35,7 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
     
     func login(with email: String, and password: String) -> Single<CredentialDTO> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .error(AppError.somethingWentWrong)
+            return .error(APIErrorDTO.somethingWentWrong)
         }
         
         switch mock {

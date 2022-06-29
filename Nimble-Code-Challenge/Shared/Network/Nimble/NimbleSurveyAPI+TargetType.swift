@@ -1,5 +1,5 @@
 //
-//  NimbleSurveyAPITargetType.swift
+//  NimbleSurveyAPI+TargetType.swift
 //  Nimble-Code-Challenge
 //
 //  Created by Son Hoang on 24/06/2022.
@@ -14,14 +14,14 @@ extension NimbleSurveyAPI: TargetType {
     
     var path: String {
         switch self {
-        case .login, .refreshToken:
+        case .login:
             return "oauth/token"
         }
     }
     
     var method: Method {
         switch self {
-        case .login, .refreshToken:
+        case .login:
             return .post
         }
     }
@@ -34,9 +34,6 @@ extension NimbleSurveyAPI: TargetType {
             paramaters["grant_type"] = "password"
             paramaters["email"] = email
             paramaters["password"] = password
-        case .refreshToken(let refreshToken):
-            paramaters["grant_type"] = "refresh_token"
-            paramaters["refresh_token"] = refreshToken
         }
         return paramaters
     }
@@ -52,7 +49,7 @@ extension NimbleSurveyAPI: TargetType {
     var headers: [String: String]? {
         var headers: [String: String] = [:]
         switch self {
-        case .login, .refreshToken:
+        case .login:
             return headers
         default:
             let credential = UserSession.shared.getCredential()
