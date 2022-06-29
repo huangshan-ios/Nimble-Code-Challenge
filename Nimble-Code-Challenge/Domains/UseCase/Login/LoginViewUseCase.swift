@@ -22,9 +22,6 @@ final class LoginViewUseCaseImpl: LoginViewUseCase {
     
     func login(with email: String, and password: String) -> Single<Bool> {
         return credentialRepository.login(with: email, and: password)
-            .map { credentialDTO in
-                UserSession.shared.setCredential(credentialDTO.toCredentials())
-                return true
-            }
+            .map { _ in return true}
     }
 }

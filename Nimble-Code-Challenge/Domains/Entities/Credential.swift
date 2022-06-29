@@ -7,16 +7,25 @@
 
 import Foundation
 
-struct Credential {
+struct Credential: Encodable {
     var id: String = ""
     var type: String = ""
     var attributes: Attributes = Attributes()
     
-    struct Attributes {
-        var accessToken: String = ""
-        var tokenType: String = ""
-        var expiresIn: Int = 0
-        var refreshToken: String = ""
-        var createdAt: Int = 0
+    struct Attributes: Encodable {
+        var access_token: String = ""
+        var token_type: String = ""
+        var expires_in: Int = 0
+        var refresh_token: String = ""
+        var created_at: Int = 0
+    }
+}
+
+extension Credential {
+    func toString() -> String {
+        guard let data = try? JSONEncoder().encode(self) else {
+            return ""
+        }
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }

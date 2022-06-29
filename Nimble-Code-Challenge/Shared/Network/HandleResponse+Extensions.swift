@@ -11,8 +11,8 @@ import RxSwift
 extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
     func handleResponse() -> Single<Element> {
         return flatMap { response in
-            if let credential = try? response.map(CredentialDTO.self) {
-                UserSession.shared.setCredential(credential.toCredentials())
+            if let credential = try? response.map(DataResponseDTO<CredentialDTO>.self) {
+                UserSession.shared.setCredential(credential.data.toCredential())
             }
             
             if (200 ... 299) ~= response.statusCode {

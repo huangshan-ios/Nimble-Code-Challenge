@@ -68,6 +68,7 @@
 		F7EFC0D7286CC39D00177139 /* ResponseMeta.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */; };
 		F7EFC0D9286CC93600177139 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D8286CC93600177139 /* Array+Extensions.swift */; };
 		F7EFC0DB286CCA1C00177139 /* BulletsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0DA286CCA1C00177139 /* BulletsView.swift */; };
+		F7EFC0DD286CDB5A00177139 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0DC286CDB5A00177139 /* KeychainHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		F7EFC0D6286CC39D00177139 /* ResponseMeta.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseMeta.swift; sourceTree = "<group>"; };
 		F7EFC0D8286CC93600177139 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		F7EFC0DA286CCA1C00177139 /* BulletsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulletsView.swift; sourceTree = "<group>"; };
+		F7EFC0DC286CDB5A00177139 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +417,7 @@
 				F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */,
 				F779C30E2869AA1E0046DF5F /* IndicatorLoader.swift */,
 				F779C3102869AC190046DF5F /* UserSession.swift */,
+				F7EFC0DC286CDB5A00177139 /* KeychainHelper.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -788,6 +791,7 @@
 				F7026F71286C3E3B00523A2A /* AuthAPI+TargetType.swift in Sources */,
 				F7EFC0CA286CBDF500177139 /* HomeViewModel.swift in Sources */,
 				F71F8663286583F800767F6E /* NimbleSurveyAPI.swift in Sources */,
+				F7EFC0DD286CDB5A00177139 /* KeychainHelper.swift in Sources */,
 				F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */,
 				F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */,
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,

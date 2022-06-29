@@ -22,7 +22,7 @@ struct CredentialDTO: Decodable {
 }
 
 extension CredentialDTO {
-    func toCredentials() -> Credential {
+    func toCredential() -> Credential {
         return Credential(id: id,
                           type: type,
                           attributes: attributes.toCredentialAttributes())
@@ -31,10 +31,10 @@ extension CredentialDTO {
 
 extension CredentialDTO.Attributes {
     func toCredentialAttributes() -> Credential.Attributes {
-        return Credential.Attributes(accessToken: access_token,
-                                     tokenType: token_type,
-                                     expiresIn: expires_in,
-                                     refreshToken: refresh_token,
-                                     createdAt: created_at)
+        return Credential.Attributes(access_token: access_token,
+                                     token_type: token_type,
+                                     expires_in: expires_in,
+                                     refresh_token: refresh_token,
+                                     created_at: created_at)
     }
 }
