@@ -20,7 +20,7 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case login(Result<Bool, AppError>)
+        case login(Result<Bool, Error>)
         
         enum Case {
             case login
@@ -35,7 +35,7 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
     
     func login(with email: String, and password: String) -> Single<Bool> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .error(AppError.somethingWentWrong)
+            return .error(APIErrorDTO.somethingWentWrong)
         }
         
         switch mock {

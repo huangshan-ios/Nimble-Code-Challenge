@@ -9,7 +9,7 @@ import RxSwift
 
 @testable import Nimble_Code_Challenge
 
-final class NetworkServiceMock: NetworkService, Mockable {
+final class NetworkServiceMock: NimbleNetworkService, Mockable {
 
     var listMock: [MockType] = []
     
@@ -29,7 +29,7 @@ final class NetworkServiceMock: NetworkService, Mockable {
     
     func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .error(NetworkAPIError.unknown)
+            return .error(APIErrorDTO.somethingWentWrong)
         }
         
         switch mock {
@@ -42,7 +42,7 @@ final class NetworkServiceMock: NetworkService, Mockable {
                     return .just(object)
                 case .object(let object):
                     guard let object = object as? T else {
-                        return .error(NetworkAPIError.unknown)
+                        return .error(APIErrorDTO.somethingWentWrong)
                     }
                     return .just(object)
                 }

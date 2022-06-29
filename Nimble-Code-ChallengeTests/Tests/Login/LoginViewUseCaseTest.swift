@@ -28,7 +28,7 @@ class LoginViewUseCaseTest: XCTestCase {
     
     override func setUp() {
         disposeBag = DisposeBag()
-        repository = CredentialRepositoryMock(networkService: NetworkServiceImpl())
+        repository = CredentialRepositoryMock(networkService: NimbleNetworkServiceImpl())
         useCase = LoginViewUseCaseImpl(credentialRepository: repository)
     }
     
@@ -43,14 +43,15 @@ class LoginViewUseCaseTest: XCTestCase {
     }
     
     func testLoginError() throws {
-        repository.listMock = [.login(.failure(NetworkAPIError.notFound))]
+        repository.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
             .catch({ error in
-                guard case .notFound = (error as? NetworkAPIError) else {
-                    return .just(false)
+                let error = error.toAPIError()
+                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("something_went_wrong") {
+                    return .just(true)
                 }
-                return .just(true)
+                return .just(false)
             })
             .toBlocking()
             .first()

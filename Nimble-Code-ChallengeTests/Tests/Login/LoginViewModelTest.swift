@@ -30,7 +30,7 @@ class LoginViewModelTest: XCTestCase {
     override func setUp() {
         
         disposeBag = DisposeBag()
-        useCase = LoginViewUseCaseMock(credentialRepository: CredentialRepositoryImpl(networkService: NetworkServiceImpl()))
+        useCase = LoginViewUseCaseMock(credentialRepository: CredentialRepositoryImpl(networkService: NimbleNetworkServiceImpl()))
         viewModel = LoginViewModel(useCase: useCase)
         scheduler = TestScheduler(initialClock: 0)
         
@@ -111,7 +111,7 @@ class LoginViewModelTest: XCTestCase {
     func testLoginError() throws {
         let isLoginError = scheduler.createObserver(Bool.self)
         
-        useCase.listMock = [.login(.failure(.somethingWentWrong))]
+        useCase.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
         
         output.loginSuccess
             .emit()
@@ -119,10 +119,7 @@ class LoginViewModelTest: XCTestCase {
         
         output.error
             .map({ error in
-                guard let error = error, case .somethingWentWrong = error else {
-                    return false
-                }
-                return true
+                return !(error?.toAPIError().errors.isEmpty ?? false)
             })
             .emit(to: isLoginError)
             .disposed(by: disposeBag)
