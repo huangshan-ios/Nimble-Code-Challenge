@@ -60,8 +60,8 @@ extension NimbleSurveyAPI: TargetType {
             return headers
         default:
             let credential = UserSession.shared.getCredential()
-            if !credential.attributes.accessToken.isEmpty {
-                headers["Authorization"] = "\(credential.attributes.tokenType) \(credential.attributes.accessToken)"
+            if !credential.attributes.access_token.isEmpty {
+                headers["Authorization"] = "\(credential.attributes.token_type) \(credential.attributes.access_token)"
             }
         }
         return headers

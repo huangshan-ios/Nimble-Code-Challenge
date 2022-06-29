@@ -62,7 +62,7 @@ final class HomeViewModel: ViewModelType {
                         currentSurveyIndex -= 1
                     }
                 case .forward:
-                    if currentSurveyIndex < totalSurveys.count - 1 {
+                    if currentSurveyIndex < totalSurveys - 1 {
                         currentSurveyIndex += 1
                     }
                 }

@@ -21,7 +21,7 @@ extension AuthAPI: TargetType {
     }
     
     var paramaters: [String: String] {
-        let refreshToken = UserSession.shared.getCredential().attributes.refreshToken
+        let refreshToken = UserSession.shared.getCredential().attributes.refresh_token
         return ["grant_type": "refresh_token",
                 "refresh_token": refreshToken,
                 "client_id": "ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE",
