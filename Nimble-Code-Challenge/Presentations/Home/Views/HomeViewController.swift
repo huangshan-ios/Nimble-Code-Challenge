@@ -24,9 +24,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     @IBOutlet weak var bulletsView: BulletsView!
     @IBOutlet weak var surveyTitleLabel: UILabel!
     @IBOutlet weak var surveyDescriptionLabel: UILabel!
+    @IBOutlet weak var takeSurveyButton: UIButton!
     
     private let fetchSurveysTrigger = PublishSubject<Void>()
-    private let swipeTrigger = PublishSubject<SwipeDirection>()
+    private let swipeTrigger = PublishSubject<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +51,7 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
     override func configureBindings() {
         let input = HomeViewModel.Input(fetchSurveys: fetchSurveysTrigger.asObservable(),
-                                        swipe: swipeTrigger.asObservable())
+                                        swipeToIndex: swipeTrigger.asObservable())
         
         let output = viewModel.transform(input)
         
@@ -71,16 +72,20 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         
         let surveysDispo = output.surveys
             .drive(onNext: { [weak self] surveys in
-                guard let self = self else { return }
+                guard
+                    let self = self,
+                    let survey = surveys[safe: 0]
+                else {
+                    return
+                }
                 self.bulletsView.setNumOfBullets(surveys.count)
-                self.updateSurveyContent(at: 0, surveys: surveys, isReload: true)
+                self.updateSurveyContent(survey: survey, index: 0, isReload: true)
             })
         
-        let currentSurveyDispo = output.currentIndex
-            .withLatestFrom(output.surveys) { return ($0, $1) }
-            .drive(onNext: { [weak self] currentIndex, surveys in
-                guard let self = self else { return }
-                self.updateSurveyContent(at: currentIndex, surveys: surveys)
+        let currentSurveyDispo = output.currentSurvey
+            .drive(onNext: { [weak self] result in
+                guard let self = self, let survey = result.survey else { return }
+                self.updateSurveyContent(survey: survey, index: result.index)
             })
         
         let loadingDispo = output.isLoading
@@ -105,19 +110,11 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     private func configureUITriggers(_ output: HomeViewModel.Output) {
         let swipeTriggerDispo = surveyCollectionView.rx
             .didScroll
-            .withLatestFrom(output.currentIndex)
-            .compactMap({ [weak self] index -> SwipeDirection? in
+            .compactMap({ [weak self] index -> Int? in
                 guard let self = self else {
                     return nil
                 }
-                
-                let scrollPos = Int(self.surveyCollectionView.contentOffset.x / self.view.frame.width)
-                
-                guard scrollPos != index else {
-                    return nil
-                }
-                
-                return scrollPos > index ? .forward : .backward
+                return Int(self.surveyCollectionView.contentOffset.x / self.view.frame.width)
             }).bind(to: swipeTrigger)
         
         let refreshTriggerDispo = surveyCollectionView.rx
@@ -129,14 +126,22 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                 return .just(())
             }).bind(to: fetchSurveysTrigger)
         
-        disposeBag.insert([swipeTriggerDispo, refreshTriggerDispo])
+        let takeSurveyButtonDispo = takeSurveyButton.rx.tap
+            .withLatestFrom(output.currentSurvey)
+            .subscribe(onNext: { [weak self] result in
+                guard let self = self,
+                      let survey = result.survey
+                else {
+                    return
+                }
+                self.coordinator.gotoSurveyDetail(survey: survey)
+            })
+        
+        disposeBag.insert([swipeTriggerDispo, refreshTriggerDispo,
+                           takeSurveyButtonDispo])
     }
     
-    private func updateSurveyContent(at index: Int, surveys: [Survey], isReload: Bool = false) {
-        guard let survey = surveys[safe: index] else {
-            return
-        }
-        
+    private func updateSurveyContent(survey: Survey, index: Int, isReload: Bool = false) {
         bulletsView.switchTo(bulletAt: index)
         surveyTitleLabel.setTextWithFadeInAnimation(text: survey.attributes.title)
         surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)

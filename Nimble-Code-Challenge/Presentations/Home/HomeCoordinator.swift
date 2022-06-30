@@ -28,4 +28,8 @@ final class HomeCoordinator: Coordinator {
         appCoordinator.start(loginCoordinator)
         appCoordinator.finish(self)
     }
+    
+    func gotoSurveyDetail(survey: Survey) {
+        // TODO: Animate to go to survey detail
+    }
 }
