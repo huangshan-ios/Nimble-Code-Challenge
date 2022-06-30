@@ -61,7 +61,7 @@ final class HomeViewModel: ViewModelType {
             .map { direction -> Int in
                 switch direction {
                 case .backward:
-                    if currentSurveyIndex > 1 {
+                    if currentSurveyIndex > 0 {
                         currentSurveyIndex -= 1
                     }
                 case .forward:

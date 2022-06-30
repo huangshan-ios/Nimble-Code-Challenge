@@ -56,6 +56,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         let output = viewModel.transform(input)
         
         let collectionDataSourceDispo = output.surveys
+            .do(onNext: { [weak self] surveys in
+                guard let self = self else { return }
+                self.bulletsView.setNumOfBullets(surveys.count)
+            })
             .map({ surveys in
                 let coverImages = surveys.map({ $0.attributes.cover_image_url })
                 return [SectionModel<String, String>(model: "", items: coverImages)]
@@ -63,7 +67,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
             .drive(surveyCollectionView.rx.items(dataSource: dataSource))
         
         let currentSurveyDispo = Driver.combineLatest(output.surveys, output.currentIndex)
-            .compactMap { surveys, currentIndex in
+            .compactMap { [weak self] surveys, currentIndex -> Survey? in
+                guard let self = self else { return nil }
+                self.currentIndex = currentIndex
+                self.bulletsView.switchTo(bulletAt: currentIndex)
                 return surveys[safe: currentIndex]
             }.drive(onNext: { [weak self] survey in
                 guard let self = self else { return }
@@ -71,16 +78,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                 self.surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)
             })
         
-        let currentIndexDispo = output.currentIndex
-            .drive(onNext: { [weak self] index in
-                guard let self = self else { return }
-                self.currentIndex = index
-                self.bulletsView.switchTo(bulletAt: index)
-            })
-        
         let loadingDispo = output.isLoading
             .emit(onNext: { [weak self] isLoading in
                 guard let self = self else { return }
+                self.surveyCollectionView.isScrollEnabled = !isLoading
                 self.showIndicator(isLoading)
             })
         
@@ -112,7 +113,7 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         let refreshTriggerDispo = surveyCollectionView.rx
             .contentOffset
             .flatMap({ contentOffset -> Observable<Void> in
-                guard contentOffset.x < -20 else {
+                guard contentOffset.x < -50 else {
                     return .empty()
                 }
                 return .just(())
@@ -120,7 +121,6 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
             .bind(to: fetchSurveysTrigger)
         
         disposeBag.insert([collectionDataSourceDispo, currentSurveyDispo,
-                           currentIndexDispo,
                            loadingDispo, errorDispo,
                            swipeTriggerDispo, refreshTriggerDispo])
     }
