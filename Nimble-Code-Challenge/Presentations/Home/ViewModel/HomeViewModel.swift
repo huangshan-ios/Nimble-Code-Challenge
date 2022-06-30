@@ -58,6 +58,7 @@ final class HomeViewModel: ViewModelType {
                     })
             }.do(onNext: { survey in
                 totalSurveys = survey.count
+                currentSurveyIndex = 0
                 indexTrigger.onNext(0)
             })
         

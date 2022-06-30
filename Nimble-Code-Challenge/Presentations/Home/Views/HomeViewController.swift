@@ -27,7 +27,6 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
     private let fetchSurveysTrigger = PublishSubject<Void>()
     private let swipeTrigger = PublishSubject<SwipeDirection>()
-    private var currentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,27 +54,33 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         
         let output = viewModel.transform(input)
         
+        configureOutput(output)
+        configureUITriggers(output)
+    }
+    
+    override func onConfirmUnauthorizedClient() {
+        coordinator.logout()
+    }
+    
+    private func configureOutput(_ output: HomeViewModel.Output) {
         let collectionDataSourceDispo = output.surveys
-            .do(onNext: { [weak self] surveys in
-                guard let self = self else { return }
-                self.bulletsView.setNumOfBullets(surveys.count)
-            })
             .map({ surveys in
                 let coverImages = surveys.map({ $0.attributes.cover_image_url })
                 return [SectionModel<String, String>(model: "", items: coverImages)]
-            })
-            .drive(surveyCollectionView.rx.items(dataSource: dataSource))
+            }).drive(surveyCollectionView.rx.items(dataSource: dataSource))
         
-        let currentSurveyDispo = Driver.combineLatest(output.surveys, output.currentIndex)
-            .compactMap { [weak self] surveys, currentIndex -> Survey? in
-                guard let self = self else { return nil }
-                self.currentIndex = currentIndex
-                self.bulletsView.switchTo(bulletAt: currentIndex)
-                return surveys[safe: currentIndex]
-            }.drive(onNext: { [weak self] survey in
+        let surveysDispo = output.surveys
+            .drive(onNext: { [weak self] surveys in
                 guard let self = self else { return }
-                self.surveyTitleLabel.setTextWithFadeInAnimation(text: survey.attributes.title)
-                self.surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)
+                self.bulletsView.setNumOfBullets(surveys.count)
+                self.updateSurveyContent(at: 0, surveys: surveys, isReload: true)
+            })
+        
+        let currentSurveyDispo = output.currentIndex
+            .withLatestFrom(output.surveys) { return ($0, $1) }
+            .drive(onNext: { [weak self] currentIndex, surveys in
+                guard let self = self else { return }
+                self.updateSurveyContent(at: currentIndex, surveys: surveys)
             })
         
         let loadingDispo = output.isLoading
@@ -92,22 +97,28 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                 self.handleError(error: error)
             })
         
+        disposeBag.insert([collectionDataSourceDispo, surveysDispo,
+                           currentSurveyDispo,
+                           loadingDispo, errorDispo])
+    }
+    
+    private func configureUITriggers(_ output: HomeViewModel.Output) {
         let swipeTriggerDispo = surveyCollectionView.rx
-            .didEndDecelerating
-            .compactMap({ [weak self] _ -> SwipeDirection? in
+            .didScroll
+            .withLatestFrom(output.currentIndex)
+            .compactMap({ [weak self] index -> SwipeDirection? in
                 guard let self = self else {
                     return nil
                 }
                 
                 let scrollPos = Int(self.surveyCollectionView.contentOffset.x / self.view.frame.width)
                 
-                guard scrollPos != self.currentIndex else {
+                guard scrollPos != index else {
                     return nil
                 }
                 
-                return scrollPos > self.currentIndex ? .forward : SwipeDirection.backward
-            })
-            .bind(to: swipeTrigger)
+                return scrollPos > index ? .forward : .backward
+            }).bind(to: swipeTrigger)
         
         let refreshTriggerDispo = surveyCollectionView.rx
             .contentOffset
@@ -116,15 +127,23 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                     return .empty()
                 }
                 return .just(())
-            })
-            .bind(to: fetchSurveysTrigger)
+            }).bind(to: fetchSurveysTrigger)
         
-        disposeBag.insert([collectionDataSourceDispo, currentSurveyDispo,
-                           loadingDispo, errorDispo,
-                           swipeTriggerDispo, refreshTriggerDispo])
+        disposeBag.insert([swipeTriggerDispo, refreshTriggerDispo])
     }
     
-    override func onConfirmUnauthorizedClient() {
-        coordinator.logout()
+    private func updateSurveyContent(at index: Int, surveys: [Survey], isReload: Bool = false) {
+        guard let survey = surveys[safe: index] else {
+            return
+        }
+        
+        bulletsView.switchTo(bulletAt: index)
+        surveyTitleLabel.setTextWithFadeInAnimation(text: survey.attributes.title)
+        surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)
+        
+        if isReload {
+            surveyCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                              at: .top, animated: false)
+        }
     }
 }
