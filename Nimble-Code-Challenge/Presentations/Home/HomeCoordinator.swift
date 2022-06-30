@@ -19,16 +19,6 @@ final class HomeCoordinator: Coordinator {
         navigationController.viewControllers = [homeViewController]
     }
     
-    func logout() {
-        guard let appCoordinator = parentCoordinator as? AppCoordinator else {
-            return
-        }
-        let loginCoordinator = LoginCoordinator()
-        loginCoordinator.navigationController = navigationController
-        appCoordinator.start(loginCoordinator)
-        appCoordinator.finish(self)
-    }
-    
     func gotoSurveyDetail(survey: Survey) {
         // TODO: Animate to go to survey detail
     }
