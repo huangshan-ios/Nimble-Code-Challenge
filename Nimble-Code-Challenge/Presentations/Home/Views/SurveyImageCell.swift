@@ -6,12 +6,28 @@
 //
 
 import UIKit
+import Nuke
 
 class SurveyImageCell: UICollectionViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var backgroundImage: UIImageView!
+    
+    func setImage(_ url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        
+        let options = ImageLoadingOptions(transition: .fadeIn(duration: 0.33))
+        
+        let request = ImageRequest(
+            url: url,
+            processors: [ImageProcessors.Resize(size: UIScreen.main.bounds.size,
+                                                contentMode: .aspectFill,
+                                                crop: true, upscale: true)],
+            priority: .high
+        )
+        
+        Nuke.loadImage(with: request, options: options, into: backgroundImage)
     }
 
 }

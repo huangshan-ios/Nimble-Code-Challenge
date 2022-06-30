@@ -37,13 +37,15 @@ final class HomeViewModel: ViewModelType {
         
         let activityIndicator = ActivityIndicator()
         let errorTrigger = PublishRelay<Error?>()
+        let indexTrigger = PublishSubject<Int>()
         
         var currentSurveyIndex: Int = 0
         var totalSurveys: Int = 0
         
         let fetchTrigger = input.fetchSurveys
-            .flatMap { [weak self] _ -> Observable<[Survey]> in
-                guard let self = self else { return .empty() }
+            .withLatestFrom(activityIndicator)
+            .flatMap { [weak self] isLoading -> Observable<[Survey]> in
+                guard let self = self, !isLoading else { return .empty() }
                 return self.useCase.fetchSurveys()
                     .trackActivity(activityIndicator)
                     .catch({ error in
@@ -52,9 +54,10 @@ final class HomeViewModel: ViewModelType {
                     })
             }.do(onNext: { survey in
                 totalSurveys = survey.count
+                indexTrigger.onNext(0)
             })
         
-        let currentSurveyIndexTrigger = input.swipe
+        let swipeToIndexTrigger = input.swipe
             .map { direction -> Int in
                 switch direction {
                 case .backward:
@@ -69,9 +72,13 @@ final class HomeViewModel: ViewModelType {
                 return currentSurveyIndex
             }
         
-        return Output(isLoading: activityIndicator.asSignal(onErrorJustReturn: false),
-                      error: errorTrigger.asSignal(onErrorJustReturn: nil),
-                      surveys: fetchTrigger.asDriver(onErrorJustReturn: []),
-                      currentIndex: currentSurveyIndexTrigger.asDriver(onErrorJustReturn: 0))
+        let currentIndexTrigger = Observable.merge(swipeToIndexTrigger, indexTrigger.asObserver())
+        
+        return Output(
+            isLoading: activityIndicator.asSignal(onErrorJustReturn: false),
+            error: errorTrigger.asSignal(onErrorJustReturn: nil),
+            surveys: fetchTrigger.asDriver(onErrorJustReturn: []),
+            currentIndex: currentIndexTrigger.asDriver(onErrorJustReturn: 0)
+        )
     }
 }

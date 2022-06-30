@@ -8,8 +8,17 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
+    
+    private let dataSource = RxCollectionViewSectionedReloadDataSource<SectionModel<String, String>>(configureCell: { dataSource, collectionView, indexPath, item in
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SurveyImageCell.className, for: indexPath) as? SurveyImageCell else {
+            return UICollectionViewCell()
+        }
+        cell.setImage(item)
+        return cell
+    })
     
     @IBOutlet weak var surveyCollectionView: UICollectionView!
     @IBOutlet weak var bulletsView: BulletsView!
@@ -17,12 +26,27 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     @IBOutlet weak var surveyDescriptionLabel: UILabel!
     
     private let fetchSurveysTrigger = PublishSubject<Void>()
-    private let loadMoreTrigger = PublishSubject<Void>()
     private let swipeTrigger = PublishSubject<SwipeDirection>()
+    private var currentIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchSurveysTrigger.onNext(())
+    }
+    
+    override func configureUIs() {
+        let cellNib = UINib(nibName: SurveyImageCell.className, bundle: nil)
+        surveyCollectionView.register(cellNib, forCellWithReuseIdentifier: SurveyImageCell.className)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        layout.itemSize = surveyCollectionView.frame.size
+        layout.minimumLineSpacing = .leastNonzeroMagnitude
+        surveyCollectionView.collectionViewLayout = layout
+        
+        surveyCollectionView.isPagingEnabled = true
+        surveyCollectionView.showsHorizontalScrollIndicator = false
+        surveyCollectionView.contentInsetAdjustmentBehavior = .never
     }
     
     override func configureBindings() {
@@ -31,25 +55,26 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         
         let output = viewModel.transform(input)
         
-        let surveyImages = output.surveys
-            .map { surveys in
-                return surveys.map({ $0.attributes.cover_image_url })
-            }.drive(onNext: { _ in
-                // TODO: Bind to collection view
+        let collectionDataSourceDispo = output.surveys
+            .map({ surveys in
+                let coverImages = surveys.map({ $0.attributes.cover_image_url })
+                return [SectionModel<String, String>(model: "", items: coverImages)]
             })
+            .drive(surveyCollectionView.rx.items(dataSource: dataSource))
         
         let currentSurveyDispo = Driver.combineLatest(output.surveys, output.currentIndex)
             .compactMap { surveys, currentIndex in
                 return surveys[safe: currentIndex]
             }.drive(onNext: { [weak self] survey in
                 guard let self = self else { return }
-                self.surveyTitleLabel.text = survey.attributes.title
-                self.surveyDescriptionLabel.text = survey.attributes.description
+                self.surveyTitleLabel.setTextWithFadeInAnimation(text: survey.attributes.title)
+                self.surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)
             })
         
         let currentIndexDispo = output.currentIndex
             .drive(onNext: { [weak self] index in
                 guard let self = self else { return }
+                self.currentIndex = index
                 self.bulletsView.switchTo(bulletAt: index)
             })
         
@@ -67,9 +92,36 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                 self.handleError(error: error)
             })
         
-        disposeBag.insert([surveyImages, currentSurveyDispo,
+        let swipeTriggerDispo = surveyCollectionView.rx
+            .didEndDecelerating
+            .compactMap({ [weak self] _ -> SwipeDirection? in
+                guard let self = self else {
+                    return nil
+                }
+                
+                let scrollPos = Int(self.surveyCollectionView.contentOffset.x / self.view.frame.width)
+                
+                guard scrollPos != self.currentIndex else {
+                    return nil
+                }
+                
+                return scrollPos > self.currentIndex ? .forward : SwipeDirection.backward
+            })
+            .bind(to: swipeTrigger)
+        
+        let refreshTriggerDispo = surveyCollectionView.rx
+            .contentOffset
+            .flatMap({ contentOffset -> Observable<Void> in
+                guard contentOffset.x < -20 else {
+                    return .empty()
+                }
+                return .just(())
+            })
+            .bind(to: fetchSurveysTrigger)
+        
+        disposeBag.insert([collectionDataSourceDispo, currentSurveyDispo,
                            currentIndexDispo,
-                           loadingDispo, errorDispo])
+                           loadingDispo, errorDispo,
+                           swipeTriggerDispo, refreshTriggerDispo])
     }
-    
 }
