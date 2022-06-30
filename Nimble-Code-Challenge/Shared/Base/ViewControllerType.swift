@@ -47,6 +47,12 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
             IndicatorLoader.shared.hide()
         }
     }
+    
+    // MARK: - Utilities functions
+    func onConfirmErrorDialog() {}
+    func onCancelErrorDialog() {}
+    func onConfirmUnauthorizedClient() {}
+
 }
 
 // MARK: Private functions
@@ -76,11 +82,4 @@ extension ViewControllerType {
         
         present(alertController, animated: false)
     }
-}
-
-// MARK: - Utilities functions
-extension ViewControllerType {
-    func onConfirmErrorDialog() {}
-    func onCancelErrorDialog() {}
-    func onConfirmUnauthorizedClient() {}
 }

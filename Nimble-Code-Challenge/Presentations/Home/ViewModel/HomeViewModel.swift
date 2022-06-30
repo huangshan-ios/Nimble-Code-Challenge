@@ -42,7 +42,11 @@ final class HomeViewModel: ViewModelType {
         var currentSurveyIndex: Int = 0
         var totalSurveys: Int = 0
         
-        let fetchTrigger = input.fetchSurveys
+        let reloadSurveys = NotificationCenter.default.rx
+            .notification(.reloadHomeScreen, object: nil)
+            .map { _ in }
+        
+        let fetchTrigger = Observable.merge(input.fetchSurveys, reloadSurveys)
             .withLatestFrom(activityIndicator)
             .flatMap { [weak self] isLoading -> Observable<[Survey]> in
                 guard let self = self, !isLoading else { return .empty() }
