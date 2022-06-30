@@ -27,10 +27,12 @@ class LoginViewModelTest: XCTestCase {
     
     private var scheduler: TestScheduler!
     
+    // TODO: Write more test case
+    
     override func setUp() {
         
         disposeBag = DisposeBag()
-        useCase = LoginViewUseCaseMock(credentialRepository: CredentialRepositoryImpl(networkService: NimbleNetworkServiceImpl()))
+        useCase = LoginViewUseCaseMock(credentialRepository: CredentialRepositoryMock(networkService: NetworkServiceMock()))
         viewModel = LoginViewModel(useCase: useCase)
         scheduler = TestScheduler(initialClock: 0)
         
@@ -40,13 +42,23 @@ class LoginViewModelTest: XCTestCase {
                                          forgotPassword: .empty())
         
         output = viewModel.transform(input)
-        
+    }
+    
+    private func prepareForTestLoginButton() {
         output.enableLoginButton
             .drive()
             .disposed(by: disposeBag)
     }
     
+    private func prepareForTestLogin() {
+        output.loginSuccess
+            .emit()
+            .disposed(by: disposeBag)
+    }
+    
     func testLoginButtonEnabled() throws {
+        prepareForTestLoginButton()
+        
         emailTriggerSubject.onNext("dev@nimblehq.co")
         passwordTriggerSubject.onNext("12345678")
         
@@ -56,6 +68,8 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoginButtonIsNotEnabledWhenInputOnlyEmail() throws {
+        prepareForTestLoginButton()
+        
         emailTriggerSubject.onNext("dev@nimblehq.co")
         passwordTriggerSubject.onNext("")
         
@@ -65,6 +79,8 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoginButtonIsNotEnabledWhenInputOnlyPassword() throws {
+        prepareForTestLoginButton()
+        
         emailTriggerSubject.onNext("")
         passwordTriggerSubject.onNext("12345678")
         
@@ -74,6 +90,8 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoginButtonIsNotEnabledWhenInputNothing() throws {
+        prepareForTestLoginButton()
+        
         emailTriggerSubject.onNext("")
         passwordTriggerSubject.onNext("")
         
@@ -109,13 +127,11 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoginError() throws {
+        prepareForTestLogin()
+        
         let isLoginError = scheduler.createObserver(Bool.self)
         
         useCase.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
-        
-        output.loginSuccess
-            .emit()
-            .disposed(by: disposeBag)
         
         output.error
             .map({ error in
@@ -142,13 +158,11 @@ class LoginViewModelTest: XCTestCase {
     }
     
     func testLoadingStates() throws {
+        prepareForTestLogin()
+        
         let loadingStates = scheduler.createObserver(Bool.self)
         
         useCase.listMock = [.login(.success(true))]
-        
-        output.loginSuccess
-            .emit()
-            .disposed(by: disposeBag)
         
         output.isLoading
             .emit(to: loadingStates)
@@ -174,13 +188,13 @@ class LoginViewModelTest: XCTestCase {
     }
     
     override func tearDown() {
+        disposeBag = nil
+        
         viewModel = nil
         useCase = nil
         output = nil
         
         scheduler = nil
-        
-        disposeBag = nil
     }
     
 }

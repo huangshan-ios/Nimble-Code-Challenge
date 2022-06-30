@@ -18,22 +18,16 @@ class LoginViewUseCaseTest: XCTestCase {
     private var repository: CredentialRepositoryMock!
     private var useCase: LoginViewUseCaseImpl!
     
-    private lazy var mockDTO: CredentialDTO = {
-        return CredentialDTO(id: "1",
-                        type: "Bearer",
-                        attributes: CredentialAttributesDTO(access_token: "lbxD2K2BjbYtNzz8xjvh2FvSKx838KBCf79q773kq2c",
-                                                       token_type: "Bearer", expires_in: 7200,
-                                                       refresh_token: "3zJz2oW0njxlj_I3ghyUBF7ZfdQKYXd2n0ODlMkAjHc", created_at: 1597169495))
-    }()
+    // TODO: Write more test case
     
     override func setUp() {
         disposeBag = DisposeBag()
-        repository = CredentialRepositoryMock(networkService: NimbleNetworkServiceImpl())
+        repository = CredentialRepositoryMock(networkService: NetworkServiceMock())
         useCase = LoginViewUseCaseImpl(credentialRepository: repository)
     }
     
     func testLoginSuccess() throws {
-        repository.listMock = [.login(.success(mockDTO))]
+        repository.listMock = [.login(.success(.json("login_success")))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
             .toBlocking()
@@ -48,7 +42,7 @@ class LoginViewUseCaseTest: XCTestCase {
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
             .catch({ error in
                 let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("something_went_wrong") {
+                if !error.errors.isEmpty && error.errors.first!.detail.elementsEqual("Something went wrong") {
                     return .just(true)
                 }
                 return .just(false)

@@ -10,43 +10,34 @@ import RxSwift
 @testable import Nimble_Code_Challenge
 
 final class NetworkServiceMock: NimbleNetworkService, Mockable {
-
+    
     var listMock: [MockType] = []
     
-    enum MockType {
-        case login(Result<DataTypeMock, Error>)
-        
-        enum Case {
-            case login
-        }
-        
-        var `case`: Case {
-            switch self {
-            case .login: return .login
-            }
-        }
-    }
+    typealias MockType = Result<DataTypeMock, ErrorTypeMock>
     
     func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
-        guard let mock = listMock.first(where: { $0.case == .login }) else {
+        guard let mock = listMock.first else {
             return .error(APIErrorDTO.somethingWentWrong)
         }
         
         switch mock {
-        case .login(let result):
-            switch result {
-            case .success(let dataType):
-                switch dataType {
-                case .json(let fileName):
-                    let object = loadJSON(filename: fileName, type: T.self)
-                    return .just(object)
-                case .object(let object):
-                    guard let object = object as? T else {
-                        return .error(APIErrorDTO.somethingWentWrong)
-                    }
-                    return .just(object)
+        case .success(let dataType):
+            switch dataType {
+            case .json(let fileName):
+                let object = loadJSON(filename: fileName, type: T.self)
+                return .just(object)
+            case .object(let object):
+                guard let object = object as? T else {
+                    return .error(APIErrorDTO.somethingWentWrong)
                 }
-            case .failure(let error):
+                return .just(object)
+            }
+        case .failure(let errorType):
+            switch errorType {
+            case .json(let fileName):
+                let error = loadJSON(filename: fileName, type: APIErrorDTO.self)
+                return .error(error)
+            case .error(let error):
                 return .error(error)
             }
         }

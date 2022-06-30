@@ -1,16 +1,15 @@
 //
-//  CredentialRepositoryMock.swift
+//  SurveyRepositoryMock.swift
 //  Nimble-Code-ChallengeTests
 //
-//  Created by Son Hoang on 28/06/2022.
+//  Created by Son Hoang on 01/07/2022.
 //
 
 import RxSwift
 
 @testable import Nimble_Code_Challenge
 
-final class CredentialRepositoryMock: CredentialRepository, Mockable {
-    
+final class SurveyRespositoryMock: SurveyRepository, Mockable {
     let networkService: NimbleNetworkService
     
     init(networkService: NimbleNetworkService) {
@@ -20,42 +19,41 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case login(Result<DataTypeMock, Error>)
+        case surveys(Result<DataTypeMock, Error>)
         
         enum Case {
-            case login
+            case surveys
         }
         
         var `case`: Case {
             switch self {
-            case .login: return .login
+            case .surveys: return .surveys
             }
         }
     }
     
-    func login(with email: String, and password: String) -> Single<CredentialDTO> {
-        guard let mock = listMock.first(where: { $0.case == .login }) else {
+    func fetchSurveys() -> Single<DataResponseDTO<[SurveyDTO]>> {
+        guard let mock = listMock.first(where: { $0.case == .surveys }) else {
             return .error(APIErrorDTO.somethingWentWrong)
         }
         
         switch mock {
-        case .login(let result):
+        case .surveys(let result):
             switch result {
             case .success(let dataType):
                 switch dataType {
                 case .json(let fileName):
-                    let object = loadJSON(filename: fileName, type: DataResponseDTO<CredentialDTO>.self)
-                    return .just(object.data)
+                    let object = loadJSON(filename: fileName, type: DataResponseDTO<[SurveyDTO]>.self)
+                    return .just(object)
                 case .object(let object):
-                    guard let object = object as? DataResponseDTO<CredentialDTO> else {
+                    guard let object = object as? DataResponseDTO<[SurveyDTO]> else {
                         return .error(APIErrorDTO.somethingWentWrong)
                     }
-                    return .just(object.data)
+                    return .just(object)
                 }
             case .failure(let error):
                 return .error(error)
             }
         }
     }
-    
 }

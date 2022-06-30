@@ -18,6 +18,8 @@ class CredentialRepositoryTest: XCTestCase {
     private var repository: CredentialRepositoryImpl!
     private var networkService: NetworkServiceMock!
     
+    // TODO: Write more test case
+    
     override func setUp() {
         disposeBag = DisposeBag()
         networkService = NetworkServiceMock()
@@ -25,7 +27,7 @@ class CredentialRepositoryTest: XCTestCase {
     }
     
     func testLoginSuccess() throws {
-        networkService.listMock = [.login(.success(.json("login_success")))]
+        networkService.listMock = [.success(.json("login_success"))]
         
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
             .toBlocking()
@@ -35,13 +37,13 @@ class CredentialRepositoryTest: XCTestCase {
     }
     
     func testLoginFailed() throws {
-        networkService.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
+        networkService.listMock = [.failure(.json("login_incorect_password"))]
         
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
             .map({ _ in return true })
             .catch({ error in
                 let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("something_went_wrong") {
+                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("invalid_email_or_password") {
                     return .just(true)
                 }
                 return .just(false)
