@@ -21,13 +21,23 @@ final class LoginCoordinator: Coordinator {
     }
     
     func navigateToHomeViewController() {
-        guard let appCoordinator = parentCoordinator as? AppCoordinator else {
+        if let appCoordinator = parentCoordinator as? AppCoordinator {
+            let homeCoordinator = HomeCoordinator()
+            homeCoordinator.navigationController = appCoordinator.navigationController
+            appCoordinator.start(homeCoordinator)
+            appCoordinator.finish(self)
             return
         }
-        let homeCoordinator = HomeCoordinator()
-        homeCoordinator.navigationController = appCoordinator.navigationController
-        appCoordinator.start(homeCoordinator)
-        appCoordinator.finish(self)
+        
+        if let homeCoordinator = parentCoordinator as? HomeCoordinator,
+           let loginViewController = navigationController.visibleViewController as? LoginViewController {
+            loginViewController.dismiss(animated: true) { [weak self] in
+                guard let self = self else { return }
+                homeCoordinator.finish(self)
+                NotificationCenter.default.post(name: .reloadHomeScreen, object: nil)
+            }
+            return
+        }
     }
     
 }

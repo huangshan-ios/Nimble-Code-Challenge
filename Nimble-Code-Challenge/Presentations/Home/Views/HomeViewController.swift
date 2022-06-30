@@ -81,7 +81,6 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         let loadingDispo = output.isLoading
             .emit(onNext: { [weak self] isLoading in
                 guard let self = self else { return }
-                self.surveyCollectionView.isScrollEnabled = !isLoading
                 self.showIndicator(isLoading)
             })
         
@@ -123,5 +122,9 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         disposeBag.insert([collectionDataSourceDispo, currentSurveyDispo,
                            loadingDispo, errorDispo,
                            swipeTriggerDispo, refreshTriggerDispo])
+    }
+    
+    override func onConfirmUnauthorizedClient() {
+        coordinator.logout()
     }
 }
