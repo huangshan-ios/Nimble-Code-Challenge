@@ -1,15 +1,19 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 RXSWIFT_VERSION = '6.5.0'
 RXCOCOA_VERSION = '6.5.0'
 RXTEST_VERSION = '6.5.0'
 RXBLOCKING_VERSION = '6.5.0'
+RXDATASOURCE_VERSION = '~> 5.0'
 MOYA_VERSION = '~> 15.0'
+NUKE_VERSION = '~> 9.0'
 
 def project_dependency
   pod 'RxSwift', RXSWIFT_VERSION
   pod 'RxCocoa', RXCOCOA_VERSION
+  pod 'RxDataSources', RXDATASOURCE_VERSION
   pod 'Moya/RxSwift', MOYA_VERSION
+  pod 'Nuke', NUKE_VERSION
 end
 
 def test_depdendency 

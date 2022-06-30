@@ -16,6 +16,7 @@
 		F7026F74286C3EA100523A2A /* NimbleNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F73286C3EA100523A2A /* NimbleNetworkService.swift */; };
 		F7026F76286C401800523A2A /* TokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F75286C401800523A2A /* TokenError.swift */; };
 		F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F79286C50BE00523A2A /* Error+Extensions.swift */; };
+		F7026F7E286D6F9800523A2A /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */; };
 		F71F86122865608800767F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86112865608800767F6E /* AppDelegate.swift */; };
 		F71F861B2865608900767F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71F861A2865608900767F6E /* Assets.xcassets */; };
 		F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F861C2865608900767F6E /* LaunchScreen.storyboard */; };
@@ -95,6 +96,7 @@
 		F7026F73286C3EA100523A2A /* NimbleNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NimbleNetworkService.swift; sourceTree = "<group>"; };
 		F7026F75286C401800523A2A /* TokenError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenError.swift; sourceTree = "<group>"; };
 		F7026F79286C50BE00523A2A /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
+		F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		F71F860E2865608800767F6E /* Nimble-Code-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nimble-Code-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F86112865608800767F6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F71F861A2865608900767F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 				F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */,
 				F7026F79286C50BE00523A2A /* Error+Extensions.swift */,
 				F7EFC0D8286CC93600177139 /* Array+Extensions.swift */,
+				F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -780,6 +783,7 @@
 			files = (
 				F71F867028658EF800767F6E /* NimbleNetworkServiceImpl.swift in Sources */,
 				F7EFC0D1286CC0FA00177139 /* HomeViewUseCase.swift in Sources */,
+				F7026F7E286D6F9800523A2A /* UILabel+Extensions.swift in Sources */,
 				F7EFC0C6286CBD8100177139 /* SurveyImageCell.swift in Sources */,
 				F71F865528656A4600767F6E /* LoginViewController.swift in Sources */,
 				F71F86512865695C00767F6E /* NSObject+Extensions.swift in Sources */,
@@ -991,10 +995,11 @@
 				INFOPLIST_FILE = "Nimble-Code-Challenge/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1021,10 +1026,11 @@
 				INFOPLIST_FILE = "Nimble-Code-Challenge/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
