@@ -22,6 +22,11 @@ struct DataResponseDTO<D: Decodable>: Decodable {
         meta = try container.decodeIfPresent(MetaDTO.self, forKey: .meta)
     }
     
+    init(data: D, meta: MetaDTO?) {
+        self.data = data
+        self.meta = meta
+    }
+    
     struct MetaDTO: Decodable {
         let page, pages, page_size, records: Int
     }
