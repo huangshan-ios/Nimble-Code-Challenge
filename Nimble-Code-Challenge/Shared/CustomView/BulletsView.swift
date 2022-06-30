@@ -65,8 +65,13 @@ class BulletsView: UIView {
     func switchTo(bulletAt index: Int) {
         let previousBullet = stackView.subviews.enumerated().first(where: { $0.offset == currentBullet }).map { $0.element }
         let newBullet = stackView.subviews.enumerated().first(where: { $0.offset == index }).map { $0.element }
+        
         previousBullet?.backgroundColor = .white.withAlphaComponent(0.3)
-        newBullet?.backgroundColor = .white
+
+        UIView.animate(withDuration: 0.2, delay: 0, animations: {
+            newBullet?.backgroundColor = .white
+        })
+        
         currentBullet = index
     }
     

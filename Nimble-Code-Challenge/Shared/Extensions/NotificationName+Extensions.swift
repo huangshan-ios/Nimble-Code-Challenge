@@ -8,5 +8,5 @@
 import Foundation
 
 extension Notification.Name {
-    static let reloadHomeScreen = Notification.Name("ReloadHomeScreen")
+    static let loginSuccess = Notification.Name("LoginSuccess")
 }

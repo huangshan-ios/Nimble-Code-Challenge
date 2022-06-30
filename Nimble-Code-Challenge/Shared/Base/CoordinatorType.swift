@@ -38,3 +38,11 @@ class Coordinator: CoordinatorType {
         }
     }
 }
+
+extension Coordinator {
+    func logout() {
+        let loginCoordinator = LoginCoordinator(isPresentation: true)
+        loginCoordinator.navigationController = navigationController
+        start(loginCoordinator)
+    }
+}

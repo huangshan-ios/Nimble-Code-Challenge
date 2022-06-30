@@ -37,7 +37,7 @@ final class HomeViewModel: ViewModelType {
         var totalSurveys: [Survey] = []
         
         let reloadSurveys = NotificationCenter.default.rx
-            .notification(.reloadHomeScreen, object: nil)
+            .notification(.loginSuccess, object: nil)
             .map { _ in }
         
         let fetchTrigger = Observable.merge(input.fetchSurveys, reloadSurveys)
@@ -59,12 +59,13 @@ final class HomeViewModel: ViewModelType {
             })
         
         let swipeToIndexTrigger = input.swipeToIndex
-                .compactMap { index -> (survey: Survey?, index: Int)? in
-                    guard let survey = totalSurveys[safe: index] else {
-                        return nil
-                    }
-                    return (survey: survey, index: index)
+            .distinctUntilChanged()
+            .compactMap({ index -> (survey: Survey?, index: Int)? in
+                guard let survey = totalSurveys[safe: index] else {
+                    return nil
                 }
+                return (survey: survey, index: index)
+            })
         
         let currentSurveyTrigger = Observable.merge(swipeToIndexTrigger,
                                                     surveyTrigger.asObserver())

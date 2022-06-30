@@ -67,8 +67,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         let collectionDataSourceDispo = output.surveys
             .map({ surveys in
                 let coverImages = surveys.map({ $0.attributes.cover_image_url })
-                return [SectionModel<String, String>(model: "", items: coverImages)]
-            }).drive(surveyCollectionView.rx.items(dataSource: dataSource))
+                let sectionModel = SectionModel<String, String>(model: "", items: coverImages)
+                return [sectionModel]
+            })
+            .drive(surveyCollectionView.rx.items(dataSource: dataSource))
         
         let surveysDispo = output.surveys
             .drive(onNext: { [weak self] surveys in
@@ -84,7 +86,12 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         
         let currentSurveyDispo = output.currentSurvey
             .drive(onNext: { [weak self] result in
-                guard let self = self, let survey = result.survey else { return }
+                guard
+                    let self = self,
+                    let survey = result.survey
+                else {
+                    return
+                }
                 self.updateSurveyContent(survey: survey, index: result.index)
             })
         
