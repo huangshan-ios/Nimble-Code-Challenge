@@ -8,23 +8,18 @@
 import RxSwift
 import RxCocoa
 
-enum SwipeDirection {
-    case backward
-    case forward
-}
-
 final class HomeViewModel: ViewModelType {
     
     struct Input {
         let fetchSurveys: Observable<Void>
-        let swipe: Observable<SwipeDirection>
+        let swipeToIndex: Observable<Int>
     }
     
     struct Output {
         let isLoading: Signal<Bool>
         let error: Signal<Error?>
         let surveys: Driver<[Survey]>
-        let currentIndex: Driver<Int>
+        let currentSurvey: Driver<(survey: Survey?, index: Int)>
     }
     
     let useCase: HomeViewUseCase
@@ -37,10 +32,9 @@ final class HomeViewModel: ViewModelType {
         
         let activityIndicator = ActivityIndicator()
         let errorTrigger = PublishRelay<Error?>()
-        let indexTrigger = PublishSubject<Int>()
+        let surveyTrigger = PublishSubject<(survey: Survey?, index: Int)>()
         
-        var currentSurveyIndex: Int = 0
-        var totalSurveys: Int = 0
+        var totalSurveys: [Survey] = []
         
         let reloadSurveys = NotificationCenter.default.rx
             .notification(.reloadHomeScreen, object: nil)
@@ -56,34 +50,31 @@ final class HomeViewModel: ViewModelType {
                         errorTrigger.accept(error)
                         return .empty()
                     })
-            }.do(onNext: { survey in
-                totalSurveys = survey.count
-                currentSurveyIndex = 0
-                indexTrigger.onNext(0)
+            }.do(onNext: { surveys in
+                totalSurveys = surveys
+                if let survey = surveys[safe: 0] {
+                    surveyTrigger.onNext((survey: survey,
+                                          index: 0))
+                }
             })
         
-        let swipeToIndexTrigger = input.swipe
-            .map { direction -> Int in
-                switch direction {
-                case .backward:
-                    if currentSurveyIndex > 0 {
-                        currentSurveyIndex -= 1
+        let swipeToIndexTrigger = input.swipeToIndex
+                .compactMap { index -> (survey: Survey?, index: Int)? in
+                    guard let survey = totalSurveys[safe: index] else {
+                        return nil
                     }
-                case .forward:
-                    if currentSurveyIndex < totalSurveys - 1 {
-                        currentSurveyIndex += 1
-                    }
+                    return (survey: survey, index: index)
                 }
-                return currentSurveyIndex
-            }
         
-        let currentIndexTrigger = Observable.merge(swipeToIndexTrigger, indexTrigger.asObserver())
+        let currentSurveyTrigger = Observable.merge(swipeToIndexTrigger,
+                                                    surveyTrigger.asObserver())
         
         return Output(
             isLoading: activityIndicator.asSignal(onErrorJustReturn: false),
             error: errorTrigger.asSignal(onErrorJustReturn: nil),
             surveys: fetchTrigger.asDriver(onErrorJustReturn: []),
-            currentIndex: currentIndexTrigger.asDriver(onErrorJustReturn: 0)
+            currentSurvey: currentSurveyTrigger
+                .asDriver(onErrorJustReturn: (survey: nil, index: 0))
         )
     }
 }
