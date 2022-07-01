@@ -1,0 +1,13 @@
+//
+//  Debug.xcconfig
+//  Nimble-Code-Challenge
+//
+//  Created by Son Hoang on 01/07/2022.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Pods/Target Support Files/Pods-Nimble-Code-Challenge/Pods-Nimble-Code-Challenge.debug.xcconfig"
+
+SERVER_DOMAIN_NAME = survey-api.nimblehq.co
