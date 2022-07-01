@@ -8,7 +8,10 @@
 import RxSwift
 
 protocol SurveyRepository {
-    func fetchSurveys() -> Single<DataResponseDTO<[SurveyDTO]>>
+    var networkService: NimbleNetworkService { get }
+    
+    func fetchSurveys() -> Single<DataSurveyDTO>
+    func getDetailSurvey(_ surveyId: String) -> Single<DataSurveyDetailDTO>
 }
 
 final class SurveyRepositoryImpl: SurveyRepository {
@@ -18,7 +21,11 @@ final class SurveyRepositoryImpl: SurveyRepository {
         self.networkService = networkService
     }
     
-    func fetchSurveys() -> Single<DataResponseDTO<[SurveyDTO]>> {
-        return networkService.request(.surveys, type: DataResponseDTO.self)
+    func fetchSurveys() -> Single<DataSurveyDTO> {
+        return networkService.request(.surveys, type: DataSurveyDTO.self)
+    }
+    
+    func getDetailSurvey(_ surveyId: String) -> Single<DataSurveyDetailDTO> {
+        return networkService.request(.surveyDetail(surveyId), type: DataSurveyDetailDTO.self)
     }
 }
