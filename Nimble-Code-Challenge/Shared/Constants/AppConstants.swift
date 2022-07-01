@@ -6,5 +6,8 @@
 //
 
 struct AppConstants {
-    static let baseURL = "https://survey-api.nimblehq.co/api/v1/"
+    static var baseURL: String {
+        let urlString = AppConfigurationHelper.shared.value(for: "SERVER_BASE_URL") ?? ""
+        return urlString
+    }
 }
