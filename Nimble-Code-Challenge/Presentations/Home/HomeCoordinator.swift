@@ -20,6 +20,8 @@ final class HomeCoordinator: Coordinator {
     }
     
     func gotoSurveyDetail(survey: Survey) {
-        // TODO: Animate to go to survey detail
+        let surveyDetailCoordinator = SurveyDetailCoordinator(survey: survey)
+        surveyDetailCoordinator.navigationController = navigationController
+        start(surveyDetailCoordinator)
     }
 }

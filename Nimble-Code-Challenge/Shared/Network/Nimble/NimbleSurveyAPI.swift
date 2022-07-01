@@ -10,4 +10,5 @@ import Foundation
 enum NimbleSurveyAPI {
     case login(String, String)
     case surveys
+    case surveyDetail(String)
 }

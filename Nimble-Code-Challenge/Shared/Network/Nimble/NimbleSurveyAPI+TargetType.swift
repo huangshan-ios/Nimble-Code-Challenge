@@ -18,6 +18,8 @@ extension NimbleSurveyAPI: TargetType {
             return "oauth/token"
         case .surveys:
             return "surveys"
+        case .surveyDetail(let id):
+            return "surveys/\(id)"
         }
     }
     
@@ -25,7 +27,7 @@ extension NimbleSurveyAPI: TargetType {
         switch self {
         case .login:
             return .post
-        case .surveys:
+        case .surveys, .surveyDetail:
             return .get
         }
     }
@@ -39,7 +41,7 @@ extension NimbleSurveyAPI: TargetType {
             paramaters["grant_type"] = "password"
             paramaters["email"] = email
             paramaters["password"] = password
-        case .surveys:
+        case .surveys, .surveyDetail:
             return paramaters
         }
         return paramaters
