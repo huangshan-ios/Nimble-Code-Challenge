@@ -10,4 +10,8 @@ struct AppConstants {
         let urlString = AppConfigurationHelper.shared.value(for: "SERVER_BASE_URL") ?? ""
         return urlString
     }
+    
+    static let clientSecrect: String = AppConfigurationHelper.shared.value(for: "CLIENT_SECRECT") ?? ""
+    static let clientId: String = AppConfigurationHelper.shared.value(for: "CLIENT_ID") ?? ""
+    
 }
