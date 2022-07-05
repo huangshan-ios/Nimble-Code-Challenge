@@ -11,3 +11,5 @@
 #include "Pods/Target Support Files/Pods-Nimble-Code-Challenge/Pods-Nimble-Code-Challenge.debug.xcconfig"
 
 SERVER_DOMAIN_NAME = survey-api.nimblehq.co
+CLIENT_SECRET = lMQb900L-mTeU-FVTCwyhjsfBwRCxwwbCitPob96cuU
+CLIENT_ID = ofzl-2h5ympKa0WqqTzqlVJUiRsxmXQmt5tkgrlWnOE
