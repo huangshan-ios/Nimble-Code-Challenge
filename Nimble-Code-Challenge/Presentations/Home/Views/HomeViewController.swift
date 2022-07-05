@@ -9,6 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import SkeletonView
 
 class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
@@ -20,6 +21,8 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         return cell
     })
     
+    @IBOutlet weak var detailDateLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var surveyCollectionView: UICollectionView!
     @IBOutlet weak var bulletsView: BulletsView!
     @IBOutlet weak var surveyTitleLabel: UILabel!
@@ -28,6 +31,9 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
     private let fetchSurveysTrigger = PublishSubject<Void>()
     private let swipeTrigger = PublishSubject<Int>()
+    
+    private lazy var dateViews: [UILabel] = [detailDateLabel, dateLabel]
+    private lazy var surveyViews: [UILabel] = [surveyTitleLabel, surveyDescriptionLabel]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +53,20 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         surveyCollectionView.isPagingEnabled = true
         surveyCollectionView.showsHorizontalScrollIndicator = false
         surveyCollectionView.contentInsetAdjustmentBehavior = .never
+        
+        configureSkeletonUIs(isLoading: true)
+    }
+    
+    private func configureSkeletonUIs(isLoading: Bool) {
+        if isLoading {
+            dateViews.forEach({ $0.showLabelSkeletonAnimation(numberOfLines: 1) })
+            surveyViews.forEach({ $0.showLabelSkeletonAnimation() })
+            bulletsView.showSkeletonAnimation()
+        } else {
+            dateViews.forEach({ $0.hideSkeleton() })
+            surveyViews.forEach({ $0.hideSkeleton()  })
+            bulletsView.hideSkeleton()
+        }
     }
     
     override func configureBindings() {
@@ -80,6 +100,7 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
                 else {
                     return
                 }
+                self.configureSkeletonUIs(isLoading: false)
                 self.bulletsView.setNumOfBullets(surveys.count)
                 self.updateSurveyContent(survey: survey, index: 0, isReload: true)
             })

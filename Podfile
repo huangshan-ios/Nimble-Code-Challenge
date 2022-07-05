@@ -8,6 +8,7 @@ RXDATASOURCE_VERSION = '~> 5.0'
 MOYA_VERSION = '~> 15.0'
 NUKE_VERSION = '~> 9.0'
 SNAPKIT_VERSION = '~> 5.0.0'
+SKELETON_VERSION = '1.29.2'
 
 def project_dependency
   pod 'RxSwift', RXSWIFT_VERSION
@@ -16,6 +17,7 @@ def project_dependency
   pod 'Moya/RxSwift', MOYA_VERSION
   pod 'Nuke', NUKE_VERSION
   pod 'SnapKit', SNAPKIT_VERSION
+  pod 'SkeletonView', SKELETON_VERSION
 end
 
 def test_depdendency 

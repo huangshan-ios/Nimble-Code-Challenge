@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 extension UILabel {
     func setTextWithFadeInAnimation(text: String, duration: TimeInterval = 0.5, delay: TimeInterval = 0.0) {
@@ -17,5 +18,17 @@ extension UILabel {
             self.text = text
             self.alpha = 1.0
         })
+    }
+    
+    func showLabelSkeletonAnimation(lineSpacing: CGFloat = 4, cornerRadius: Int = 8,
+                                    numberOfLines: Int = 2, lineHeight: CGFloat = 16,
+                                    gradientColors: [UIColor] = [.white.withAlphaComponent(0.12), .white.withAlphaComponent(0.48), .white.withAlphaComponent(0.12)],
+                                    animation: SkeletonLayerAnimation? = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight),
+                                    transition: SkeletonTransitionStyle = .crossDissolve(1)) {
+        skeletonLineSpacing = lineSpacing
+        linesCornerRadius = cornerRadius
+        skeletonTextNumberOfLines = .custom(numberOfLines)
+        skeletonTextLineHeight = .fixed(lineHeight)
+        showAnimatedGradientSkeleton(usingGradient: .init(colors: gradientColors), animation: animation, transition: transition)
     }
 }
