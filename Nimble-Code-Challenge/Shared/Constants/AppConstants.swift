@@ -11,7 +11,7 @@ struct AppConstants {
         return urlString
     }
     
-    static let clientSecrect: String = AppConfigurationHelper.shared.value(for: "CLIENT_SECRECT") ?? ""
+    static let clientSecret: String = AppConfigurationHelper.shared.value(for: "CLIENT_SECRET") ?? ""
     static let clientId: String = AppConfigurationHelper.shared.value(for: "CLIENT_ID") ?? ""
     
 }

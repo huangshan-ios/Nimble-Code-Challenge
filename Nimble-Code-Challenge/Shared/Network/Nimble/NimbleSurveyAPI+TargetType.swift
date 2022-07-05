@@ -36,7 +36,7 @@ extension NimbleSurveyAPI: TargetType {
         var paramaters: [String: String] = [:]
         switch self {
         case .login(let email, let password):
-            paramaters["client_secret"] = AppConstants.clientSecrect
+            paramaters["client_secret"] = AppConstants.clientSecret
             paramaters["client_id"] = AppConstants.clientId
             paramaters["grant_type"] = "password"
             paramaters["email"] = email

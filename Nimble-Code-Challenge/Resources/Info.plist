@@ -10,8 +10,8 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>CLIENT_SECRECT</key>
-	<string>${CLIENT_SECRECT}</string>
+	<key>CLIENT_SECRET</key>
+	<string>${CLIENT_SECRET}</string>
 	<key>CLIENT_ID</key>
 	<string>$(CLIENT_ID)</string>
 </dict>
