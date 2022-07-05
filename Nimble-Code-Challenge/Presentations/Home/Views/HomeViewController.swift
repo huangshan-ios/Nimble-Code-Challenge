@@ -28,12 +28,10 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     @IBOutlet weak var surveyTitleLabel: UILabel!
     @IBOutlet weak var surveyDescriptionLabel: UILabel!
     @IBOutlet weak var takeSurveyButton: UIButton!
+    @IBOutlet weak var shrimerView: UIView!
     
     private let fetchSurveysTrigger = PublishSubject<Void>()
     private let swipeTrigger = PublishSubject<Int>()
-    
-    private lazy var dateViews: [UILabel] = [detailDateLabel, dateLabel]
-    private lazy var surveyViews: [UILabel] = [surveyTitleLabel, surveyDescriptionLabel]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,13 +57,15 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
     private func configureSkeletonUIs(isLoading: Bool) {
         if isLoading {
-            dateViews.forEach({ $0.showLabelSkeletonAnimation(numberOfLines: 1) })
-            surveyViews.forEach({ $0.showLabelSkeletonAnimation() })
-            bulletsView.showSkeletonAnimation()
+            shrimerView.showSkeletonAnimation()
         } else {
-            dateViews.forEach({ $0.hideSkeleton() })
-            surveyViews.forEach({ $0.hideSkeleton()  })
-            bulletsView.hideSkeleton()
+            UIView.animate(withDuration: 0.7, delay: 0.0,
+                           options: UIView.AnimationOptions.curveEaseIn,
+                           animations: { [weak self ] in
+                guard let self = self else { return}
+                self.shrimerView.alpha = 0
+            })
+            shrimerView.hideSkeleton()
         }
     }
     

@@ -23,7 +23,6 @@ extension UIView {
                                gradientColors: [UIColor] = [.white.withAlphaComponent(0.12), .white.withAlphaComponent(0.48), .white.withAlphaComponent(0.12)],
                                animation: SkeletonLayerAnimation? = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .leftRight),
                                transition: SkeletonTransitionStyle = .crossDissolve(1)) {
-        skeletonCornerRadius = cornerRadius
         showAnimatedGradientSkeleton(usingGradient: .init(colors: gradientColors), animation: animation, transition: transition)
     }
 }

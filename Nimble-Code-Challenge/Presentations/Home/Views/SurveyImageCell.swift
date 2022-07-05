@@ -17,8 +17,6 @@ class SurveyImageCell: UICollectionViewCell {
             return
         }
         
-        let options = ImageLoadingOptions(transition: .fadeIn(duration: 0.33))
-        
         let request = ImageRequest(
             url: url,
             processors: [ImageProcessors.Resize(size: UIScreen.main.bounds.size,
@@ -27,7 +25,7 @@ class SurveyImageCell: UICollectionViewCell {
             priority: .high
         )
         
-        Nuke.loadImage(with: request, options: options, into: backgroundImage)
+        Nuke.loadImage(with: request, into: backgroundImage)
     }
 
 }
