@@ -18,10 +18,22 @@ private var apiSession: Session = {
 }()
 
 class BaseProvider<API: TargetType>: MoyaProvider<API> {
+    
+    override func endpoint(_ token: API) -> Endpoint {
+        let defaultEndpoint = MoyaProvider.defaultEndpointMapping(for: token)
+        if !defaultEndpoint.url.contains(AppConstants.URL.authen) {
+            let credential = UserSession.shared.getCredential()
+            if !credential.attributes.access_token.isEmpty {
+                let authorizationHeader = "\(credential.attributes.token_type) \(credential.attributes.access_token)"
+                return defaultEndpoint.adding(newHTTPHeaderFields: ["Authorization": authorizationHeader])
+            }
+        }
+        return defaultEndpoint
+    }
+    
     convenience init(apiSession: Session = apiSession,
                      pluginsProvider: [PluginType] = []) {
-        self.init(endpointClosure: MoyaProvider.defaultEndpointMapping,
-                  requestClosure: MoyaProvider<API>.defaultRequestMapping,
+        self.init(requestClosure: MoyaProvider<API>.defaultRequestMapping,
                   stubClosure: MoyaProvider.neverStub,
                   callbackQueue: nil,
                   session: apiSession,
