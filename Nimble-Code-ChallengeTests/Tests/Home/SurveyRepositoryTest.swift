@@ -34,8 +34,8 @@ class SurveyRepositoryTest: XCTestCase {
             .first()
         
         XCTAssertNotNil(result)
-        XCTAssertEqual(result?.data.count ?? 0, 2)
-        XCTAssertEqual(result?.data[0].id, "d5de6a8f8f5f1cfe51bc")
+        XCTAssertEqual(result?.data?.count ?? 0, 2)
+        XCTAssertEqual(result?.data?[0].id, "d5de6a8f8f5f1cfe51bc")
     }
     
     func testFetchSurveysFailed() throws {

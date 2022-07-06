@@ -11,15 +11,18 @@ import RxSwift
 extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
     func handleResponse() -> Single<Element> {
         return flatMap { response in
-            if let credential = try? response.map(DataResponseDTO<CredentialDTO>.self) {
-                UserSession.shared.setCredential(credential.data.toCredential())
+            if let jsonString = String(data: response.data, encoding: .utf8),
+               let responseDTO = DataResponseDTO<CredentialDTO>(JSONString: jsonString),
+               let credential = responseDTO.data?.toCredential() {
+                UserSession.shared.setCredential(credential)
             }
             
             if (200 ... 299) ~= response.statusCode {
                 return .just(response)
             }
             
-            if var error = try? response.map(APIErrorDTO.self) {
+            if let jsonString = String(data: response.data, encoding: .utf8),
+               let error = APIErrorDTO(JSONString: jsonString) {
                 error.httpStatusCode = response.statusCode
                 return .error(error)
             }

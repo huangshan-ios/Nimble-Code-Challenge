@@ -5,91 +5,139 @@
 //  Created by Son Hoang on 30/06/2022.
 //
 
-import Foundation
+import ObjectMapper
 
-struct DataSurveyDTO: Decodable {
-    let data: [SurveyDTO]
-    let meta: MetaDTO
+class DataSurveyDTO: Mappable {
+    var data: [SurveyDTO]?
+    var meta: MetaDTO?
     
-    enum CodingKeys: String, CodingKey {
-        case data
-        case meta
-    }
+    required init?(map: Map) {}
     
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        data = try container.decode([SurveyDTO].self, forKey: .data)
-        meta = try container.decode(MetaDTO.self, forKey: .meta)
-    }
-    
-    init(data: [SurveyDTO], meta: MetaDTO) {
-        self.data = data
-        self.meta = meta
+    func mapping(map: Map) {
+        data <- map["data"]
+        meta <- map["meta"]
     }
 }
 
-struct SurveyDTO: Decodable {
-    let id, type: String
-    let attributes: Attributes
-    let relationships: Relationships
+class SurveyDTO: Mappable {
+    var id, type: String?
+    var attributes: Attributes?
+    var relationships: Relationships?
     
-    struct Attributes: Codable {
-        let title, description: String
-        let thank_email_above_threshold: String?
-        let thank_email_below_threshold: String?
-        let is_active: Bool
-        let cover_image_url: String
-        let created_at, active_at: String
-        let inactive_at: String?
-        let survey_type: String
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        type <- map["type"]
+        attributes <- map["attributes"]
+        relationships <- map["relationships"]
     }
     
-    struct Relationships: Decodable {
-        let questions: Questions
+    class Attributes: Mappable {
+        var title, description: String?
+        var thankEmailAboveThreshold: String?
+        var thankEmailBelowThreshold: String?
+        var isActive: Bool?
+        var coverImageUrl: String?
+        var createdAt, activeAt: String?
+        var inactiveAt: String?
+        var surveyType: String?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            title <- map["title"]
+            description <- map["description"]
+            thankEmailAboveThreshold <- map["thank_email_above_threshold"]
+            thankEmailBelowThreshold <- map["thank_email_below_threshold"]
+            isActive <- map["is_active"]
+            coverImageUrl <- map["cover_image_url"]
+            createdAt <- map["created_at"]
+            activeAt <- map["active_at"]
+            inactiveAt <- map["inactive_at"]
+            surveyType <- map["survey_type"]
+        }
     }
     
-    struct Questions: Decodable {
-        let data: [QuestionsDetail]
+    class Relationships: Mappable {
+        var questions: Questions?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            questions <- map["questions"]
+        }
     }
     
-    struct QuestionsDetail: Decodable {
-        let id: String
-        let type: String
+    class Questions: Mappable {
+        var data: [QuestionsDetail]?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            data <- map["data"]
+        }
+    }
+    
+    class QuestionsDetail: Mappable {
+        var id: String?
+        var type: String?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            id <- map["id"]
+            type <- map["type"]
+        }
     }
 }
 
-struct MetaDTO: Decodable {
-    let page, pages, page_size, records: Int
+class MetaDTO: Mappable {
+    var page, pages, pageSize, records: Int?
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        page <- map["page"]
+        pages <- map["pages"]
+        pageSize <- map["page_size"]
+        records <- map["records"]
+    }
 }
 
 extension DataSurveyDTO {
     func toDataSurvey() -> DataSurvey {
-        return DataSurvey(data: data.map { $0.toSurvey() },
-                          meta: meta.toMeta())
+        let surveys = data?
+            .compactMap({ surveyDTO in
+                return surveyDTO.toSurvey()
+            }) ?? []
+        return DataSurvey(data: surveys,
+                          meta: meta?.toMeta())
     }
 }
 
 extension MetaDTO {
     func toMeta() -> DataSurvey.Meta {
-        return DataSurvey.Meta(page: page,
-                               pages: pages,
-                               page_size: page_size,
-                               records: records)
+        return DataSurvey.Meta(page: page ?? 0,
+                               pages: pages ?? 0,
+                               pageSize: pageSize ?? 0,
+                               records: records ?? 0)
     }
 }
 
 extension SurveyDTO {
     func toSurvey() -> Survey {
-        return Survey(id: id,
-                      type: type,
-                      attributes: attributes.toSurveyAttributes())
+        let surveyAttributes = attributes?.toSurveyAttributes() ?? Survey.Attributes(title: "", description: "", coverImageUrl: "")
+        return Survey(id: id ?? "",
+                      type: type ?? "",
+                      attributes: surveyAttributes)
     }
 }
 
 extension SurveyDTO.Attributes {
     func toSurveyAttributes() -> Survey.Attributes {
-        return Survey.Attributes(title: title,
-                                 description: description,
-                                 cover_image_url: cover_image_url)
+        return Survey.Attributes(title: title ?? "",
+                                 description: description ?? "",
+                                 coverImageUrl: coverImageUrl ?? "")
     }
 }

@@ -6,7 +6,8 @@
 //
 
 import RxSwift
+import ObjectMapper
 
 protocol NimbleNetworkService {
-    func request<T: Decodable>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T>
+    func request<T: Mappable>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T>
 }

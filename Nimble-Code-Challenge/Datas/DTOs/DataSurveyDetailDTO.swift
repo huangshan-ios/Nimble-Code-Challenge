@@ -5,114 +5,182 @@
 //  Created by Son Hoang on 01/07/2022.
 //
 
-import Foundation
+import ObjectMapper
 
-struct DataSurveyDetailDTO: Decodable {
-    let data: SurveyDetailDTO
-    let included: [IncludedDTO]
-}
-
-struct SurveyDetailDTO: Decodable {
-    let id, type: String
-    let attributes: Attributes
-    let relationships: Relationships
+class DataSurveyDetailDTO: Mappable {
+    var data: SurveyDetailDTO?
+    var included: [IncludedDTO]?
     
-    struct Attributes: Decodable {
-        let title, description: String
-        let thank_email_above_threshold: String?
-        let thank_email_below_threshold: String?
-        let isActive: Bool
-        let cover_image_url: String
-        let created_at, active_at: String
-        let inactive_at: String??
-        let survey_type: String
-    }
+    required init?(map: Map) {}
     
-    struct Relationships: Decodable {
-        let questions: Questions
-    }
-    
-    struct Questions: Decodable {
-        let data: [QuestionDataDetail]
-    }
-    
-    struct QuestionDataDetail: Decodable {
-        let id: String
-        let type: String
+    func mapping(map: Map) {
+        data <- map["data"]
+        included <- map["included"]
     }
 }
 
-struct IncludedDTO: Decodable {
-    let id: String
-    let type: String
-    let attributes: Attributes
-    let relationships: Relationships?
+class SurveyDetailDTO: Mappable {
+    var id, type: String?
+    var attributes: Attributes?
+    var data: Relationships?
     
-    struct Attributes: Codable {
-        let text, helpText: String?
-        let displayOrder: Int
-        let shortText: String
-        let pick: String?
-        let displayType: String
-        let isMandatory: Bool
-        let correctAnswerID: String?
-        let facebookProfile: String?
-        let twitterProfile: String?
-        let imageURL: String?
-        let coverImageURL: String?
-        let coverImageOpacity: Double?
-        let coverBackgroundColor: String?
-        let isShareableOnFacebook, isShareableOnTwitter: Bool?
-        let fontFace, fontSize: String?
-        let tagList: String?
-        let inputMaskPlaceholder: String?
-        let isCustomerFirstName, isCustomerLastName, isCustomerTitle, isCustomerEmail: Bool?
-        let promptCustomAnswer: Bool?
-        let weight: String?
-        let inputMask: String?
-        let dateConstraint, defaultValue: String?
-        let responseClass: String?
-        let referenceIdentifier: String?
-        let score: Int?
-        let alerts: [String]?
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        type <- map["type"]
+        attributes <- map["data"]
+        data <- map["data"]
+    }
+    
+    class Attributes: Mappable {
+        var title, description: String?
+        var thankEmailAboveThreshold: String?
+        var thankEmailBelowThreshold: String?
+        var isActive: Bool?
+        var coverTmageUrl: String?
+        var createdAt, activeAt: String?
+        var inactiveAt: String?
+        var surveyType: String?
         
-        enum CodingKeys: String, CodingKey {
-            case text
-            case helpText = "help_text"
-            case displayOrder = "display_order"
-            case shortText = "short_text"
-            case pick
-            case displayType = "display_type"
-            case isMandatory = "is_mandatory"
-            case correctAnswerID = "correct_answer_id"
-            case facebookProfile = "facebook_profile"
-            case twitterProfile = "twitter_profile"
-            case imageURL = "image_url"
-            case coverImageURL = "cover_image_url"
-            case coverImageOpacity = "cover_image_opacity"
-            case coverBackgroundColor = "cover_background_color"
-            case isShareableOnFacebook = "is_shareable_on_facebook"
-            case isShareableOnTwitter = "is_shareable_on_twitter"
-            case fontFace = "font_face"
-            case fontSize = "font_size"
-            case tagList = "tag_list"
-            case inputMaskPlaceholder = "input_mask_placeholder"
-            case isCustomerFirstName = "is_customer_first_name"
-            case isCustomerLastName = "is_customer_last_name"
-            case isCustomerTitle = "is_customer_title"
-            case isCustomerEmail = "is_customer_email"
-            case promptCustomAnswer = "prompt_custom_answer"
-            case weight
-            case inputMask = "input_mask"
-            case dateConstraint = "date_constraint"
-            case defaultValue = "default_value"
-            case responseClass = "response_class"
-            case referenceIdentifier = "reference_identifier"
-            case score, alerts
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            title <- map["title"]
+            description <- map["description"]
+            thankEmailAboveThreshold <- map["thank_email_above_threshold"]
+            thankEmailBelowThreshold <- map["thank_email_below_threshold"]
+            isActive <- map["isActive"]
+            coverTmageUrl <- map["cover_image_url"]
+            createdAt <- map["created_at"]
+            activeAt <- map["active_at"]
+            inactiveAt <- map["inactive_at"]
+            surveyType <- map["survey_type"]
         }
     }
     
-    struct Relationships: Decodable {
-        let answers: SurveyDetailDTO.Questions
+    class Relationships: Mappable {
+        var questions: Questions?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            questions <- map["questions"]
+        }
+    }
+    
+    class Questions: Mappable {
+        var data: [QuestionDataDetail]?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            data <- map["data"]
+        }
+    }
+    
+    class QuestionDataDetail: Mappable {
+        var id: String?
+        var type: String?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            id <- map["id"]
+            type <- map["type"]
+        }
+    }
+}
+
+class IncludedDTO: Mappable {
+    var id: String?
+    var type: String?
+    var attributes: Attributes?
+    var relationships: Relationships?
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        type <- map["type"]
+        attributes <- map["id"]
+        relationships <- map["type"]
+    }
+    
+    class Attributes: Mappable {
+        var text, helpText: String?
+        var displayOrder: Int?
+        var shortText: String?
+        var pick: String?
+        var displayType: String?
+        var isMandatory: Bool?
+        var correctAnswerID: String?
+        var facebookProfile: String?
+        var twitterProfile: String?
+        var imageURL: String?
+        var coverImageURL: String?
+        var coverImageOpacity: Double?
+        var coverBackgroundColor: String?
+        var isShareableOnFacebook, isShareableOnTwitter: Bool?
+        var fontFace, fontSize: String?
+        var tagList: String?
+        var inputMaskPlaceholder: String?
+        var isCustomerFirstName, isCustomerLastName, isCustomerTitle, isCustomerEmail: Bool?
+        var promptCustomAnswer: Bool?
+        var weight: String?
+        var inputMask: String?
+        var dateConstraint, defaultValue: String?
+        var responseClass: String?
+        var referenceIdentifier: String?
+        var score: Int?
+        var alerts: [String]?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            text <- map["text"]
+            helpText <- map["help_text"]
+            displayOrder <- map["display_order"]
+            shortText <- map["short_text"]
+            pick <- map["pick"]
+            displayType <- map["display_type"]
+            isMandatory <- map["is_mandatory"]
+            correctAnswerID <- map["correct_answer_id"]
+            facebookProfile <- map["facebook_profile"]
+            twitterProfile <- map["twitter_profile"]
+            imageURL <- map["image_url"]
+            coverImageURL <- map["cover_image_url"]
+            coverImageOpacity <- map["cover_image_opacity"]
+            coverBackgroundColor <- map["cover_background_color"]
+            isShareableOnFacebook <- map["is_shareable_on_facebook"]
+            isShareableOnTwitter <- map["is_shareable_on_twitter"]
+            fontFace <- map["font_face"]
+            fontSize <- map["font_size"]
+            tagList <- map["tag_list"]
+            inputMaskPlaceholder <- map["input_mask_placeholder"]
+            isCustomerFirstName <- map["is_customer_first_name"]
+            isCustomerLastName <- map["is_customer_last_name"]
+            isCustomerTitle <- map["is_customer_title"]
+            isCustomerEmail <- map["is_customer_email"]
+            promptCustomAnswer <- map["prompt_custom_answer"]
+            weight <- map["weight"]
+            inputMask <- map["input_mask"]
+            dateConstraint <- map["date_constraint"]
+            defaultValue <- map["default_value"]
+            responseClass <- map["response_class"]
+            referenceIdentifier <- map["reference_identifier"]
+            score <- map["score"]
+            alerts <- map["alerts"]
+        }
+    }
+    
+    class Relationships: Mappable {
+        var answers: SurveyDetailDTO.Questions?
+        
+        required init?(map: Map) {}
+        
+        func mapping(map: Map) {
+            answers <- map["answers"]
+        }
     }
 }

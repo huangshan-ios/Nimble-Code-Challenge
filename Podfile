@@ -9,6 +9,7 @@ MOYA_VERSION = '~> 15.0'
 NUKE_VERSION = '~> 9.0'
 SNAPKIT_VERSION = '~> 5.0.0'
 SKELETON_VERSION = '1.29.2'
+OBJECTMAPPER_VERSION = '~> 3.5'
 
 def project_dependency
   pod 'RxSwift', RXSWIFT_VERSION
@@ -18,6 +19,7 @@ def project_dependency
   pod 'Nuke', NUKE_VERSION
   pod 'SnapKit', SNAPKIT_VERSION
   pod 'SkeletonView', SKELETON_VERSION
+  pod 'ObjectMapper', OBJECTMAPPER_VERSION
 end
 
 def test_depdendency 

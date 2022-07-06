@@ -10,7 +10,7 @@ import RxSwift
 protocol CredentialRepository {
     var networkService: NimbleNetworkService { get }
     
-    func login(with email: String, and password: String) -> Single<CredentialDTO>
+    func login(with email: String, and password: String) -> Single<CredentialDTO?>
 }
 
 final class CredentialRepositoryImpl: CredentialRepository {
@@ -20,7 +20,7 @@ final class CredentialRepositoryImpl: CredentialRepository {
         self.networkService = networkService
     }
     
-    func login(with email: String, and password: String) -> Single<CredentialDTO> {
+    func login(with email: String, and password: String) -> Single<CredentialDTO?> {
         return networkService.request(.login(email, password), type: DataResponseDTO.self)
             .map({ $0.data })
     }

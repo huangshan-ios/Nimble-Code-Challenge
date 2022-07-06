@@ -5,34 +5,39 @@
 //  Created by Son Hoang on 27/06/2022.
 //
 
-import Foundation
+import ObjectMapper
 
-struct APIErrorDTO: Error, Decodable {
+class APIErrorDTO: Error, Mappable {
     static let somethingWentWrong = APIErrorDTO(errors: [APIErrorDetail.somethingWentWrong])
     
     var httpStatusCode: Int?
-    let errors: [APIErrorDetail]
+    var errors: [APIErrorDetail]?
     
-    struct APIErrorDetail: Decodable {
+    init(errors: [APIErrorDetail]) {
+        self.errors = errors
+    }
+    
+    required init?(map: Map) {}
+    
+    func mapping(map: Map) {
+        errors <- map["errors"]
+    }
+    
+    class APIErrorDetail: Mappable {
         static let somethingWentWrong = APIErrorDetail(source: "local",
                                                        detail: "Something went wrong",
                                                        code: "something_went_wrong")
         
-        let source: String?
-        let detail: String
-        let code: String
+        var source: String?
+        var detail: String?
+        var code: String?
         
-        enum CodingKeys: String, CodingKey {
-            case source
-            case detail
-            case code
-        }
+        required init?(map: Map) {}
         
-        init(from decoder: Decoder) throws {
-            let container = try decoder.container(keyedBy: CodingKeys.self)
-            source = try container.decodeIfPresent(String.self, forKey: .source)
-            detail = try container.decode(String.self, forKey: .detail)
-            code = try container.decode(String.self, forKey: .code)
+        func mapping(map: Map) {
+            source <- map["source"]
+            detail <- map["detail"]
+            code <- map["code"]
         }
         
         init(source: String, detail: String, code: String) {

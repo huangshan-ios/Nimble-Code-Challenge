@@ -13,6 +13,6 @@ struct Survey {
     
     struct Attributes {
         let title, description: String
-        let cover_image_url: String
+        let coverImageUrl: String
     }
 }

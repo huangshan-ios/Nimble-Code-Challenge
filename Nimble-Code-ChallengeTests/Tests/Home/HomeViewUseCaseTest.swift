@@ -45,7 +45,7 @@ class HomeViewUseCaseTest: XCTestCase {
         let result = try useCase.fetchSurveys(in: 0, with: 5)
             .catch({ error in
                 let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.detail.elementsEqual("Something went wrong") {
+                if !error.errors!.isEmpty && error.errors!.first!.detail!.elementsEqual("Something went wrong") {
                     return .just(DataSurvey(data: [], meta: nil))
                 }
                 return .never()

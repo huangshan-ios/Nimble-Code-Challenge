@@ -33,7 +33,7 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
         }
     }
     
-    func login(with email: String, and password: String) -> Single<CredentialDTO> {
+    func login(with email: String, and password: String) -> Single<CredentialDTO?> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
             return .error(APIErrorDTO.somethingWentWrong)
         }
@@ -57,5 +57,4 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
             }
         }
     }
-    
 }

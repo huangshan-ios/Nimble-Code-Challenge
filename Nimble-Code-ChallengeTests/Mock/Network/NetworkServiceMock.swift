@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import ObjectMapper
 
 @testable import Nimble_Code_Challenge
 
@@ -15,7 +16,7 @@ final class NetworkServiceMock: NimbleNetworkService, Mockable {
     
     typealias MockType = Result<DataTypeMock, ErrorTypeMock>
     
-    func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Decodable {
+    func request<T>(_ request: NimbleSurveyAPI, type: T.Type) -> Single<T> where T: Mappable {
         guard let mock = listMock.first else {
             return .error(APIErrorDTO.somethingWentWrong)
         }

@@ -135,7 +135,7 @@ class LoginViewModelTest: XCTestCase {
         
         output.error
             .map({ error in
-                return !(error?.toAPIError().errors.isEmpty ?? false)
+                return !(error?.toAPIError().errors!.isEmpty ?? false)
             })
             .emit(to: isLoginError)
             .disposed(by: disposeBag)

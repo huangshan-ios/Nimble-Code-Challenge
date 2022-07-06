@@ -18,7 +18,7 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        if UserSession.shared.getCredential().attributes.access_token.isEmpty {
+        if UserSession.shared.getCredential().attributes.accessToken.isEmpty {
             setRootToLogin()
         } else {
             setRootToHome()

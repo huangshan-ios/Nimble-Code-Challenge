@@ -28,14 +28,15 @@ class CredentialRepositoryTest: XCTestCase {
     
     func testLoginSuccess() throws {
         networkService.listMock = [.success(.json("login_success"))]
-        
+
         let result = try repository.login(with: "dev@nimblehq.co", and: "12345678")
+            .compactMap({ $0 })
             .toBlocking()
             .first()
-        
-        XCTAssertEqual(result!.id, "10")
+
+        XCTAssertEqual(result!.id!, "10")
     }
-    
+
     func testLoginFailed() throws {
         networkService.listMock = [.failure(.json("login_incorect_password"))]
         
@@ -43,7 +44,7 @@ class CredentialRepositoryTest: XCTestCase {
             .map({ _ in return true })
             .catch({ error in
                 let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.code.elementsEqual("invalid_email_or_password") {
+                if !error.errors!.isEmpty && error.errors!.first!.code!.elementsEqual("invalid_email_or_password") {
                     return .just(true)
                 }
                 return .just(false)

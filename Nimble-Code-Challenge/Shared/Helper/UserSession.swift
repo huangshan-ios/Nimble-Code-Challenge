@@ -31,8 +31,8 @@ extension UserSession {
             return credential
         }
         
-        let credentialDTO = try? JSONDecoder().decode(CredentialDTO.self, from: data)
-        credential = credentialDTO?.toCredential() ?? Credential()
+        let credentialDTO = try? JSONDecoder().decode(Credential.self, from: data)
+        credential = credentialDTO ?? Credential()
         
         return credential
     }
