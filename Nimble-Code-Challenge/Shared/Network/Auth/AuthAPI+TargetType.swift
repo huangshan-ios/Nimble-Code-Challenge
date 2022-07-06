@@ -13,7 +13,7 @@ extension AuthAPI: TargetType {
     }
     
     var path: String {
-        return "oauth/token"
+        return AppConstants.URL.authen
     }
     
     var method: Moya.Method {

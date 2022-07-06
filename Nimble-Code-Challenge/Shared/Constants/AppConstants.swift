@@ -14,4 +14,9 @@ struct AppConstants {
     static let clientSecret: String = AppConfigurationHelper.shared.value(for: "CLIENT_SECRET") ?? ""
     static let clientId: String = AppConfigurationHelper.shared.value(for: "CLIENT_ID") ?? ""
     
+    struct URL {
+        static let authen = "oath/token"
+        static let surveys = "surveys"
+    }
+    
 }

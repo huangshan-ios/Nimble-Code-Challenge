@@ -15,11 +15,11 @@ extension NimbleSurveyAPI: TargetType {
     var path: String {
         switch self {
         case .login:
-            return "oauth/token"
+            return AppConstants.URL.authen
         case .surveys:
-            return "surveys"
+            return AppConstants.URL.surveys
         case .surveyDetail(let id):
-            return "surveys/\(id)"
+            return "\(AppConstants.URL.surveys)/\(id)"
         }
     }
     
@@ -41,10 +41,10 @@ extension NimbleSurveyAPI: TargetType {
             paramaters["grant_type"] = "password"
             paramaters["email"] = email
             paramaters["password"] = password
-        case .surveys, .surveyDetail:
+            return paramaters
+        default:
             return paramaters
         }
-        return paramaters
     }
     
     var parameterEncoding: ParameterEncoding {
@@ -56,17 +56,7 @@ extension NimbleSurveyAPI: TargetType {
     }
     
     var headers: [String: String]? {
-        var headers: [String: String] = [:]
-        switch self {
-        case .login:
-            return headers
-        default:
-            let credential = UserSession.shared.getCredential()
-            if !credential.attributes.access_token.isEmpty {
-                headers["Authorization"] = "\(credential.attributes.token_type) \(credential.attributes.access_token)"
-            }
-        }
-        return headers
+        return [:]
     }
     
 }
