@@ -40,16 +40,9 @@ xcuserdata
 #
 Pods/
 
-# Carthage
-#
-# Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
+# Gem
+Gemfile.lock
 
-Carthage/
-
-/.bundle
-/vendor/bundle
-
+# Fastlane
 fastlane/report.xml
-fastlane/screenshots
-fastlane/installer
+fastlane/test_output/*
