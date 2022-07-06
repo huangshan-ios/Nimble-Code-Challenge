@@ -27,7 +27,7 @@ platform :ios do
     #Remove the previous report
     sh("rm -rf test_output")
 
-    #Cause the scan doesn't show the coverage
+    #Cause the doesn't show the coverage
     xcov(workspace: "Nimble-Code-Challenge.xcworkspace", scheme: "Nimble-Code-Challenge", output_directory: "./fastlane/test_output/", minimum_coverage_percentage: 50.0, only_project_targets: true)
   end
 end
