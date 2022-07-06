@@ -21,7 +21,7 @@ class HomeViewModelTest: XCTestCase {
     
     private var output: HomeViewModel.Output!
     
-    private let fetchSurveysTrigger = PublishSubject<Void>()
+    private let fetchSurveysTrigger = PublishSubject<SurveyFetchType>()
     private let swipeToIndexTrigger = PublishSubject<Int>()
     
     private var scheduler: TestScheduler!
@@ -44,8 +44,10 @@ class HomeViewModelTest: XCTestCase {
     func testFetchSurveysSuccess() {
         let surveysObserver = scheduler.createObserver([Survey].self)
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
-        useCase.listMock = [.surveys(.success(surveys))]
+        useCase.listMock = [.surveys(.success(dataSurvey))]
         
         output.surveys
             .drive(surveysObserver)
@@ -55,7 +57,7 @@ class HomeViewModelTest: XCTestCase {
             .drive(currentSurveyObserver)
             .disposed(by: disposeBag)
         
-        scheduler.createHotObservable([.next(0, ())])
+        scheduler.createHotObservable([.next(0, .reload)])
             .bind(to: fetchSurveysTrigger)
             .disposed(by: disposeBag)
         
@@ -75,6 +77,43 @@ class HomeViewModelTest: XCTestCase {
         XCTAssertEqual(surveysCountEvent, [5])
     }
     
+    func testLoadMoreSurveysSuccess() {
+        let surveysObserver = scheduler.createObserver([Survey].self)
+        let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let dataSurvey = DataSurvey(data: surveys, meta: meta)
+        
+        useCase.listMock = [.surveys(.success(dataSurvey))]
+        
+        output.surveys
+            .drive(surveysObserver)
+            .disposed(by: disposeBag)
+        
+        output.currentSurvey
+            .drive(currentSurveyObserver)
+            .disposed(by: disposeBag)
+        
+        scheduler.createHotObservable([.next(0, .reload),
+                                       .next(10, .loadMore)])
+            .bind(to: fetchSurveysTrigger)
+            .disposed(by: disposeBag)
+        
+        scheduler.start()
+        
+        let surveysCountEvent = surveysObserver.events
+            .compactMap({ event -> Int? in
+                return event.value.element?.count
+            })
+        
+        let currentSurveyEvent = currentSurveyObserver.events
+            .compactMap({ event -> Survey? in
+                return event.value.element?.survey
+            })
+        
+        XCTAssertEqual(currentSurveyEvent.first!.id, surveys[0].id)
+        XCTAssertEqual(surveysCountEvent, [5, 10])
+    }
+    
     func testFetchSurveysError() {
         let isFetchSurveysErrorObserver = scheduler.createObserver(Bool.self)
         
@@ -91,7 +130,7 @@ class HomeViewModelTest: XCTestCase {
             .emit(to: isFetchSurveysErrorObserver)
             .disposed(by: disposeBag)
         
-        scheduler.createHotObservable([.next(0, ())])
+        scheduler.createHotObservable([.next(0, .reload)])
             .bind(to: fetchSurveysTrigger)
             .disposed(by: disposeBag)
         
@@ -102,8 +141,10 @@ class HomeViewModelTest: XCTestCase {
     
     func testLoadingStates() throws {
         let loadingStatesObserver = scheduler.createObserver(Bool.self)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
-        useCase.listMock = [.surveys(.success(surveys))]
+        useCase.listMock = [.surveys(.success(dataSurvey))]
         
         output.surveys
             .drive()
@@ -113,7 +154,7 @@ class HomeViewModelTest: XCTestCase {
             .emit(to: loadingStatesObserver)
             .disposed(by: disposeBag)
         
-        scheduler.createHotObservable([.next(0, ())])
+        scheduler.createHotObservable([.next(0, .reload)])
             .bind(to: fetchSurveysTrigger)
             .disposed(by: disposeBag)
         
@@ -126,8 +167,10 @@ class HomeViewModelTest: XCTestCase {
     
     func testSwipeToNextIndex() throws {
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
-        useCase.listMock = [.surveys(.success(surveys))]
+        useCase.listMock = [.surveys(.success(dataSurvey))]
         
         output.surveys
             .drive()
@@ -137,7 +180,7 @@ class HomeViewModelTest: XCTestCase {
             .drive(currentSurveyObserver)
             .disposed(by: disposeBag)
         
-        scheduler.createHotObservable([.next(0, ())])
+        scheduler.createHotObservable([.next(0, .reload)])
             .bind(to: fetchSurveysTrigger)
             .disposed(by: disposeBag)
         
@@ -170,7 +213,7 @@ class HomeViewModelTest: XCTestCase {
     func testSwipeToPreviousIndex() throws {
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
         
-        useCase.listMock = [.surveys(.success(surveys))]
+        useCase.listMock = [.surveys(.success(DataSurvey(data: surveys, meta: nil)))]
         
         output.surveys
             .drive()
@@ -180,7 +223,7 @@ class HomeViewModelTest: XCTestCase {
             .drive(currentSurveyObserver)
             .disposed(by: disposeBag)
         
-        scheduler.createHotObservable([.next(0, ())])
+        scheduler.createHotObservable([.next(0, .reload)])
             .bind(to: fetchSurveysTrigger)
             .disposed(by: disposeBag)
         

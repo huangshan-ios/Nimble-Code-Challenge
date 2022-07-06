@@ -36,7 +36,7 @@ final class SurveyRespositoryMock: SurveyRepository, Mockable {
         }
     }
     
-    func fetchSurveys() -> Single<DataSurveyDTO> {
+    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurveyDTO> {
         guard let mock = listMock.first(where: { $0.case == .surveys }),
               case let .surveys(result) = mock
         else {

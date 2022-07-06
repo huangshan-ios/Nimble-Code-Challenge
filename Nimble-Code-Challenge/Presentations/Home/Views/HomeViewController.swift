@@ -30,12 +30,12 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     @IBOutlet weak var takeSurveyButton: UIButton!
     @IBOutlet weak var shrimerView: UIView!
     
-    private let fetchSurveysTrigger = PublishSubject<Void>()
+    private let fetchSurveysTrigger = PublishSubject<SurveyFetchType>()
     private let swipeTrigger = PublishSubject<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchSurveysTrigger.onNext(())
+        fetchSurveysTrigger.onNext(.reload)
     }
     
     override func configureUIs() {
@@ -93,16 +93,20 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
             .drive(surveyCollectionView.rx.items(dataSource: dataSource))
         
         let surveysDispo = output.surveys
-            .drive(onNext: { [weak self] surveys in
+            .withLatestFrom(fetchSurveysTrigger.asDriver(onErrorJustReturn: .reload)) { (surveys: $0, fetchType: $1) }
+            .drive(onNext: { [weak self] response in
                 guard
                     let self = self,
-                    let survey = surveys[safe: 0]
+                    let survey = response.surveys[safe: 0]
                 else {
                     return
                 }
                 self.configureSkeletonUIs(isLoading: false)
-                self.bulletsView.setNumOfBullets(surveys.count)
-                self.updateSurveyContent(survey: survey, index: 0, isReload: true)
+                self.bulletsView.setNumOfBullets(response.surveys.count)
+                
+                let isReload = response.fetchType == .reload
+                let index = isReload ? 0 : self.bulletsView.currentBullet
+                self.updateSurveyContent(survey: survey, index: index, isReload: isReload)
             })
         
         let currentSurveyDispo = output.currentSurvey
@@ -147,11 +151,17 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         
         let refreshTriggerDispo = surveyCollectionView.rx
             .contentOffset
-            .flatMap({ contentOffset -> Observable<Void> in
-                guard contentOffset.x < -50 else {
-                    return .empty()
+            .compactMap({ [weak self] contentOffset -> SurveyFetchType? in
+                guard let self = self else {
+                    return nil
                 }
-                return .just(())
+                if contentOffset.x < -50 {
+                    return .reload
+                }
+                if contentOffset.x + UIScreen.main.bounds.width > self.surveyCollectionView.contentSize.width + 50 {
+                    return .loadMore
+                }
+                return nil
             }).bind(to: fetchSurveysTrigger)
         
         let takeSurveyButtonDispo = takeSurveyButton.rx.tap
