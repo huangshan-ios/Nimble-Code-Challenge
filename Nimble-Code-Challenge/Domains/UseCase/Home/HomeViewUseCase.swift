@@ -10,7 +10,7 @@ import RxSwift
 protocol HomeViewUseCase {
     var surveyRepository: SurveyRepository { get }
     
-    func fetchSurveys() -> Single<[Survey]>
+    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurvey>
 }
 
 final class HomeViewUseCaseImpl: HomeViewUseCase {
@@ -20,10 +20,10 @@ final class HomeViewUseCaseImpl: HomeViewUseCase {
         self.surveyRepository = surveyRepository
     }
     
-    func fetchSurveys() -> Single<[Survey]> {
-        return surveyRepository.fetchSurveys()
+    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurvey> {
+        return surveyRepository.fetchSurveys(in: page, with: size)
             .map { response in
-                return response.data.map { $0.toSurvey() }
+                return response.toDataSurvey()
             }
     }
 }

@@ -8,10 +8,15 @@
 import RxSwift
 import RxCocoa
 
+enum SurveyFetchType {
+    case reload
+    case loadMore
+}
+
 final class HomeViewModel: ViewModelType {
     
     struct Input {
-        let fetchSurveys: Observable<Void>
+        let fetchSurveys: Observable<SurveyFetchType>
         let swipeToIndex: Observable<Int>
     }
     
@@ -36,27 +41,49 @@ final class HomeViewModel: ViewModelType {
         
         var totalSurveys: [Survey] = []
         
+        let numberItemPerPage: Int = 5
+        var currentRequestPage: Int = 0
+        var maxPage: Int?
+        
         let reloadSurveys = NotificationCenter.default.rx
             .notification(.loginSuccess, object: nil)
-            .map { _ in }
+            .map({ _ -> SurveyFetchType in
+                return .reload
+            })
         
         let fetchTrigger = Observable.merge(input.fetchSurveys, reloadSurveys)
-            .withLatestFrom(activityIndicator)
-            .flatMap { [weak self] isLoading -> Observable<[Survey]> in
-                guard let self = self, !isLoading else { return .empty() }
-                return self.useCase.fetchSurveys()
-                    .trackActivity(activityIndicator)
-                    .catch({ error in
-                        errorTrigger.accept(error)
-                        return .empty()
-                    })
-            }.do(onNext: { surveys in
-                totalSurveys = surveys
-                if let survey = surveys[safe: 0] {
-                    surveyTrigger.onNext((survey: survey,
-                                          index: 0))
+            .withLatestFrom(activityIndicator) { (fetchType: $0, isLoading: $1) }
+            .flatMap { [weak self] input -> Observable<[Survey]> in
+                guard
+                    !input.isLoading,
+                    let self = self,
+                    let pageCalculated = self.calculatePage(with: currentRequestPage,
+                                                              maxPage: maxPage,
+                                                              fetchType: input.fetchType)
+                else {
+                    return .empty()
                 }
-            })
+                
+                maxPage = pageCalculated.maxPage
+                currentRequestPage = pageCalculated.requestPage
+                
+                return self.fetchSurveys(in: currentRequestPage, with: numberItemPerPage,
+                                         errorTrigger: errorTrigger,
+                                         activityIndicator: activityIndicator)
+                .map { [weak self] dataSurvey in
+                    guard let self = self else {
+                        return totalSurveys
+                    }
+                    
+                    maxPage = dataSurvey.meta?.pages
+                    let surveys = self.calculateSurveys(currentSurveys: totalSurveys,
+                                                        loadedSurveys: dataSurvey.data,
+                                                        surveyTrigger: surveyTrigger,
+                                                        fetchType: input.fetchType)
+                    totalSurveys = surveys
+                    return surveys
+                }
+            }
         
         let swipeToIndexTrigger = input.swipeToIndex
             .distinctUntilChanged()
@@ -77,5 +104,59 @@ final class HomeViewModel: ViewModelType {
             currentSurvey: currentSurveyTrigger
                 .asDriver(onErrorJustReturn: (survey: nil, index: 0))
         )
+    }
+}
+
+extension HomeViewModel {
+    private func calculatePage(
+        with page: Int,
+        maxPage: Int?,
+        fetchType: SurveyFetchType
+    ) -> (requestPage: Int, maxPage: Int?)? {
+        switch fetchType {
+        case .reload:
+            return (requestPage: 0, maxPage: nil)
+        case .loadMore:
+            if let maxPage = maxPage, page < maxPage {
+                return (requestPage: page + 1, maxPage: nil)
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    private func calculateSurveys(
+        currentSurveys: [Survey],
+        loadedSurveys: [Survey],
+        surveyTrigger: PublishSubject<(survey: Survey?, index: Int)>,
+        fetchType: SurveyFetchType
+    ) -> [Survey] {
+        var surveys = currentSurveys
+        
+        switch fetchType {
+        case .reload:
+            surveys = loadedSurveys
+            if let survey = surveys[safe: 0] {
+                surveyTrigger.onNext((survey: survey,
+                                      index: 0))
+            }
+        case .loadMore:
+            surveys.append(contentsOf: loadedSurveys)
+        }
+        
+        return surveys
+    }
+    
+    private func fetchSurveys(
+        in page: Int, with size: Int,
+        errorTrigger: PublishRelay<Error?>,
+        activityIndicator: ActivityIndicator
+    ) -> Observable<DataSurvey> {
+        return useCase.fetchSurveys(in: page, with: size)
+            .trackActivity(activityIndicator)
+            .catch({ error in
+                errorTrigger.accept(error)
+                return .empty()
+            })
     }
 }

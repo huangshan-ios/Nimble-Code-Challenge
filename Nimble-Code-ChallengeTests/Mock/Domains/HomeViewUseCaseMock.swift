@@ -19,7 +19,7 @@ final class HomeViewUseCaseMock: HomeViewUseCase, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case surveys(Result<[Survey], Error>)
+        case surveys(Result<DataSurvey, Error>)
         
         enum Case {
             case surveys
@@ -32,7 +32,7 @@ final class HomeViewUseCaseMock: HomeViewUseCase, Mockable {
         }
     }
     
-    func fetchSurveys() -> Single<[Survey]> {
+    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurvey> {
         guard let mock = listMock.first(where: { $0.case == .surveys }) else {
             return .error(APIErrorDTO.somethingWentWrong)
         }

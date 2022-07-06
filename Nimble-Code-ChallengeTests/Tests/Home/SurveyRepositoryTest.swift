@@ -29,7 +29,7 @@ class SurveyRepositoryTest: XCTestCase {
     func testFetchSurveysSuccess() throws {
         networkService.listMock = [.success(.json("fetch_surveys_success"))]
         
-        let result = try repository.fetchSurveys()
+        let result = try repository.fetchSurveys(in: 0, with: 5)
             .toBlocking()
             .first()
         
@@ -41,7 +41,7 @@ class SurveyRepositoryTest: XCTestCase {
     func testFetchSurveysFailed() throws {
         networkService.listMock = [.failure(.json("fetch_surveys_success_invalid_page_number"))]
         
-        let result = try repository.fetchSurveys()
+        let result = try repository.fetchSurveys(in: 0, with: 5)
             .map({ _ in return true })
             .catch({ error in
                 return .just(true)

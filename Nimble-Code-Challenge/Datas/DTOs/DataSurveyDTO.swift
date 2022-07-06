@@ -9,7 +9,7 @@ import Foundation
 
 struct DataSurveyDTO: Decodable {
     let data: [SurveyDTO]
-    let meta: MetaDTO?
+    let meta: MetaDTO
     
     enum CodingKeys: String, CodingKey {
         case data
@@ -19,10 +19,10 @@ struct DataSurveyDTO: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         data = try container.decode([SurveyDTO].self, forKey: .data)
-        meta = try container.decodeIfPresent(MetaDTO.self, forKey: .meta)
+        meta = try container.decode(MetaDTO.self, forKey: .meta)
     }
     
-    init(data: [SurveyDTO], meta: MetaDTO?) {
+    init(data: [SurveyDTO], meta: MetaDTO) {
         self.data = data
         self.meta = meta
     }
@@ -62,12 +62,19 @@ struct MetaDTO: Decodable {
     let page, pages, page_size, records: Int
 }
 
+extension DataSurveyDTO {
+    func toDataSurvey() -> DataSurvey {
+        return DataSurvey(data: data.map { $0.toSurvey() },
+                          meta: meta.toMeta())
+    }
+}
+
 extension MetaDTO {
-    func toMeta() -> Meta {
-        return Meta(page: page,
-                    pages: pages,
-                    page_size: page_size,
-                    records: records)
+    func toMeta() -> DataSurvey.Meta {
+        return DataSurvey.Meta(page: page,
+                               pages: pages,
+                               page_size: page_size,
+                               records: records)
     }
 }
 
