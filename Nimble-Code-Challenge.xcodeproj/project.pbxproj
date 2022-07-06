@@ -18,6 +18,7 @@
 		F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F79286C50BE00523A2A /* Error+Extensions.swift */; };
 		F7026F7E286D6F9800523A2A /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */; };
 		F7026F82286D837A00523A2A /* NotificationName+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7026F81286D837A00523A2A /* NotificationName+Extensions.swift */; };
+		F70BE035287549D200214131 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F70BE034287549D200214131 /* UIImage+Extensions.swift */; };
 		F71F86122865608800767F6E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F71F86112865608800767F6E /* AppDelegate.swift */; };
 		F71F861B2865608900767F6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F71F861A2865608900767F6E /* Assets.xcassets */; };
 		F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F71F861C2865608900767F6E /* LaunchScreen.storyboard */; };
@@ -113,6 +114,7 @@
 		F7026F79286C50BE00523A2A /* Error+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Extensions.swift"; sourceTree = "<group>"; };
 		F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		F7026F81286D837A00523A2A /* NotificationName+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Extensions.swift"; sourceTree = "<group>"; };
+		F70BE034287549D200214131 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		F71F860E2865608800767F6E /* Nimble-Code-Challenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Nimble-Code-Challenge.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F71F86112865608800767F6E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F71F861A2865608900767F6E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 				F7EFC0D8286CC93600177139 /* Array+Extensions.swift */,
 				F7026F7D286D6F9800523A2A /* UILabel+Extensions.swift */,
 				F7026F81286D837A00523A2A /* NotificationName+Extensions.swift */,
+				F70BE034287549D200214131 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -918,6 +921,7 @@
 				F779C3112869AC190046DF5F /* UserSession.swift in Sources */,
 				F779C30F2869AA1E0046DF5F /* IndicatorLoader.swift in Sources */,
 				F7EFC0DB286CCA1C00177139 /* BulletsView.swift in Sources */,
+				F70BE035287549D200214131 /* UIImage+Extensions.swift in Sources */,
 				F7026F6B286C3B4300523A2A /* BaseService.swift in Sources */,
 				F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */,
 				F7664AA1286F33DE00E06652 /* SurveyDetailViewUseCase.swift in Sources */,

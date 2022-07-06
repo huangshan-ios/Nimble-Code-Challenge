@@ -25,7 +25,16 @@ class SurveyImageCell: UICollectionViewCell {
             priority: .high
         )
         
-        Nuke.loadImage(with: request, into: backgroundImage)
+        Nuke.loadImage(with: request, into: backgroundImage) { [weak self] result in
+            guard
+                let self = self,
+                case let .success(response) = result
+            else {
+                return
+            }
+            let improveImage = response.image.resize(size: UIScreen.main.bounds.size)
+            self.backgroundImage.image = improveImage
+        }
     }
 
 }
