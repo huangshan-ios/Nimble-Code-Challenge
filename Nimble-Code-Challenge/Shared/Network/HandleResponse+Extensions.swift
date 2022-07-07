@@ -7,24 +7,32 @@
 
 import Moya
 import RxSwift
+import JSONAPIMapper
 
 extension PrimitiveSequence where Trait == SingleTrait, Element == Response {
     func handleResponse() -> Single<Element> {
         return flatMap { response in
-            if let credential = try? response.map(DataResponseDTO<CredentialDTO>.self) {
-                UserSession.shared.setCredential(credential.data.toCredential())
+            
+            if let credentialDTO = try? JSONAPIDecoder().decode(CredentialDTO.self, from: response.data) {
+                UserSession.shared.setCredential(credentialDTO.toCredential())
             }
             
             if (200 ... 299) ~= response.statusCode {
                 return .just(response)
             }
             
-            if var error = try? response.map(APIErrorDTO.self) {
-                error.httpStatusCode = response.statusCode
-                return .error(error)
+            do {
+                let _ = try JSONAPIDecoder().decode(JSONAPIObject.self, from: response.data)
+            } catch let error {
+                if let errors = error as? [JSONAPIError], let error = errors.first {
+                    let apiError = APIError(statusCode: response.statusCode,
+                                            detail: error.detail ?? "",
+                                            code: error.code ?? "")
+                    return .error(apiError)
+                }
             }
             
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
     }
 }

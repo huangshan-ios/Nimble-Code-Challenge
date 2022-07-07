@@ -8,11 +8,5 @@
 import Foundation
 
 struct Survey {
-    let id, type: String
-    let attributes: Attributes
-    
-    struct Attributes {
-        let title, description: String
-        let coverImageUrl: String
-    }
+    let id, type, title, description, coverImageUrl: String
 }

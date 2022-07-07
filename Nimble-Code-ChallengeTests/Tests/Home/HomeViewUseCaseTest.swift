@@ -28,7 +28,7 @@ class HomeViewUseCaseTest: XCTestCase {
     }
     
     func testFetchSurveysSuccess() throws {
-        repository.listMock = [.surveys(.success(.json("fetch_surveys_success")))]
+        repository.listMock = [.surveys(.success("fetch_surveys_success"))]
         
         let result = try useCase.fetchSurveys(in: 0, with: 5)
             .toBlocking()
@@ -40,12 +40,11 @@ class HomeViewUseCaseTest: XCTestCase {
     }
     
     func testFetchSurveysError() throws {
-        repository.listMock = [.surveys(.failure(APIErrorDTO.somethingWentWrong))]
+        repository.listMock = [.surveys(.failure(APIError.somethingWentWrong))]
         
         let result = try useCase.fetchSurveys(in: 0, with: 5)
             .catch({ error in
-                let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.detail.elementsEqual("Something went wrong") {
+                if error.toAPIError().code.elementsEqual("something_went_wrong") {
                     return .just(DataSurvey(data: [], meta: nil))
                 }
                 return .never()

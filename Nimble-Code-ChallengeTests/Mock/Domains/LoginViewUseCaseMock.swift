@@ -35,7 +35,7 @@ final class LoginViewUseCaseMock: LoginViewUseCase, Mockable {
     
     func login(with email: String, and password: String) -> Single<Bool> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
         
         switch mock {

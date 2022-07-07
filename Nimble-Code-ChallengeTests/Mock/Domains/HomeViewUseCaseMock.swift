@@ -34,7 +34,7 @@ final class HomeViewUseCaseMock: HomeViewUseCase, Mockable {
     
     func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurvey> {
         guard let mock = listMock.first(where: { $0.case == .surveys }) else {
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
         
         switch mock {

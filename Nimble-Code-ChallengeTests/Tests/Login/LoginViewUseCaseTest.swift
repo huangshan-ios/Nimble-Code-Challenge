@@ -37,12 +37,12 @@ class LoginViewUseCaseTest: XCTestCase {
     }
     
     func testLoginError() throws {
-        repository.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
+        repository.listMock = [.login(.failure(APIError.somethingWentWrong))]
         
         let result = try useCase.login(with: "dev@nimblehq.co", and: "12345678")
             .catch({ error in
                 let error = error.toAPIError()
-                if !error.errors.isEmpty && error.errors.first!.detail.elementsEqual("Something went wrong") {
+                if error.detail.elementsEqual("Something went wrong") {
                     return .just(true)
                 }
                 return .just(false)

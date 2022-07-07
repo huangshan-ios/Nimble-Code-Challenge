@@ -15,7 +15,7 @@ final class UserSession {
     private var credential: Credential = Credential()
     
     var isLoggedIn: Bool {
-        return !getCredential().attributes.accessToken.isEmpty
+        return !getCredential().accessToken.isEmpty
     }
 
 }

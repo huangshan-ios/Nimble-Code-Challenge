@@ -57,8 +57,8 @@ class ViewControllerType<V: ViewModelType, C: CoordinatorType>: UIViewController
 
 // MARK: Private functions
 extension ViewControllerType {
-    private func showError(error: APIErrorDTO) {
-        let apiError = error.errors.first ?? APIErrorDTO.APIErrorDetail.somethingWentWrong
+    private func showError(error: APIError) {
+        let apiError = error
         let httpStatusCode = error.httpStatusCode ?? -1
         
         let alertController = UIAlertController(title: "Oops there was an error!",
