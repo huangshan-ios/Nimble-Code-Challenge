@@ -27,15 +27,15 @@ class SurveyRepositoryTest: XCTestCase {
     }
     
     func testFetchSurveysSuccess() throws {
-        networkService.listMock = [.success(.json("fetch_surveys_success"))]
+        networkService.listMock = [.success("fetch_surveys_success")]
         
         let result = try repository.fetchSurveys(in: 0, with: 5)
             .toBlocking()
             .first()
         
         XCTAssertNotNil(result)
-        XCTAssertEqual(result?.data.count ?? 0, 2)
-        XCTAssertEqual(result?.data[0].id, "d5de6a8f8f5f1cfe51bc")
+        XCTAssertEqual(result?.0.count ?? 0, 2)
+        XCTAssertEqual(result?.0[0].id, "d5de6a8f8f5f1cfe51bc")
     }
     
     func testFetchSurveysFailed() throws {

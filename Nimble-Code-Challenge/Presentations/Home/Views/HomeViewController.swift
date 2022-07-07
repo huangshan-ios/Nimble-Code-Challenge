@@ -86,7 +86,7 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     private func configureOutput(_ output: HomeViewModel.Output) {
         let collectionDataSourceDispo = output.surveys
             .map({ surveys in
-                let coverImages = surveys.map({ $0.attributes.coverImageUrl })
+                let coverImages = surveys.map({ $0.coverImageUrl })
                 let sectionModel = SectionModel<String, String>(model: "", items: coverImages)
                 return [sectionModel]
             })
@@ -189,8 +189,8 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     
     private func updateSurveyContent(survey: Survey, index: Int, isReload: Bool = false) {
         bulletsView.switchTo(bulletAt: index)
-        surveyTitleLabel.setTextWithFadeInAnimation(text: survey.attributes.title)
-        surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.attributes.description)
+        surveyTitleLabel.setTextWithFadeInAnimation(text: survey.title)
+        surveyDescriptionLabel.setTextWithFadeInAnimation(text: survey.description)
         
         if isReload {
             surveyCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),

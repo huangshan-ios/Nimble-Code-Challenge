@@ -8,17 +8,11 @@
 import Foundation
 
 struct Credential: Codable {
-    var id: String = ""
-    var type: String = ""
-    var attributes: Attributes = Attributes()
-    
-    struct Attributes: Codable {
-        var accessToken: String = ""
-        var tokenType: String = ""
-        var expiresIn: Int = 0
-        var refreshToken: String = ""
-        var createdAt: Int = 0
-    }
+    var accessToken: String = ""
+    var tokenType: String = ""
+    var expiresIn: Int = 0
+    var refreshToken: String = ""
+    var createdAt: Int = 0
 }
 
 extension Credential {

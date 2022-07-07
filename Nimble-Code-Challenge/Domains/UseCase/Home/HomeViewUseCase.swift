@@ -6,6 +6,7 @@
 //
 
 import RxSwift
+import JSONAPIMapper
 
 protocol HomeViewUseCase {
     var surveyRepository: SurveyRepository { get }
@@ -22,8 +23,8 @@ final class HomeViewUseCaseImpl: HomeViewUseCase {
     
     func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurvey> {
         return surveyRepository.fetchSurveys(in: page, with: size)
-            .map { response in
-                return response.toDataSurvey()
-            }
+            .map({ result in
+                return DataSurvey(data: result.0.map { $0.toSurvey() }, meta: result.1.toMeta())
+            })
     }
 }

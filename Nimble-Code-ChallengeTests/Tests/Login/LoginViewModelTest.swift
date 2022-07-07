@@ -131,11 +131,11 @@ class LoginViewModelTest: XCTestCase {
         
         let isLoginError = scheduler.createObserver(Bool.self)
         
-        useCase.listMock = [.login(.failure(APIErrorDTO.somethingWentWrong))]
+        useCase.listMock = [.login(.failure(APIError.somethingWentWrong))]
         
         output.error
             .map({ error in
-                return !(error?.toAPIError().errors.isEmpty ?? false)
+                return error!.toAPIError().code.elementsEqual("something_went_wrong")
             })
             .emit(to: isLoginError)
             .disposed(by: disposeBag)

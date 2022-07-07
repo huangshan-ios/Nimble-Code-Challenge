@@ -20,7 +20,7 @@ final class SurveyRespositoryMock: SurveyRepository, Mockable {
     var listMock: [MockType] = []
     
     enum MockType {
-        case surveys(Result<DataTypeMock, Error>)
+        case surveys(Result<String, Error>)
         case surveyDetail(Result<DataTypeMock, Error>)
         
         enum Case {
@@ -36,25 +36,17 @@ final class SurveyRespositoryMock: SurveyRepository, Mockable {
         }
     }
     
-    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurveyDTO> {
+    func fetchSurveys(in page: Int, with size: Int) -> Single<([SurveyDTO], MetaDTO)> {
         guard let mock = listMock.first(where: { $0.case == .surveys }),
               case let .surveys(result) = mock
         else {
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
         
         switch result {
-        case .success(let dataType):
-            switch dataType {
-            case .json(let fileName):
-                let object = loadJSON(filename: fileName, type: DataSurveyDTO.self)
-                return .just(object)
-            case .object(let object):
-                guard let object = object as? DataSurveyDTO else {
-                    return .error(APIErrorDTO.somethingWentWrong)
-                }
-                return .just(object)
-            }
+        case .success(let fileName):
+            let object = loadJSON(filename: fileName, type: [SurveyDTO].self, metaType: MetaDTO.self)
+            return .just(object)
         case .failure(let error):
             return .error(error)
         }
@@ -64,7 +56,7 @@ final class SurveyRespositoryMock: SurveyRepository, Mockable {
         guard let mock = listMock.first(where: { $0.case == .surveyDetail }),
               case let .surveyDetail(result) = mock
         else {
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
         
         switch result {
@@ -75,7 +67,7 @@ final class SurveyRespositoryMock: SurveyRepository, Mockable {
                 return .just(object)
             case .object(let object):
                 guard let object = object as? DataSurveyDetailDTO else {
-                    return .error(APIErrorDTO.somethingWentWrong)
+                    return .error(APIError.somethingWentWrong)
                 }
                 return .just(object)
             }

@@ -8,9 +8,9 @@
 import Foundation
 
 extension Error {
-    func toAPIError() -> APIErrorDTO {
-        guard let apiErrorDTO = self as? APIErrorDTO else {
-            return  APIErrorDTO.somethingWentWrong
+    func toAPIError() -> APIError {
+        guard let apiErrorDTO = self as? APIError else {
+            return  APIError.somethingWentWrong
         }
         
         return apiErrorDTO

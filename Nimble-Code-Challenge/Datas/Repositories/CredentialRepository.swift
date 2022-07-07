@@ -21,7 +21,6 @@ final class CredentialRepositoryImpl: CredentialRepository {
     }
     
     func login(with email: String, and password: String) -> Single<CredentialDTO> {
-        return networkService.request(.login(email, password), type: DataResponseDTO.self)
-            .map({ $0.data })
+        return networkService.request(.login(email, password), type: CredentialDTO.self)
     }
 }

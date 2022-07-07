@@ -52,9 +52,8 @@
 		F779C2EA286751F20046DF5F /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2E9286751F20046DF5F /* UIView+Extensions.swift */; };
 		F779C2EC286754F40046DF5F /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */; };
 		F779C2EF28675B4E0046DF5F /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */; };
-		F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F528695A230046DF5F /* APIErrorDTO.swift */; };
+		F779C2F628695A230046DF5F /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2F528695A230046DF5F /* APIError.swift */; };
 		F779C2FF2869640A0046DF5F /* CredentialDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C2FE2869640A0046DF5F /* CredentialDTO.swift */; };
-		F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3002869657B0046DF5F /* DataResponseDTO.swift */; };
 		F779C30628697CEE0046DF5F /* HomeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30528697CEE0046DF5F /* HomeCoordinator.swift */; };
 		F779C30C286980570046DF5F /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C30A286980570046DF5F /* HomeViewController.swift */; };
 		F779C30D286980570046DF5F /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F779C30B286980570046DF5F /* HomeViewController.xib */; };
@@ -70,6 +69,7 @@
 		F77E6FA628760450003615FD /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77E6FA528760450003615FD /* SplashCoordinator.swift */; };
 		F77E6FA828760458003615FD /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77E6FA728760458003615FD /* SplashViewModel.swift */; };
 		F784F579287696BA00B55BCE /* LoginTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F784F578287696BA00B55BCE /* LoginTransitionManager.swift */; };
+		F7E2913F287746E800C94B49 /* MetaDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7E2913E287746E800C94B49 /* MetaDTO.swift */; };
 		F7EFC0AB286B6A2400177139 /* CredentialRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */; };
 		F7EFC0AF286B6AAD00177139 /* LoginViewUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */; };
 		F7EFC0B1286B6ECB00177139 /* CredentialRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */; };
@@ -79,7 +79,7 @@
 		F7EFC0C6286CBD8100177139 /* SurveyImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0C4286CBD8100177139 /* SurveyImageCell.swift */; };
 		F7EFC0C7286CBD8100177139 /* SurveyImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F7EFC0C5286CBD8100177139 /* SurveyImageCell.xib */; };
 		F7EFC0CA286CBDF500177139 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0C9286CBDF500177139 /* HomeViewModel.swift */; };
-		F7EFC0CE286CBF5800177139 /* DataSurveyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0CD286CBF5800177139 /* DataSurveyDTO.swift */; };
+		F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */; };
 		F7EFC0D1286CC0FA00177139 /* HomeViewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D0286CC0FA00177139 /* HomeViewUseCase.swift */; };
 		F7EFC0D3286CC1F400177139 /* SurveyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */; };
 		F7EFC0D5286CC38800177139 /* Survey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0D4286CC38800177139 /* Survey.swift */; };
@@ -158,9 +158,8 @@
 		F779C2E9286751F20046DF5F /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		F779C2EB286754F40046DF5F /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		F779C2EE28675B4E0046DF5F /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		F779C2F528695A230046DF5F /* APIErrorDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIErrorDTO.swift; sourceTree = "<group>"; };
+		F779C2F528695A230046DF5F /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		F779C2FE2869640A0046DF5F /* CredentialDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialDTO.swift; sourceTree = "<group>"; };
-		F779C3002869657B0046DF5F /* DataResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataResponseDTO.swift; sourceTree = "<group>"; };
 		F779C30528697CEE0046DF5F /* HomeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCoordinator.swift; sourceTree = "<group>"; };
 		F779C30A286980570046DF5F /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F779C30B286980570046DF5F /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -176,6 +175,7 @@
 		F77E6FA528760450003615FD /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
 		F77E6FA728760458003615FD /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		F784F578287696BA00B55BCE /* LoginTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTransitionManager.swift; sourceTree = "<group>"; };
+		F7E2913E287746E800C94B49 /* MetaDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetaDTO.swift; sourceTree = "<group>"; };
 		F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryMock.swift; sourceTree = "<group>"; };
 		F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseTest.swift; sourceTree = "<group>"; };
 		F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryTest.swift; sourceTree = "<group>"; };
@@ -185,7 +185,7 @@
 		F7EFC0C4286CBD8100177139 /* SurveyImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyImageCell.swift; sourceTree = "<group>"; };
 		F7EFC0C5286CBD8100177139 /* SurveyImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SurveyImageCell.xib; sourceTree = "<group>"; };
 		F7EFC0C9286CBDF500177139 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		F7EFC0CD286CBF5800177139 /* DataSurveyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSurveyDTO.swift; sourceTree = "<group>"; };
+		F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyDTO.swift; sourceTree = "<group>"; };
 		F7EFC0D0286CC0FA00177139 /* HomeViewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewUseCase.swift; sourceTree = "<group>"; };
 		F7EFC0D2286CC1F400177139 /* SurveyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurveyRepository.swift; sourceTree = "<group>"; };
 		F7EFC0D4286CC38800177139 /* Survey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Survey.swift; sourceTree = "<group>"; };
@@ -524,7 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				F7026F75286C401800523A2A /* TokenError.swift */,
-				F779C2F528695A230046DF5F /* APIErrorDTO.swift */,
+				F779C2F528695A230046DF5F /* APIError.swift */,
 			);
 			path = ResponseDTO;
 			sourceTree = "<group>";
@@ -532,9 +532,9 @@
 		F779C2F728695BAD0046DF5F /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
-				F779C3002869657B0046DF5F /* DataResponseDTO.swift */,
 				F779C2FE2869640A0046DF5F /* CredentialDTO.swift */,
-				F7EFC0CD286CBF5800177139 /* DataSurveyDTO.swift */,
+				F7EFC0CD286CBF5800177139 /* SurveyDTO.swift */,
+				F7E2913E287746E800C94B49 /* MetaDTO.swift */,
 				F7664AA2286F351200E06652 /* DataSurveyDetailDTO.swift */,
 			);
 			path = DTOs;
@@ -942,8 +942,8 @@
 				F7EFC0DD286CDB5A00177139 /* KeychainHelper.swift in Sources */,
 				F77840AB286EB71400A55EB2 /* AppConfigurationHelper.swift in Sources */,
 				F7F3B4F42874B62D00DF4D4C /* DataSurvey.swift in Sources */,
-				F7EFC0CE286CBF5800177139 /* DataSurveyDTO.swift in Sources */,
-				F7EFC0CE286CBF5800177139 /* DataSurveyDTO.swift in Sources */,
+				F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */,
+				F7EFC0CE286CBF5800177139 /* SurveyDTO.swift in Sources */,
 				F7026F7A286C50BE00523A2A /* Error+Extensions.swift in Sources */,
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
 				F70BE0372875609E00214131 /* URL+Extensions.swift in Sources */,
@@ -970,13 +970,13 @@
 				F7026F6D286C3E1200523A2A /* AuthService.swift in Sources */,
 				F7664A9A286F338D00E06652 /* SurveyDetailViewController.swift in Sources */,
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
-				F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */,
 				F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */,
 				F77E6FA328760446003615FD /* SplashViewController.swift in Sources */,
+				F7E2913F287746E800C94B49 /* MetaDTO.swift in Sources */,
 				F77E6FA828760458003615FD /* SplashViewModel.swift in Sources */,
 				F71F86652865846100767F6E /* NimbleSurveyAPI+TargetType.swift in Sources */,
 				F784F579287696BA00B55BCE /* LoginTransitionManager.swift in Sources */,
-				F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */,
+				F779C2F628695A230046DF5F /* APIError.swift in Sources */,
 				F7664AA3286F351200E06652 /* DataSurveyDetailDTO.swift in Sources */,
 				F7EFC0D5286CC38800177139 /* Survey.swift in Sources */,
 				F7664A96286F333C00E06652 /* SurveyDetailCoordinator.swift in Sources */,

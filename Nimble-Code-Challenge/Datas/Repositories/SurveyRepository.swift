@@ -6,11 +6,12 @@
 //
 
 import RxSwift
+import JSONAPIMapper
 
 protocol SurveyRepository {
     var networkService: NimbleNetworkService { get }
     
-    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurveyDTO>
+    func fetchSurveys(in page: Int, with size: Int) -> Single<([SurveyDTO], MetaDTO)>
     func getDetailSurvey(_ surveyId: String) -> Single<DataSurveyDetailDTO>
 }
 
@@ -21,8 +22,8 @@ final class SurveyRepositoryImpl: SurveyRepository {
         self.networkService = networkService
     }
     
-    func fetchSurveys(in page: Int, with size: Int) -> Single<DataSurveyDTO> {
-        return networkService.request(.surveys(page, size), type: DataSurveyDTO.self)
+    func fetchSurveys(in page: Int, with size: Int) -> Single<([SurveyDTO], MetaDTO)> {
+        return networkService.request(.surveys(page, size), type: [SurveyDTO].self, metaType: MetaDTO.self)
     }
     
     func getDetailSurvey(_ surveyId: String) -> Single<DataSurveyDetailDTO> {

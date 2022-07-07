@@ -117,7 +117,7 @@ class HomeViewModelTest: XCTestCase {
     func testFetchSurveysError() {
         let isFetchSurveysErrorObserver = scheduler.createObserver(Bool.self)
         
-        useCase.listMock = [.surveys(.failure(APIErrorDTO.somethingWentWrong))]
+        useCase.listMock = [.surveys(.failure(APIError.somethingWentWrong))]
         
         output.surveys
             .drive()
@@ -125,7 +125,7 @@ class HomeViewModelTest: XCTestCase {
         
         output.error
             .map({ error in
-                return !(error?.toAPIError().errors.isEmpty ?? false)
+                return error!.toAPIError().code.elementsEqual("something_went_wrong")
             })
             .emit(to: isFetchSurveysErrorObserver)
             .disposed(by: disposeBag)
@@ -265,22 +265,22 @@ class HomeViewModelTest: XCTestCase {
 }
 
 private let surveys = [Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
-                              attributes: Survey.Attributes(title: "Scarlett Bangkok",
-                                                            description: "We'd love ot hear from you!",
-                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                              title: "Scarlett Bangkok",
+                              description: "We'd love ot hear from you!",
+                              coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"),
                        Survey(id: "22de6a8f8f5f1cfe51bc", type: "survey",
-                              attributes: Survey.Attributes(title: "Scarlett Bangkok",
-                                                            description: "We'd love ot hear from you!",
-                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                              title: "Scarlett Bangkok",
+                              description: "We'd love ot hear from you!",
+                              coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
-                              attributes: Survey.Attributes(title: "Scarlett Bangkok",
-                                                            description: "We'd love ot hear from you!",
-                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                              title: "Scarlett Bangkok",
+                              description: "We'd love ot hear from you!",
+                              coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
-                              attributes: Survey.Attributes(title: "Scarlett Bangkok",
-                                                            description: "We'd love ot hear from you!",
-                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                              title: "Scarlett Bangkok",
+                              description: "We'd love ot hear from you!",
+                              coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
-                              attributes: Survey.Attributes(title: "Scarlett Bangkok",
-                                                            description: "We'd love ot hear from you!",
-                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"))]
+                              title: "Scarlett Bangkok",
+                              description: "We'd love ot hear from you!",
+                              coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")]

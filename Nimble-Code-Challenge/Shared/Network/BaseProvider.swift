@@ -24,8 +24,8 @@ class BaseProvider<API: TargetType>: MoyaProvider<API> {
         var headers = token.headers
 
         let credential = UserSession.shared.getCredential()
-        if !credential.attributes.accessToken.isEmpty {
-            let authorizationHeader = "\(credential.attributes.tokenType) \(credential.attributes.accessToken)"
+        if !credential.accessToken.isEmpty {
+            let authorizationHeader = "\(credential.tokenType) \(credential.accessToken)"
             headers?["Authorization"] = authorizationHeader
         }
         

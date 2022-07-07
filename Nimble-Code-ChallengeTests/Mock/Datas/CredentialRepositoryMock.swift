@@ -35,7 +35,7 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
     
     func login(with email: String, and password: String) -> Single<CredentialDTO> {
         guard let mock = listMock.first(where: { $0.case == .login }) else {
-            return .error(APIErrorDTO.somethingWentWrong)
+            return .error(APIError.somethingWentWrong)
         }
         
         switch mock {
@@ -44,13 +44,13 @@ final class CredentialRepositoryMock: CredentialRepository, Mockable {
             case .success(let dataType):
                 switch dataType {
                 case .json(let fileName):
-                    let object = loadJSON(filename: fileName, type: DataResponseDTO<CredentialDTO>.self)
-                    return .just(object.data)
+                    let response = loadJSON(filename: fileName, type: CredentialDTO.self)
+                    return .just(response)
                 case .object(let object):
-                    guard let object = object as? DataResponseDTO<CredentialDTO> else {
-                        return .error(APIErrorDTO.somethingWentWrong)
+                    guard let response = object as? CredentialDTO else {
+                        return .error(APIError.somethingWentWrong)
                     }
-                    return .just(object.data)
+                    return .just(response)
                 }
             case .failure(let error):
                 return .error(error)
