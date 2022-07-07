@@ -12,7 +12,7 @@ struct DataSurvey {
     let meta: Meta?
     
     struct Meta {
-        let page, pages, page_size, records: Int
+        let page, pages, pageSize, records: Int
     }
     
 }

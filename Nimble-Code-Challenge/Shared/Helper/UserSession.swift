@@ -15,7 +15,7 @@ final class UserSession {
     private var credential: Credential = Credential()
     
     var isLoggedIn: Bool {
-        return !getCredential().attributes.access_token.isEmpty
+        return !getCredential().attributes.accessToken.isEmpty
     }
 
 }
@@ -35,8 +35,8 @@ extension UserSession {
             return credential
         }
         
-        let credentialDTO = try? JSONDecoder().decode(CredentialDTO.self, from: data)
-        credential = credentialDTO?.toCredential() ?? Credential()
+        let credentialDTO = try? JSONDecoder().decode(Credential.self, from: data)
+        credential = credentialDTO ?? Credential()
         
         return credential
     }

@@ -7,17 +7,17 @@
 
 import Foundation
 
-struct Credential: Encodable {
+struct Credential: Codable {
     var id: String = ""
     var type: String = ""
     var attributes: Attributes = Attributes()
     
-    struct Attributes: Encodable {
-        var access_token: String = ""
-        var token_type: String = ""
-        var expires_in: Int = 0
-        var refresh_token: String = ""
-        var created_at: Int = 0
+    struct Attributes: Codable {
+        var accessToken: String = ""
+        var tokenType: String = ""
+        var expiresIn: Int = 0
+        var refreshToken: String = ""
+        var createdAt: Int = 0
     }
 }
 

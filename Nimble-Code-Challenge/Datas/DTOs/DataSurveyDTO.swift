@@ -35,13 +35,27 @@ struct SurveyDTO: Decodable {
     
     struct Attributes: Codable {
         let title, description: String
-        let thank_email_above_threshold: String?
-        let thank_email_below_threshold: String?
-        let is_active: Bool
-        let cover_image_url: String
-        let created_at, active_at: String
-        let inactive_at: String?
-        let survey_type: String
+        let thankEmailAboveThreshold: String?
+        let thankEmailBelowThreshold: String?
+        let isActive: Bool
+        let coverImageUrl: String
+        let createdAt: String?
+        let activeAt: String
+        let inactiveAt: String?
+        let surveyType: String
+        
+        enum CodingKeys: String, CodingKey {
+            case title
+            case description
+            case thankEmailAboveThreshold = "thank_email_above_threshold"
+            case thankEmailBelowThreshold = "thank_email_below_threshold"
+            case isActive = "is_active"
+            case coverImageUrl = "cover_image_url"
+            case createdAt = "create_at"
+            case activeAt = "active_at"
+            case inactiveAt = "inactive_at"
+            case surveyType = "survey_type"
+        }
     }
     
     struct Relationships: Decodable {
@@ -59,7 +73,14 @@ struct SurveyDTO: Decodable {
 }
 
 struct MetaDTO: Decodable {
-    let page, pages, page_size, records: Int
+    let page, pages, pageSize, records: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case page
+        case pages
+        case pageSize = "page_size"
+        case records
+    }
 }
 
 extension DataSurveyDTO {
@@ -73,7 +94,7 @@ extension MetaDTO {
     func toMeta() -> DataSurvey.Meta {
         return DataSurvey.Meta(page: page,
                                pages: pages,
-                               page_size: page_size,
+                               pageSize: pageSize,
                                records: records)
     }
 }
@@ -90,6 +111,6 @@ extension SurveyDTO.Attributes {
     func toSurveyAttributes() -> Survey.Attributes {
         return Survey.Attributes(title: title,
                                  description: description,
-                                 cover_image_url: cover_image_url)
+                                 coverImageUrl: coverImageUrl)
     }
 }
