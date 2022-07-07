@@ -44,7 +44,7 @@ class HomeViewModelTest: XCTestCase {
     func testFetchSurveysSuccess() {
         let surveysObserver = scheduler.createObserver([Survey].self)
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
-        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, pageSize: 5, records: 20)
         let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
         useCase.listMock = [.surveys(.success(dataSurvey))]
@@ -80,7 +80,7 @@ class HomeViewModelTest: XCTestCase {
     func testLoadMoreSurveysSuccess() {
         let surveysObserver = scheduler.createObserver([Survey].self)
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
-        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, pageSize: 5, records: 20)
         let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
         useCase.listMock = [.surveys(.success(dataSurvey))]
@@ -141,7 +141,7 @@ class HomeViewModelTest: XCTestCase {
     
     func testLoadingStates() throws {
         let loadingStatesObserver = scheduler.createObserver(Bool.self)
-        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, pageSize: 5, records: 20)
         let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
         useCase.listMock = [.surveys(.success(dataSurvey))]
@@ -167,7 +167,7 @@ class HomeViewModelTest: XCTestCase {
     
     func testSwipeToNextIndex() throws {
         let currentSurveyObserver = scheduler.createObserver((survey: Survey?, index: Int).self)
-        let meta = DataSurvey.Meta(page: 0, pages: 5, page_size: 5, records: 20)
+        let meta = DataSurvey.Meta(page: 0, pages: 5, pageSize: 5, records: 20)
         let dataSurvey = DataSurvey(data: surveys, meta: meta)
         
         useCase.listMock = [.surveys(.success(dataSurvey))]
@@ -267,20 +267,20 @@ class HomeViewModelTest: XCTestCase {
 private let surveys = [Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
                               attributes: Survey.Attributes(title: "Scarlett Bangkok",
                                                             description: "We'd love ot hear from you!",
-                                                            cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
                        Survey(id: "22de6a8f8f5f1cfe51bc", type: "survey",
                               attributes: Survey.Attributes(title: "Scarlett Bangkok",
                                                             description: "We'd love ot hear from you!",
-                                                            cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
                               attributes: Survey.Attributes(title: "Scarlett Bangkok",
                                                             description: "We'd love ot hear from you!",
-                                                            cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
                               attributes: Survey.Attributes(title: "Scarlett Bangkok",
                                                             description: "We'd love ot hear from you!",
-                                                            cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
+                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_")),
                        Survey(id: "d5de6a8f8f5f1cfe51bc", type: "survey",
                               attributes: Survey.Attributes(title: "Scarlett Bangkok",
                                                             description: "We'd love ot hear from you!",
-                                                            cover_image_url: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"))]
+                                                            coverImageUrl: "https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_"))]
