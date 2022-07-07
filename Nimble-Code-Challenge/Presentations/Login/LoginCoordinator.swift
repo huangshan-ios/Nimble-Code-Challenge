@@ -5,11 +5,12 @@
 //  Created by Son Hoang on 24/06/2022.
 //
 
-import Foundation
+import UIKit
 
 final class LoginCoordinator: Coordinator {
     
     let isPresentation: Bool
+    let customNavigationDelegate = LoginTransitionManager(duration: 0.8)
     
     init(isPresentation: Bool = false) {
         self.isPresentation = isPresentation
@@ -24,14 +25,23 @@ final class LoginCoordinator: Coordinator {
                                                       controller: LoginViewController.self)
         
         if isPresentation {
+            // Remove the delegate for the transition animation first
+            // Cause maybe the delegate of the animation still exist
+            navigationController.delegate = nil
             navigationController.present(loginViewController, animated: true)
         } else {
-            navigationController.viewControllers = [loginViewController]
+            navigationController.delegate = customNavigationDelegate
+            navigationController.setViewControllers([loginViewController], animated: true)
         }
     }
     
     func navigateToHomeViewController() {
-        if let appCoordinator = parentCoordinator as? AppCoordinator {
+        // Remove the delegate for the transition animation first
+        // Cause maybe the delegate of the animation still exist
+        navigationController.delegate = nil
+        
+        if let splashCoordinator = parentCoordinator as? SplashCoordinator,
+           let appCoordinator = splashCoordinator.parentCoordinator as? AppCoordinator {
             let homeCoordinator = HomeCoordinator()
             homeCoordinator.navigationController = appCoordinator.navigationController
             appCoordinator.start(homeCoordinator)
@@ -46,5 +56,4 @@ final class LoginCoordinator: Coordinator {
             }
         }
     }
-    
 }

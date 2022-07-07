@@ -65,6 +65,11 @@
 		F779C3202869EE760046DF5F /* LoginViewModelTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */; };
 		F779C3222869EED00046DF5F /* DataTypeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3212869EED00046DF5F /* DataTypeMock.swift */; };
 		F779C3242869EFA30046DF5F /* LoginViewUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */; };
+		F77E6FA328760446003615FD /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77E6FA128760446003615FD /* SplashViewController.swift */; };
+		F77E6FA428760446003615FD /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F77E6FA228760446003615FD /* SplashViewController.xib */; };
+		F77E6FA628760450003615FD /* SplashCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77E6FA528760450003615FD /* SplashCoordinator.swift */; };
+		F77E6FA828760458003615FD /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F77E6FA728760458003615FD /* SplashViewModel.swift */; };
+		F784F579287696BA00B55BCE /* LoginTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F784F578287696BA00B55BCE /* LoginTransitionManager.swift */; };
 		F7EFC0AB286B6A2400177139 /* CredentialRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */; };
 		F7EFC0AF286B6AAD00177139 /* LoginViewUseCaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */; };
 		F7EFC0B1286B6ECB00177139 /* CredentialRepositoryTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */; };
@@ -166,6 +171,11 @@
 		F779C31F2869EE760046DF5F /* LoginViewModelTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModelTest.swift; sourceTree = "<group>"; };
 		F779C3212869EED00046DF5F /* DataTypeMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypeMock.swift; sourceTree = "<group>"; };
 		F779C3232869EFA30046DF5F /* LoginViewUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseMock.swift; sourceTree = "<group>"; };
+		F77E6FA128760446003615FD /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		F77E6FA228760446003615FD /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SplashViewController.xib; sourceTree = "<group>"; };
+		F77E6FA528760450003615FD /* SplashCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashCoordinator.swift; sourceTree = "<group>"; };
+		F77E6FA728760458003615FD /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
+		F784F578287696BA00B55BCE /* LoginTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTransitionManager.swift; sourceTree = "<group>"; };
 		F7EFC0AA286B6A2400177139 /* CredentialRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryMock.swift; sourceTree = "<group>"; };
 		F7EFC0AE286B6AAD00177139 /* LoginViewUseCaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewUseCaseTest.swift; sourceTree = "<group>"; };
 		F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialRepositoryTest.swift; sourceTree = "<group>"; };
@@ -360,6 +370,7 @@
 		F71F86492865631000767F6E /* Presentations */ = {
 			isa = PBXGroup;
 			children = (
+				F77E6F9E2876042A003615FD /* Splash */,
 				F71F865228656A2700767F6E /* Login */,
 				F779C304286975480046DF5F /* Home */,
 				F7664A94286F332600E06652 /* SurveyDetail */,
@@ -504,6 +515,7 @@
 				F779C3102869AC190046DF5F /* UserSession.swift */,
 				F7EFC0DC286CDB5A00177139 /* KeychainHelper.swift */,
 				F77840AA286EB71300A55EB2 /* AppConfigurationHelper.swift */,
+				F784F578287696BA00B55BCE /* LoginTransitionManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -624,6 +636,33 @@
 				F7EFC0B0286B6ECB00177139 /* CredentialRepositoryTest.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		F77E6F9E2876042A003615FD /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				F77E6FA028760435003615FD /* ViewModel */,
+				F77E6F9F28760432003615FD /* View */,
+				F77E6FA528760450003615FD /* SplashCoordinator.swift */,
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		F77E6F9F28760432003615FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F77E6FA128760446003615FD /* SplashViewController.swift */,
+				F77E6FA228760446003615FD /* SplashViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F77E6FA028760435003615FD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F77E6FA728760458003615FD /* SplashViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		F7EFC0B2286B6EEA00177139 /* Network */ = {
@@ -761,6 +800,7 @@
 				F71F865628656A4600767F6E /* LoginViewController.xib in Resources */,
 				F7664A9B286F338D00E06652 /* SurveyDetailViewController.xib in Resources */,
 				F71F861E2865608900767F6E /* LaunchScreen.storyboard in Resources */,
+				F77E6FA428760446003615FD /* SplashViewController.xib in Resources */,
 				F71F861B2865608900767F6E /* Assets.xcassets in Resources */,
 				F779C30D286980570046DF5F /* HomeViewController.xib in Resources */,
 				F7EFC0C7286CBD8100177139 /* SurveyImageCell.xib in Resources */,
@@ -908,6 +948,7 @@
 				F71F865B28656B0B00767F6E /* AppCoordinator.swift in Sources */,
 				F70BE0372875609E00214131 /* URL+Extensions.swift in Sources */,
 				F7026F74286C3EA100523A2A /* NimbleNetworkService.swift in Sources */,
+				F77E6FA628760450003615FD /* SplashCoordinator.swift in Sources */,
 				F71F865D28656BA000767F6E /* CoordinatorType.swift in Sources */,
 				F71F866A2865859800767F6E /* BaseProvider.swift in Sources */,
 				F7026F76286C401800523A2A /* TokenError.swift in Sources */,
@@ -931,7 +972,10 @@
 				F71F864C2865688B00767F6E /* ViewModelType.swift in Sources */,
 				F779C3012869657B0046DF5F /* DataResponseDTO.swift in Sources */,
 				F71F865928656A6400767F6E /* LoginViewModel.swift in Sources */,
+				F77E6FA328760446003615FD /* SplashViewController.swift in Sources */,
+				F77E6FA828760458003615FD /* SplashViewModel.swift in Sources */,
 				F71F86652865846100767F6E /* NimbleSurveyAPI+TargetType.swift in Sources */,
+				F784F579287696BA00B55BCE /* LoginTransitionManager.swift in Sources */,
 				F779C2F628695A230046DF5F /* APIErrorDTO.swift in Sources */,
 				F7664AA3286F351200E06652 /* DataSurveyDetailDTO.swift in Sources */,
 				F7EFC0D5286CC38800177139 /* Survey.swift in Sources */,

@@ -13,6 +13,10 @@ final class UserSession {
     private let keychainHelper = KeychainHelper(service: KeychainConfiguration.serviceName,
                                                 account: KeychainConfiguration.credentials)
     private var credential: Credential = Credential()
+    
+    var isLoggedIn: Bool {
+        return !getCredential().attributes.access_token.isEmpty
+    }
 
 }
 
