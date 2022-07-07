@@ -42,7 +42,7 @@ final class HomeViewModel: ViewModelType {
         var totalSurveys: [Survey] = []
         
         let numberItemPerPage: Int = 5
-        var currentRequestPage: Int = 0
+        var currentRequestPage: Int = 1
         var maxPage: Int?
         
         let reloadSurveys = NotificationCenter.default.rx
@@ -115,7 +115,7 @@ extension HomeViewModel {
     ) -> (requestPage: Int, maxPage: Int?)? {
         switch fetchType {
         case .reload:
-            return (requestPage: 0, maxPage: nil)
+            return (requestPage: 1, maxPage: nil)
         case .loadMore:
             if let maxPage = maxPage, page < maxPage {
                 return (requestPage: page + 1, maxPage: nil)

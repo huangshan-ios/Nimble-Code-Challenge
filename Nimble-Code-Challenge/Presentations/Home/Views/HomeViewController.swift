@@ -95,17 +95,25 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
         let surveysDispo = output.surveys
             .withLatestFrom(fetchSurveysTrigger.asDriver(onErrorJustReturn: .reload)) { (surveys: $0, fetchType: $1) }
             .drive(onNext: { [weak self] response in
-                guard
-                    let self = self,
-                    let survey = response.surveys[safe: 0]
-                else {
+                guard let self = self else {
                     return
                 }
-                self.configureSkeletonUIs(isLoading: false)
-                self.bulletsView.setNumOfBullets(response.surveys.count)
                 
                 let isReload = response.fetchType == .reload
-                let index = isReload ? 0 : self.bulletsView.currentBullet
+                let index = isReload ? 0 : self.bulletsView.currentBullet + 1
+                
+                guard let survey = response.surveys[safe: index] else {
+                    return
+                }
+                
+                self.bulletsView.setNumOfBullets(response.surveys.count)
+                
+                if isReload {
+                    self.configureSkeletonUIs(isLoading: false)
+                } else {
+                    let indexPath = IndexPath(item: index, section: 0)
+                    self.surveyCollectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+                }
                 self.updateSurveyContent(survey: survey, index: index, isReload: isReload)
             })
         

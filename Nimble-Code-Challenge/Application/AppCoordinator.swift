@@ -18,22 +18,8 @@ final class AppCoordinator: Coordinator {
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
         
-        if UserSession.shared.getCredential().attributes.accessToken.isEmpty {
-            setRootToLogin()
-        } else {
-            setRootToHome()
-        }
-    }
-    
-    func setRootToLogin() {
-        let loginCoordinator = LoginCoordinator()
-        loginCoordinator.navigationController = navigationController
-        start(loginCoordinator)
-    }
-    
-    func setRootToHome() {
-        let homeViewCoordinator = HomeCoordinator()
-        homeViewCoordinator.navigationController = navigationController
-        start(homeViewCoordinator)
+        let splashCoordinator = SplashCoordinator()
+        splashCoordinator.navigationController = navigationController
+        start(splashCoordinator)
     }
 }
