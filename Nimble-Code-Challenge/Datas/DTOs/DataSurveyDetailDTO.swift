@@ -24,7 +24,7 @@ struct SurveyDetailDTO: Decodable {
         let isActive: Bool
         let cover_image_url: String
         let created_at, active_at: String
-        let inactive_at: String??
+        let inactive_at: String?
         let survey_type: String
     }
     

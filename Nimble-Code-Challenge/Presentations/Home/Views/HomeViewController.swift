@@ -86,7 +86,7 @@ class HomeViewController: ViewControllerType<HomeViewModel, HomeCoordinator> {
     private func configureOutput(_ output: HomeViewModel.Output) {
         let collectionDataSourceDispo = output.surveys
             .map({ surveys in
-                let coverImages = surveys.map({ $0.attributes.cover_image_url })
+                let coverImages = surveys.map({ $0.attributes.coverImageUrl })
                 let sectionModel = SectionModel<String, String>(model: "", items: coverImages)
                 return [sectionModel]
             })

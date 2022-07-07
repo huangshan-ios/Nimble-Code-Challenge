@@ -13,11 +13,19 @@ struct CredentialDTO: Decodable {
     let attributes: Attributes
     
     struct Attributes: Decodable {
-        let access_token: String
-        let token_type: String
-        let expires_in: Int
-        let refresh_token: String
-        let created_at: Int
+        let accessToken: String
+        let tokenType: String
+        let expiresIn: Int
+        let refreshToken: String
+        let createdAt: Int
+        
+        enum CodingKeys: String, CodingKey {
+            case accessToken = "access_token"
+            case tokenType = "token_type"
+            case expiresIn = "expires_in"
+            case refreshToken = "refresh_token"
+            case createdAt = "created_at"
+        }
     }
 }
 
@@ -31,10 +39,10 @@ extension CredentialDTO {
 
 extension CredentialDTO.Attributes {
     func toCredentialAttributes() -> Credential.Attributes {
-        return Credential.Attributes(access_token: access_token,
-                                     token_type: token_type,
-                                     expires_in: expires_in,
-                                     refresh_token: refresh_token,
-                                     created_at: created_at)
+        return Credential.Attributes(accessToken: accessToken,
+                                     tokenType: tokenType,
+                                     expiresIn: expiresIn,
+                                     refreshToken: refreshToken,
+                                     createdAt: createdAt)
     }
 }
