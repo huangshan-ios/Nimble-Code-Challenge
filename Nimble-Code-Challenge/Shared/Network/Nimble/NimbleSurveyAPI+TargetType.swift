@@ -32,8 +32,8 @@ extension NimbleSurveyAPI: TargetType {
         }
     }
     
-    var paramaters: [String: String] {
-        var paramaters: [String: String] = [:]
+    var paramaters: [String: Any] {
+        var paramaters: [String: Any] = [:]
         switch self {
         case .login(let email, let password):
             paramaters["client_secret"] = AppConstants.clientSecret
@@ -42,13 +42,22 @@ extension NimbleSurveyAPI: TargetType {
             paramaters["email"] = email
             paramaters["password"] = password
             return paramaters
+        case .surveys(let pageNumber, let pageSize):
+            paramaters["page[number]"] = pageNumber
+            paramaters["page[size]"] = pageSize
+            return paramaters
         default:
             return paramaters
         }
     }
     
     var parameterEncoding: ParameterEncoding {
-        return URLEncoding.default
+        switch self {
+        case .login, .surveyDetail:
+            return URLEncoding.default
+        case .surveys:
+            return URLEncoding.queryString
+        }
     }
     
     var task: Task {
@@ -58,5 +67,4 @@ extension NimbleSurveyAPI: TargetType {
     var headers: [String: String]? {
         return [:]
     }
-    
 }
